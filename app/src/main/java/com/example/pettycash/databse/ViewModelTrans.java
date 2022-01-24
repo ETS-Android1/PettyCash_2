@@ -3,6 +3,7 @@ package com.example.pettycash.databse;
 import com.example.pettycash.DAO.transDAO;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -30,6 +31,7 @@ public class ViewModelTrans extends AndroidViewModel {
 
 
     public void addTrans(TransactionModelView trans){
+        Log.e("test","test");
         
         mDB.databaseWriteExecutor.execute(()->{
             transDAO.insertTransaction(trans);
