@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="2"
+    tools:context=".MainActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/red"
+
+    android:layout_weight="1">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/top_space"></Space>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/top_space"
+        android:layout_centerHorizontal="true"
+        android:paddingHorizontal="10dp"
+        android:id="@+id/login_logo"
+        android:src="@drawable/logo"
+        android:paddingVertical="10dp"
+        >
+
+    </ImageView>
+
+
+
+    <TextView
+        android:id="@+id/login_welcom_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_logo"
+        android:layout_centerHorizontal="true"
+        android:text="@string/welcome_first"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:paddingTop="30dp"
+        ></TextView>
+
+    <TextView
+        android:id="@+id/login_welcome_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_welcom_first"
+        android:layout_centerHorizontal="true"
+
+        android:text="@string/welcome_second"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        ></TextView>
+</RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginLayout"
+        android:padding="20dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_loginTxt"
+            android:text="@string/login"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:paddingBottom="20dp"
+            ></TextView>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_userName"
+        android:hint="@string/userName"
+        android:paddingVertical="15dp"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/edit_text_shape"
+        android:textSize="17dp"
+        android:maxLines="1"
+        ></EditText>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp">
+
+        </Space>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_password"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/edit_text_shape"
+            android:maxLines="1"
+
+            ></EditText>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp">
+
+        </Space>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_loginBtn"
+            android:textSize="16dp"
+            android:text="@string/login"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:background="@drawable/login_btn_background"
+            android:textColor="@color/white"
+
+
+            ></androidx.appcompat.widget.AppCompatButton>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp">
+
+        </Space>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_forgotPassword"
+            android:text="@string/forgotPassword"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/red_light"
+            ></TextView>
+
+    </LinearLayout>
+</LinearLayout>

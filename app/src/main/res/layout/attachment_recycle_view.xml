@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="100dp"
+    android:layout_height="90dp">
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/attachment_recycle_image"
+        android:background="@drawable/attatchment_shape"
+        android:src="@drawable/outline_add_circle_black_36"
+        android:hint="@string/attatchment"
+        android:padding="5dp"
+        android:layout_centerHorizontal="true"
+        android:fitsSystemWindows="true"
+        android:scaleType="fitXY"
+        ></ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/attachment_recycle_title"
+        android:layout_below="@id/attachment_recycle_image"
+        android:layout_centerHorizontal="true"
+        android:text="test"
+        style="@style/normal_dark"
+        ></TextView>
+
+</RelativeLayout>

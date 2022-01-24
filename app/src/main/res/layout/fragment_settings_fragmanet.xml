@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray_light"
+    android:weightSum="5"
+
+
+
+
+    tools:context=".SettingsFragmanet">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/red_dark"
+        ></ImageButton>
+
+    <TextView
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/title_dark"
+        android:text="@string/settings"
+
+        ></TextView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/settings_preferences"
+        android:text="@string/preferences"
+        android:background="@color/white"
+
+        ></androidx.appcompat.widget.AppCompatButton>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        ></Space>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/settings_about"
+        android:text="@string/about_us"
+        android:background="@color/white"
+        ></androidx.appcompat.widget.AppCompatButton>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        ></Space>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/settings_logout"
+        android:text="@string/logout"
+        android:background="@color/white"
+        ></androidx.appcompat.widget.AppCompatButton>
+
+
+</LinearLayout>

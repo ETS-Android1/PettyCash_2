@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="8"
+
+    tools:context=".HomeContainer">
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:id="@+id/home_container_main_view"
+        class="com.example.pettycash.HomeActivity"
+
+    ></fragment>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:id="@+id/home_container_button_bar"
+        android:layout_alignParentBottom="true"
+        android:elevation="1dp"
+        android:weightSum="5"
+
+
+        >
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/outline_settings_black_48"
+            android:id="@+id/home_container_button_bar_settings"
+            android:background="@color/white"
+        ></ImageButton>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/outline_thumbs_up_down_black_48"
+            android:id="@+id/home_container_button_bar_like"
+            android:background="@color/white"
+            ></ImageButton>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            >
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/add_transaction_btn"
+                android:src="@drawable/outline_add_circle_black_48"
+                android:background="@color/gray_light"
+                ></androidx.appcompat.widget.AppCompatImageButton>
+
+        </RelativeLayout>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/outline_manage_search_black_48"
+            android:id="@+id/home_container_button_bar_3"
+            android:background="@color/white"
+            ></ImageButton>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/outline_home_black_48"
+            android:id="@+id/home_container_button_bar_home"
+            android:background="@color/white"
+            ></ImageButton>
+
+    </LinearLayout>
+
+</LinearLayout>

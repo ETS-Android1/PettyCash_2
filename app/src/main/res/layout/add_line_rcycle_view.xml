@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".AddLine"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:id="@+id/line_recycle_title_layout"
+        android:orientation="horizontal"
+        android:background="@color/gray_light"
+    android:padding="10dp"
+
+        >
+
+                <TextView     android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            style="@style/title_dark"
+            android:id="@+id/line_recycle_title_text"
+            android:text="@string/add_line"
+         android:gravity="center_vertical"
+            ></TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@drawable/edit_text_shape"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/line_recycle_category_layout"
+        android:orientation="horizontal"
+        android:padding="20dp"
+
+        >
+
+                <TextView     android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/normal_dark"
+            android:id="@+id/line_recycle_category_text"
+            android:text="@string/category"
+            ></TextView>
+
+        <RelativeLayout
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/line_recycle_category_choose_layout"
+
+            >
+
+
+            <TextView
+                android:id="@+id/line_recycle_category_choose_text"
+                style="@style/normal_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/line_recycle_category_choose_btn"
+                android:paddingRight="10dp"
+                android:text="@string/choose"
+                android:textColor="@color/red"
+
+                 android:layout_centerVertical="true"
+                        ></TextView>
+
+            <ImageButton
+                android:id="@+id/line_recycle_category_choose_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+
+                android:layout_alignParentRight="true"
+                android:background="@drawable/circle_btn_gray"
+                android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageButton>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@drawable/edit_text_shape"
+        android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+
+        android:id="@+id/line_recycle_item_layout"
+
+        android:padding="20dp"
+
+
+        >
+
+                <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/normal_dark"
+            android:id="@+id/line_recycle_item_text"
+            android:text="@string/item"
+             android:layout_centerVertical="true"
+                        ></TextView>
+
+        <RelativeLayout
+            android:id="@+id/line_recycle_item_choose_layout"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true">
+
+
+            <TextView
+                android:id="@+id/line_recycle_item_choose_text"
+                style="@style/normal_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/line_recycle_item_choose_btn"
+                android:paddingRight="10dp"
+                android:text="@string/choose"
+                android:textColor="@color/red"></TextView>
+
+            <ImageButton
+                android:id="@+id/line_recycle_item_choose_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+
+                android:layout_alignParentRight="true"
+                android:background="@drawable/circle_btn_gray"
+                android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageButton>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+
+        android:weightSum="2"
+        android:orientation="horizontal"
+
+        >
+<RelativeLayout
+    android:padding="20dp"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:id="@+id/line_recycle_quantity_layout"
+
+    >
+                <TextView     android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/normal_dark"
+            android:id="@+id/line_recycle_quantity_text"
+            android:text="@string/quantity"
+             android:gravity="center_vertical"
+            ></TextView>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/line_recycle_quantity_choose_layout"
+
+            >
+
+
+                    <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/line_recycle_quantity_choose_text"
+                android:textColor="@color/red"
+                style="@style/normal_red"
+                android:text="1"
+                android:layout_toLeftOf="@id/line_recycle_quantity_choose_btn"
+                        android:paddingRight="10dp"
+             android:layout_centerVertical="true"
+                        ></TextView>
+
+            <ImageButton
+
+                android:id="@+id/line_recycle_quantity_choose_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+
+                android:layout_alignParentRight="true"
+                android:background="@drawable/circle_btn_gray"
+                android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageButton>
+
+        </RelativeLayout>
+</RelativeLayout>
+
+
+        <RelativeLayout
+        android:background="@drawable/edit_text_shape"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/line_recycle_unit_layout"
+            android:padding="20dp"
+
+            >
+                    <TextView     android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:id="@+id/line_recycle_unit_text"
+                android:text="@string/unit"
+                 android:gravity="center_vertical"
+            ></TextView>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/line_recycle_unit_choose_layout"
+
+                >
+
+
+                        <TextView     android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/line_recycle_unit_choose_text"
+                    android:textColor="@color/red"
+                    style="@style/normal_red"
+                    android:text="@string/choose"
+                    android:paddingRight="10dp"
+                    android:layout_toLeftOf="@id/line_recycle_unit_choose_btn"
+                     android:gravity="center_vertical"
+            ></TextView>
+
+                <ImageButton
+
+                    android:id="@+id/line_recycle_unit_choose_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/circle_btn_gray"
+                    android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageButton>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:padding="20dp"
+
+        android:background="@drawable/edit_text_shape"
+        android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+
+        android:id="@+id/line_recycle_price_layout"
+        android:orientation="horizontal"
+
+        >
+
+                <TextView     android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/normal_dark"
+            android:id="@+id/line_recycle_price_text"
+            android:text="@string/price"
+             android:gravity="center_vertical"
+            ></TextView>
+
+        <RelativeLayout
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/line_recycle_price_choose_layout"
+
+            >
+
+
+                    <TextView     android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/line_recycle_price_choose_text"
+                android:textColor="@color/red"
+                style="@style/normal_red"
+                android:text="@string/sar"
+                android:paddingRight="10dp"
+                 android:gravity="center_vertical"
+                        android:layout_toLeftOf="@id/line_recycle_price_choose_btn"
+
+                        ></TextView>
+
+            <ImageButton
+                android:id="@+id/line_recycle_price_choose_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+
+                android:layout_alignParentRight="true"
+                android:background="@drawable/circle_btn_gray"
+                android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageButton>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:padding="20dp"
+
+        android:background="@drawable/edit_text_shape"
+        android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+
+        android:id="@+id/line_recycle_amount_layout"
+        android:orientation="horizontal"
+
+        >
+
+                <TextView     android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/normal_dark"
+            android:id="@+id/line_recycle_amount_text"
+            android:text="@string/amount"
+             android:gravity="center_vertical"
+            ></TextView>
+
+        <RelativeLayout
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/line_recycle_amount_choose_layout"
+
+            >
+
+
+                    <TextView     android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/line_recycle_amount_choose_text"
+                android:textColor="@color/red"
+                style="@style/normal_red"
+                android:text="0.00"
+                android:paddingRight="10dp"
+                        android:layout_toLeftOf="@id/line_recycle_amount_choose_btn"
+
+                        ></TextView>
+
+            <ImageButton
+                android:id="@+id/line_recycle_amount_choose_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+
+                android:layout_alignParentRight="true"
+                android:background="@drawable/circle_btn_gray"
+                android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageButton>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:padding="20dp"
+
+        android:background="@drawable/edit_text_shape"
+        android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+
+        android:id="@+id/line_recycle_invoice_date_layout"
+        android:orientation="horizontal"
+
+        >
+
+                <TextView     android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/normal_dark"
+            android:id="@+id/line_recycle_invoice_date_text"
+            android:text="@string/invoice_date"
+             android:gravity="center_vertical"
+            ></TextView>
+
+        <RelativeLayout
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/line_recycle_invoice_date_choose_layout"
+            >
+
+
+                    <TextView     android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/line_recycle_invoice_date_choose_text"
+                android:textColor="@color/red"
+                style="@style/normal_red"
+                android:text="2022-01-10"
+                android:paddingRight="10dp"
+                        android:layout_toLeftOf="@id/line_recycle_invoice_date_choose_btn"
+
+                        ></TextView>
+
+            <ImageView
+                android:id="@+id/line_recycle_invoice_date_choose_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+
+                android:layout_alignParentRight="true"
+                android:background="@drawable/circle_btn_white"
+                android:src="@drawable/outline_calendar_month_black_24"></ImageView>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="@drawable/edit_text_shape"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:weightSum="2"
+        android:id="@+id/line_recycle_invoice_number_layout"
+        android:orientation="vertical"
+        android:padding="20dp"
+
+        >
+               <TextView     android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/normal_dark"
+            android:id="@+id/line_recycle_invoice_number_text"
+            android:text="@string/invoice_number"
+             android:gravity="center_vertical"
+            ></TextView>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            ></Space>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/line_recycle_invoice_number_choose_layout"
+            android:background="@drawable/edit_text_shape_for_line_dark"
+            style="@style/normal_red"
+            android:hint="@string/invoice_number"
+                android:padding="10dp"
+            >
+
+
+        </EditText>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:padding="20dp"
+
+        android:background="@drawable/edit_text_shape"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:id="@+id/line_recycle_supplier_name_layout"
+        android:orientation="vertical"
+        >
+
+                <TextView     android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/normal_dark"
+            android:id="@+id/line_recycle_supplier_name_text"
+            android:text="@string/supplier_name"
+             android:gravity="center_vertical"
+            ></TextView>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            ></Space>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/line_recycle_supplier_name_choose_layout"
+            android:background="@drawable/edit_text_shape_for_line_dark"
+            style="@style/normal_red"
+            android:hint="@string/invoice_number"
+            android:padding="10dp"
+            >
+
+
+        </EditText>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:padding="20dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:id="@+id/line_recycle_vat_number_layout"
+        android:orientation="vertical"
+        android:background="@drawable/edit_text_shape"
+
+        >
+
+                <TextView     android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/normal_dark"
+            android:id="@+id/line_recycle_vat_number_text"
+            android:text="@string/vat_number"
+             android:gravity="center_vertical"
+            ></TextView>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            ></Space>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/line_recycle_vat_number_choose_layout"
+            android:background="@drawable/edit_text_shape_for_line_dark"
+            style="@style/normal_red"
+            android:hint="@string/invoice_number"
+            android:padding="10dp"
+            >
+
+
+        </EditText>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:background="@drawable/edit_text_shape"
+        android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+        android:padding="20dp"
+
+        android:id="@+id/line_recycle_billed_layout"
+        android:orientation="horizontal"
+
+        >
+
+                <TextView     android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/normal_dark"
+            android:id="@+id/line_recycle_billed_text"
+            android:text="@string/select_billed"
+             android:gravity="center_vertical"
+            ></TextView>
+
+       <Switch
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentRight="true"
+           android:id="@+id/line_recycle_switch"
+           ></Switch>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:id="@+id/line_recycle_attatchment_layout"
+        android:orientation="vertical"
+        android:padding="20dp"
+
+        >
+
+                <TextView     android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/normal_dark"
+            android:id="@+id/line_recycle_attatchment_text"
+            android:text="@string/attatchment"
+             android:gravity="center_vertical"
+            ></TextView>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            ></Space>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                >
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:id="@+id/line_recycle_attatchment_choose_layout"
+                android:background="@drawable/attatchment_shape"
+                android:src="@drawable/outline_add_circle_black_36"
+                android:hint="@string/attatchment"
+                android:padding="10dp"
+                ></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add"
+                style="@style/normal_dark"
+                android:layout_gravity="center_horizontal"
+                ></TextView>
+            </LinearLayout>
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                ></Space>
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+
+                >
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/line_recycle_attachment_recycle"
+                ></androidx.recyclerview.widget.RecyclerView>
+            </ScrollView>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

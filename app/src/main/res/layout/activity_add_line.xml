@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddLine">
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="13"
+        android:background="@color/gray_light"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:weightSum="6"
+            android:background="@color/red_dark"
+            android:paddingHorizontal="30dp"
+            >
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:src="@drawable/outline_arrow_circle_left_white_48"
+                android:background="?android:attr/selectableItemBackground"
+                android:id="@+id/add_line_cancel_btn"
+                ></androidx.appcompat.widget.AppCompatImageButton>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="8"
+            android:orientation="horizontal"
+            android:background="@color/gray_light"
+
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:weightSum="2"
+                android:paddingVertical="10dp"
+
+
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    >
+
+                    <ImageButton
+                        android:id="@+id/add_line_add_more_btn"
+                        android:layout_width="45dp"
+
+                        android:layout_height="45dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/circle_btn_white"
+
+                        android:src="@drawable/outline_add_24"
+
+                        >
+
+                    </ImageButton>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/normal_dark"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/add_more_line"
+                    android:paddingTop="5dp"
+                    android:gravity="center"
+                    ></TextView>
+
+
+            </LinearLayout>
+
+
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                ></Space>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:paddingVertical="10dp"
+
+
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    >
+                    <ImageButton
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+
+                        android:src="@drawable/outline_check_white_24"
+                        android:background="@drawable/circle_btn_red_light"
+                        android:id="@+id/add_save_and_close_btn_btn"
+                        android:layout_centerHorizontal="true"
+
+
+                        >                </ImageButton>
+
+
+                </RelativeLayout>
+
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/normal_dark"
+                    android:layout_alignParentBottom="true"
+                    android:paddingTop="5dp"
+                    android:text="@string/save_and_close"
+                    android:gravity="center"
+                    ></TextView>
+
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                ></Space>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:paddingVertical="10dp"
+
+
+                >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+android:orientation="vertical"
+                    >
+
+                    <ImageButton
+                        android:id="@+id/add_save_and_close_btn"
+                        android:layout_width="45dp"
+
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/circle_btn_red"
+                        android:src="@drawable/outline_arrow_forward_ios_white_24"
+
+                        >
+
+                    </ImageButton>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/normal_dark"
+                    android:layout_alignParentBottom="true"
+                    android:text="Continue"
+                    android:paddingTop="5dp"
+
+                    android:gravity="center"
+                    ></TextView>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="12"
+            android:orientation="vertical"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/add_line_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </ScrollView>
+    </LinearLayout>
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/add_line_select_fragment"
+        class="com.example.pettycash.SelectFragment"
+
+
+        />
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/add_line_Image_fragment"
+        class="com.example.pettycash.ImageFragment"
+
+
+        />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/add_line_type_fragment"
+        class="com.example.pettycash.TypeFragment"
+
+        />
+
+
+
+</RelativeLayout>
