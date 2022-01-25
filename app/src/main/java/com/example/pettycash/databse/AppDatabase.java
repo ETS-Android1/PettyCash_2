@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {LineModelView.class,TransactionModelView.class,AttachmentModelView.class}, version = 1 , exportSchema = false)
+@Database(entities = {LineModelViewDB.class,TransactionModelView.class,AttachmentModelView.class}, version = 4 , exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static Object LOCK = new Object();
 
@@ -40,7 +40,9 @@ public abstract class AppDatabase extends RoomDatabase {
                 AppDatabase appDatabase = Room.databaseBuilder(
                         mContext,
                         AppDatabase.class,
-                        Utlity.databaseName).build();
+                        Utlity.databaseName).fallbackToDestructiveMigration()
+
+                        .build();
 
                 instance = appDatabase;
                 return instance;

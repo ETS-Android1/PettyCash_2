@@ -2,6 +2,8 @@ package com.example.pettycash;
 
 import android.net.Uri;
 
+import com.example.pettycash.databse.AttachmentModelView;
+
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,14 +14,17 @@ public class LineModelView {
     public int quantity =1;
     public String invoiceNumber;
     public String supplierName;
-    public String vatInvoiceNumber;
+    public long vatInvoiceNumber;
     public long invoiceDate;
     public boolean billedToCustomer;
-    public List<Uri> docsList;
+    public List<AttachmentModelView> docsList;
+    public double amount;
     int position;
     String category;
     String unit;
     String item;
+    String cbsCode;
+    String expenditureType;
     boolean priceClicked,quantityClicked;
 
 

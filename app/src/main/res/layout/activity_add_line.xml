@@ -116,7 +116,7 @@
 
                         android:src="@drawable/outline_check_white_24"
                         android:background="@drawable/circle_btn_red_light"
-                        android:id="@+id/add_save_and_close_btn_btn"
+                        android:id="@+id/add_line_save_and_close_btn"
                         android:layout_centerHorizontal="true"
 
 
@@ -165,7 +165,7 @@ android:orientation="vertical"
                     >
 
                     <ImageButton
-                        android:id="@+id/add_save_and_close_btn"
+                        android:id="@+id/add_line_continue"
                         android:layout_width="45dp"
 
                         android:layout_height="45dp"

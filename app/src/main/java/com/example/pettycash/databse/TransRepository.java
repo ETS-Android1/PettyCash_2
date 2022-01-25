@@ -9,15 +9,15 @@ import com.example.pettycash.DAO.transDAO;
 import java.util.List;
 
 public class TransRepository {
-    private transDAO mtransDao ;
+     public transDAO mtransDao ;
 
 
     private LiveData<List<TransactionModelView>> transList;
-
+    AppDatabase db;
 
     public TransRepository(Application application) {
 
-        AppDatabase db = AppDatabase.getInstance(application);
+         db = AppDatabase.getInstance(application);
         this.mtransDao = db.transDao();
 
         transList = mtransDao.getAll();

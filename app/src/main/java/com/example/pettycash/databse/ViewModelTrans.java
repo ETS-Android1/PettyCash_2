@@ -11,6 +11,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class ViewModelTrans extends AndroidViewModel {
 
@@ -32,9 +34,22 @@ public class ViewModelTrans extends AndroidViewModel {
 
     public void addTrans(TransactionModelView trans){
         Log.e("test","test");
-        
-        mDB.databaseWriteExecutor.execute(()->{
-            transDAO.insertTransaction(trans);
+        new Executor() {
+            @Override
+            public void execute(Runnable command) {
+                mDB.transDao().insertTransaction(trans);
+
+            }
+        };
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                mDB.transDao().insertTransaction(trans);
+
+            }
         });
+
+        new Thread(() -> mDB.transDao().insertTransaction(trans)).start();
+
     }
 }

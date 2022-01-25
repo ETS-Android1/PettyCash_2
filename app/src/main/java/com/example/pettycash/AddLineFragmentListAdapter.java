@@ -4,11 +4,14 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -41,11 +44,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pettycash.databse.AttachmentModelView;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.security.Permission;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -76,12 +82,14 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
     private Calendar myCalendar;
     ActivityResultLauncher<Intent> someActivityResultLauncher;
      String currentPhotoPath;
+    private boolean isBilled;
 
 
     public AddLineFragmentListAdapter(Context context, AddLine activity, List<LineModelView> lines) {
         this.context = context;
         this.activity = activity;
-        lineModelViews = lines;
+        lineModelViews.addAll(lines);
+        Log.v("adpList", String.valueOf(lineModelViews.size()));
         myCalendar = Calendar.getInstance();
 
 
@@ -118,7 +126,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
 
         LineModelView current = lineModelViews.get(position);
-        List<Uri> docs= current.docsList;
+        List<AttachmentModelView> docs= current.docsList;
         holder.attachmentAdapter.linePos = position+1;
         holder.attachmentAdapter.docList.clear();
         holder.attachmentAdapter.docList.addAll(docs);
@@ -139,6 +147,12 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
         if (current.item != null)
             holder.itemChooseText.setText(current.item);
+
+        if (current.cbsCode != null)
+            holder.cbsCodeText.setText(current.cbsCode);
+
+        if (current.expenditureType != null)
+            holder.expenditureTypeText.setText(current.expenditureType);
 
         if (current.price != 0 && current.priceClicked)
             holder.priceChooseText.setText(String.valueOf(current.price));
@@ -197,18 +211,19 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
     @Override
     public int getItemCount() {
+        Log.v("adptS", String.valueOf(lineModelViews.size()));
         return lineModelViews.size();
     }
 
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
           RecyclerView attachs_recyclerView;
         int ItemView;
         ImageButton imageView;
-        RelativeLayout categorylayout,itemlayout,quantitylayout,unitlayout,datelayout,priceEditText,amountEditText;
-        TextView categoryChooseText,itemChooseText,quantityChooseText,unitChooseText,priceChooseText,amountChooseText,dateChooseText,title;
+        RelativeLayout categorylayout,itemlayout,quantitylayout,unitlayout,datelayout,cbsCodeLayout,expenditureTypeLayout,priceEditText,amountEditText;
+        TextView categoryChooseText,itemChooseText,quantityChooseText,unitChooseText,priceChooseText,amountChooseText,dateChooseText,cbsCodeText,expenditureTypeText,title;
         EditText invoiceEditText,supplierEditText,vatEditText;
         Switch billed;
         ImageView attachmentBtn;
@@ -235,6 +250,9 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
             viewHolder = this;
             billed = itemView.findViewById(R.id.line_recycle_switch);
             title = itemView.findViewById(R.id.line_recycle_title_text);
+
+            cbsCodeText = itemView.findViewById(R.id.line_recycle_cbs_code_choose_text);
+            expenditureTypeText = itemView.findViewById(R.id.line_recycle_expenditure_type_choose_text);
             dateChooseText = itemView.findViewById(R.id.line_recycle_invoice_date_choose_text);
             imageView = itemView.findViewById(R.id.prefernces_fragment_list_image);
             categorylayout = itemView.findViewById(R.id.line_recycle_category_choose_layout);
@@ -244,6 +262,8 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
             priceEditText = itemView.findViewById(R.id.line_recycle_price_choose_layout);
             amountEditText = itemView.findViewById(R.id.line_recycle_amount_choose_layout);
             datelayout = itemView.findViewById(R.id.line_recycle_invoice_date_choose_layout);
+            cbsCodeLayout = itemView.findViewById(R.id.line_recycle_cbs_code_choose_layout);
+            expenditureTypeLayout = itemView.findViewById(R.id.line_recycle_expenditure_type_choose_layout);
 
             attachmentBtn = itemView.findViewById(R.id.line_recycle_attatchment_choose_layout);
 
@@ -252,6 +272,8 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
             vatEditText = itemView.findViewById(R.id.line_recycle_vat_number_choose_layout);
             amountChooseText = itemView.findViewById(R.id.line_recycle_amount_choose_text);
 
+            cbsCodeLayout.setOnClickListener(this);
+            expenditureTypeLayout.setOnClickListener(this);
             categorylayout.setOnClickListener(this);
             unitlayout.setOnClickListener(this);
             itemlayout.setOnClickListener(this);
@@ -259,6 +281,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
             priceEditText.setOnClickListener(this);
 //            amountEditText.setOnClickListener(this);
             datelayout.setOnClickListener(this);
+            billed.setOnCheckedChangeListener(this);
             invoiceEditText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -305,7 +328,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    lineModelViews.get(getAdapterPosition()).vatInvoiceNumber = s.toString();
+                    lineModelViews.get(getAdapterPosition()).vatInvoiceNumber = Integer.valueOf(s.toString());
 
                 }
             });
@@ -390,6 +413,25 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
                 case R.id.line_recycle_attatchment_choose_layout:
                     openFiles();
 break;
+
+                case R.id.line_recycle_cbs_code_choose_layout:
+                    selectFragment = new SelectFragment(R.string.cbs_code,R.drawable.outline_category_24,R.id.line_recycle_cbs_code_choose_text,cbsCodeText.getText().toString(),activity, getAdapterPosition());
+
+                    addLine.fragmentManager.beginTransaction()
+                            .replace(R.id.add_line_select_fragment,selectFragment,"cbs")
+                            .commit();
+                    addLine.selectFragment.setVisibility(View.VISIBLE);
+
+                    break;
+                case R.id.line_recycle_expenditure_type_choose_layout:
+                    selectFragment = new SelectFragment(R.string.expenditure_type,R.drawable.outline_category_24,R.id.line_recycle_expenditure_type_choose_text,expenditureTypeText.getText().toString(),activity, getAdapterPosition());
+
+                    addLine.fragmentManager.beginTransaction()
+                            .replace(R.id.add_line_select_fragment,selectFragment,"exp")
+                            .commit();
+                    addLine.selectFragment.setVisibility(View.VISIBLE);
+
+                    break;
             }
 
 
@@ -450,12 +492,33 @@ break;
 //                        ActivityCompat.requestPermissions(addLine,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
 //                        addLine.someActivityResultLauncher.launch(takePictureIntent);
 //                        Log.v("imgData", Boolean.valueOf(currentPhotoPath.isEmpty()));
+                        LineModelView current = lineModelViews.get(getAdapterPosition());
+                        List<AttachmentModelView> docs= current.docsList;
+                        addLine.current = current;
+//                        addLine.currentItemView = itemView;
 
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, "1");
-                        takePictureIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,"1");
-                        addLine.someActivityResultLauncher.launch(takePictureIntent);
+                        int pos = current.position+1;
 
+                        OutputStream fos;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            ContentResolver resolver = context.getContentResolver();
+                            ContentValues contentValues = new ContentValues();
+                            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, pos + "." + docs.size());
+                            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png");
+                            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, "DCIM/" + "PettyCash");
+                            Uri imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+                            try {
+                                fos = resolver.openOutputStream(imageUri);
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                            Log.v("pathpath", String.valueOf(imageUri));
+                            addLine.photoURI = imageUri;
+                            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                            takePictureIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, imageUri);
+                            addLine.someActivityResultLauncher.launch(takePictureIntent);
 
+                        }
                     }
                     else if (options[item].equals("Choose from Gallery"))
                     {
@@ -526,7 +589,6 @@ break;
         public void upadteText(int viewId, String text,int pos){
             Log.v("udpate pos",String.valueOf(pos));
 
-            LineModelView current = lineModelViews.get(pos);
             switch (viewId){
 
                 case R.id.line_recycle_category_choose_text:
@@ -540,13 +602,22 @@ break;
                 case R.id.line_recycle_unit_choose_text:
                     lineModelViews.get(pos).unit = text;
                     break;
+                case R.id.line_recycle_cbs_code_choose_text:
+                    lineModelViews.get(pos).cbsCode = text;
+                    break;
+                case R.id.line_recycle_expenditure_type_choose_text:
+                    lineModelViews.get(pos).expenditureType = text;
+                    break;
 
                 case R.id.line_recycle_quantity_choose_text:
                     lineModelViews.get(pos).quantity = Integer.valueOf(text);
+                    lineModelViews.get(pos).amount =    lineModelViews.get(pos).quantity*   lineModelViews.get(pos).price;
                     break;
 
                 case R.id.line_recycle_price_choose_text:
                     lineModelViews.get(pos).price = Double.valueOf(text);
+                    lineModelViews.get(pos).amount =    lineModelViews.get(pos).quantity*   lineModelViews.get(pos).price;
+
                     break;
 
                 default:
@@ -555,6 +626,13 @@ break;
 //            Log.v("cat:",text);
 //            TextView textView = itemView.findViewById(viewId);
 //            textView.setText(text);
+
+        }
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            isBilled=isChecked;
+            lineModelViews.get(getAdapterPosition()).billedToCustomer =isBilled;
 
         }
     }

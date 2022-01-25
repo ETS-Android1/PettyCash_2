@@ -10,7 +10,7 @@ public class linesInTransaction {
             parentColumn = "id",
             entityColumn = "transId"
     )
-    public LineModelView lineModelView;
+    public LineModelViewDB lineModelViewDB;
 
 
 }

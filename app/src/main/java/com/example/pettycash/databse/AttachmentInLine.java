@@ -5,7 +5,7 @@ import androidx.room.Relation;
 
 public class AttachmentInLine {
     @Embedded
-    public LineModelView line;
+    public LineModelViewDB line;
     @Relation(
             parentColumn = "id",
             entityColumn = "lineId"

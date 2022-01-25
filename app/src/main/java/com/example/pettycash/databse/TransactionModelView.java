@@ -18,14 +18,26 @@ public class TransactionModelView {
     public   String project;
     @ColumnInfo(name = "department")
     public  String department;
+     @ColumnInfo(name = "isVat")
+    public  boolean isVat;
+     @ColumnInfo(name = "date")
+    public  long date;
+      @ColumnInfo(name = "description")
+    public  String description;
 
 
-    public TransactionModelView(String legalEntity, String businessUnit, String project, String department) {
+
+
+
+
+    public TransactionModelView(String legalEntity, String businessUnit, String project, String department,boolean isVat , long date , String description) {
         this.legalEntry = legalEntity;
         this.businessUnit = businessUnit;
         this.project = project;
         this.department = department;
-
+        this.isVat = isVat;
+        this.date = date;
+        this.description = description;
     }
 
     public TransactionModelView() {

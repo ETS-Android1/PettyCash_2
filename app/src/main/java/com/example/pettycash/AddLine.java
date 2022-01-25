@@ -5,13 +5,11 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -21,32 +19,29 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.squareup.picasso.Picasso;
+import com.example.pettycash.Utality.Utlity;
+import com.example.pettycash.databse.AttachmentModelView;
+import com.example.pettycash.databse.LineModelViewDB;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 public class AddLine extends AppCompatActivity implements View.OnClickListener {
 
+    public LineModelView current;
+    public AttachmentAdapter.ViewHolder currentItemView;
     RecyclerView lines_recyclerView;
     AddLineFragmentListAdapter adapter;
 
-    ImageButton cancelBtn,addLineBtn;
+    ImageButton cancelBtn,addLineBtn , continueBtn,saveAndCloseBtn;
 
 
     FragmentManager fragmentManager;
@@ -56,6 +51,7 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener {
     int attachPos = -1;
     boolean camere;
     Uri photoURI;
+    int currentTransID;
 
 
     @Override
@@ -63,14 +59,20 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_line);
 
+        Log.v("transIdforTrans", String.valueOf(getIntent().getIntExtra(Utlity.transId,-1)));
+        currentTransID = getIntent().getIntExtra(Utlity.transId,-1);
 
 
         cancelBtn = findViewById(R.id.add_line_cancel_btn);
         addLineBtn = findViewById(R.id.add_line_add_more_btn);
+     continueBtn = findViewById(R.id.add_line_continue);
+        saveAndCloseBtn = findViewById(R.id.add_line_save_and_close_btn);
 
 
        addLineBtn.setOnClickListener(this);
         cancelBtn.setOnClickListener(this);
+         continueBtn.setOnClickListener(this);
+        saveAndCloseBtn.setOnClickListener(this);
 
         selectFragment = findViewById(R.id.add_line_select_fragment);
         typeFragment = findViewById(R.id.add_line_type_fragment);
@@ -105,13 +107,20 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener {
                             Log.v("attachPos", String.valueOf(attachPos));
                             if (attachPos >-1) {
                                 if (camere) {
-                                    Bitmap imageBitmap = (Bitmap) result.getData().getExtras().get("data");
+//                                    Bitmap imageBitmap = (Bitmap) result.getData().getExtras().get("data");
 //                                    cancelBtn.setImageBitmap(imageBitmap);
-                                    galleryAddPic(getContentResolver(),(Bitmap) result.getData().getExtras().get("data"),"1.1","des");
+//                                    galleryAddPic(getContentResolver(),(Bitmap) result.getData().getExtras().get("data"),"1.1","des");
+                                    LineModelView current = adapter.lineModelViews.get(attachPos);
+                                    String name = String.valueOf(attachPos+current.docsList.size());
+                                    AttachmentModelView attachmentModelView = new AttachmentModelView(0,name,photoURI.toString());
+                                    current.docsList.add(attachmentModelView);
 
-//                                    LineModelView current = adapter.lineModelViews.get(attachPos);
-//                                    current.docsList.add();
 //                                    adapter.notifyDataSetChanged();
+//                                    LineModelView current = adapter.lineModelViews.get(attachPos);
+//                                    Log.v("imagePath", (String) result.getData().getExtras().get("data"));
+//
+//                                    current.docsList.add((Uri) result.getData().getExtras().get("data"));
+                                    adapter.notifyDataSetChanged();
                                 }else {
 
 
@@ -119,7 +128,7 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener {
 
 
                                     LineModelView current = adapter.lineModelViews.get(attachPos);
-                                    current.docsList.add(data.getData());
+//                                    current.docsList.add(data.getData());
                                     adapter.notifyDataSetChanged();
                                 }
                                 adapter.updateDocs();
@@ -354,10 +363,10 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener {
                 LineModelView previous =adapter.lineModelViews.get(adapter.lineModelViews.size()-1);
                 LineModelView newLine = new LineModelView(previous.position+1,previous.category,previous.unit,previous.item);
                 Log.v("new Line","pos: "+newLine.position +" cat : "+newLine.category +" item : "+newLine.item +" unit : "+newLine.unit +" price : "+newLine.price +" quantity : "+newLine.quantity);
-                lineList.add(newLine);
+                adapter.lineModelViews.add(newLine);
                 int i=0 ;
-                while (i<lineList.size()){
-                    Log.v("item "+i,String.valueOf(lineList.get(i).position));
+                while (i<adapter.lineModelViews.size()){
+                    Log.v("item "+i,String.valueOf(adapter.lineModelViews.get(i).position));
                     i++;
                 }
 //                Collections.sort(lineList, (o1, o2) -> String.valueOf(o1.position).compareTo(String.valueOf(o2.position)));
@@ -368,7 +377,38 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener {
 //                }
                 adapter.notifyDataSetChanged();
                 break;
+
+            case R.id.add_line_continue:
+                insetrAllLinesToDB();
+                break;
+
+            case R.id.add_line_save_and_close_btn:
         }
+    }
+
+    void insetrAllLinesToDB(){
+
+        int i = 0;
+        List<LineModelViewDB> lineModelViewDBList = new ArrayList<>();
+
+        while (i <= adapter.lineModelViews.size()-1){
+            LineModelView current = adapter.lineModelViews.get(i);
+            LineModelViewDB lineModelViewDB = new LineModelViewDB(currentTransID,current.category,current.unit,current.item,current.quantity,current.price,current.amount,current.supplierName,current.invoiceNumber,current.vatInvoiceNumber,current.billedToCustomer,current.invoiceDate,current.cbsCode,current.expenditureType);
+            lineModelViewDBList.add(lineModelViewDB);
+
+            i++;
+        }
+        Log.v("beforeLineList",String.valueOf(lineModelViewDBList.size()));
+
+        new Utlity.TaskRunner().executeAsync(new Utlity.AddLinesCallable(this.getApplication(),lineModelViewDBList),(data) ->{
+            Log.v("lineSizeF",String.valueOf(data));
+
+        });
+
+
+
+
+
     }
     
     

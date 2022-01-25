@@ -560,7 +560,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/new_transaction_decription_select_title"
+                        android:id="@+id/new_transaction_decription_edit_text"
                         android:hint="@string/type_here"
                         android:padding="10dp"
                         android:background="@drawable/edit_text_shape_for_line"

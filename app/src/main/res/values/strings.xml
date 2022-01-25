@@ -66,6 +66,8 @@
     <string name="submit">Submit</string>
     <string name="sar">(SAR)</string>
     <string name="add">ADD</string>
+    <string name="expenditure_type">Expenditure Type</string>
+    <string name="cbs_code">CBS Code</string>
 
 
 </resources>

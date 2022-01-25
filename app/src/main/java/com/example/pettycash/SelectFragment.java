@@ -102,8 +102,10 @@ public class SelectFragment extends Fragment implements View.OnClickListener {
 
             RecyclerView recyclerView = view.findViewById(R.id.preferences_fragment_list);
             List<String> stringsList = new ArrayList<>();
-            stringsList.add("kkk");
-            stringsList.add("jjj");
+            stringsList.add("Option 1");
+            stringsList.add("Option 2");
+            stringsList.add("Option 3");
+            stringsList.add("Option 4");
             if (textViewID == -1) {
                 Log.v("F:"," title: "+getActivity().getString(titleString)+" textId: "+String.valueOf(textViewID));
 

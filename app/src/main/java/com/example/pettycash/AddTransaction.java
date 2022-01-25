@@ -25,13 +25,17 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pettycash.DAO.transDAO;
+
 import com.example.pettycash.Utality.Utlity;
 import com.example.pettycash.databse.AppDatabase;
 import com.example.pettycash.databse.TransactionModelView;
@@ -43,6 +47,7 @@ import java.util.AbstractList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.Callable;
 
 import static com.example.pettycash.UserPreferences.business_ID;
 import static com.example.pettycash.UserPreferences.department_ID;
@@ -52,7 +57,7 @@ import static com.example.pettycash.databse.AppDatabase.databaseWriteExecutor;
 import static com.example.pettycash.databse.AppDatabase.instance;
 import static java.time.chrono.IsoChronology.INSTANCE;
 
-public class AddTransaction extends AppCompatActivity implements View.OnClickListener {
+public class AddTransaction extends AppCompatActivity implements View.OnClickListener, Callable, CompoundButton.OnCheckedChangeListener {
     TextView legalText, businessText, projectText, depatmentText ,dateText;
     ImageButton cancelBtn,confirmBtn;
     FragmentManager fragmentManager;
@@ -70,9 +75,12 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
     SettingsFragmanet settingsFragmanet;
     DatePickerDialog.OnDateSetListener date;
     private View keyboard;
+    private Switch vat;
+    private long dateTime;
 
     public AppDatabase db ;
     ViewModelTrans transViewModelProvider;
+    private boolean isVatChecked;
 
 
     @Override
@@ -83,15 +91,18 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
 
 
 
-
+        db = AppDatabase.getInstance(this);
 
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
-//                db.transDao().insertTransaction(new TransactionModelView());
+//
+//               db.transDao().delelteAll();
 //            }
 //
 //        }).start();
+
+        dateTime = Calendar.getInstance().getTimeInMillis();
 
         transViewModelProvider = new ViewModelProvider(this).get(ViewModelTrans.class);
 
@@ -145,6 +156,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH,month);
                 myCalendar.set(Calendar.DAY_OF_MONTH,day);
+                dateTime = myCalendar.getTimeInMillis();
                 updateLabel();
             }
         };
@@ -338,8 +350,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
 
             case R.id.new_transaction_confirm_btn:
                 insertTransToDB();
-                Intent toHome2 = new Intent(this, AddLine.class);
-                startActivity(toHome2);
+
 
                 break;
 
@@ -352,20 +363,46 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
 
     private void insertTransToDB() {
 
-                    String legalEntity,businessUnit,project,department;
+                    String legalEntity,businessUnit,project,department,description;
 
                     legalEntity = legalText.getText().toString();
                     businessUnit = businessText.getText().toString();
                     project = projectText.getText().toString();
                     department = depatmentText.getText().toString();
 
-                    TransactionModelView newTrans = new TransactionModelView(legalEntity,businessUnit,project,department);
-                    transViewModelProvider.addTrans(newTrans);
+                    vat = findViewById(R.id.new_transaction_vat_switch);
+                    vat.setOnCheckedChangeListener(this);
+                    EditText descriptionEditText = findViewById(R.id.new_transaction_decription_edit_text);
+                    description = descriptionEditText.getEditableText().toString();
+
+                    TransactionModelView newTrans = new TransactionModelView(legalEntity,businessUnit,project,department,isVatChecked,dateTime,description);
+        new Utlity.TaskRunner().executeAsync(new Utlity.AddTransCallable(this.getApplication(),newTrans),(data)->{
+            Log.v("tSizeF",String.valueOf(data));
+            Intent toAddLines = new Intent(this, AddLine.class);
+            toAddLines.putExtra(Utlity.transId,data);
+            startActivity(toAddLines);
+        });
+
+
+//        databaseWriteExecutor.execute(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Log.v("onBakcround","true");
+//
+//                        db.transDao().insertTransaction(newTrans);
+//                        List<TransactionModelView> list = db.transDao().getAllNotLive();
+//                        Log.v("onBakcround", String.valueOf(list.size()));
+//
+//
+//                    }
+//                });
+            }
 
 
 
 
-    }
+
+
 
 
     public static void hideFragment() {
@@ -399,4 +436,15 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    @Override
+    public Object call() throws Exception {
+        Log.v("inBack","finish");
+
+        return null;
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        isVatChecked=isChecked;
+    }
 }

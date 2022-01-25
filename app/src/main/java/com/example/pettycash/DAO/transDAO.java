@@ -18,6 +18,10 @@ public interface transDAO {
     @Query("SELECT * FROM TransactionModelView")
     LiveData<List<TransactionModelView>> getAll();
 
+    @Query("SELECT * FROM TransactionModelView")
+    List<TransactionModelView> getAllNotLive();
+
+
     @Query("DELETE FROM transactionmodelview")
     void delelteAll();
 }
