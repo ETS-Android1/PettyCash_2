@@ -68,6 +68,7 @@
     <string name="add">ADD</string>
     <string name="expenditure_type">Expenditure Type</string>
     <string name="cbs_code">CBS Code</string>
+    <string name="preview">Preview</string>
 
 
 </resources>

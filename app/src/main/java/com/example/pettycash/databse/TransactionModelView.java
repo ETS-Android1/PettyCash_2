@@ -24,6 +24,8 @@ public class TransactionModelView {
     public  long date;
       @ColumnInfo(name = "description")
     public  String description;
+    @ColumnInfo(name = "status")
+    public  boolean status;
 
 
 
@@ -38,6 +40,7 @@ public class TransactionModelView {
         this.isVat = isVat;
         this.date = date;
         this.description = description;
+        status = false;
     }
 
     public TransactionModelView() {
