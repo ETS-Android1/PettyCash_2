@@ -117,7 +117,7 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
 //                                    cancelBtn.setImageBitmap(imageBitmap);
 //                                    galleryAddPic(getContentResolver(),(Bitmap) result.getData().getExtras().get("data"),"1.1","des");
                                     LineModelView current = adapter.lineModelViews.get(attachPos);
-                                    String name = String.valueOf(attachPos+1+"."+current.docsList.size());
+                                    String name = String.valueOf(attachPos+1+"."+(current.docsList.size()+1));
                                     AttachmentModelView attachmentModelView = new AttachmentModelView(-1,name,photoURI.toString());
                                     current.docsList.add(attachmentModelView);
 
@@ -134,7 +134,11 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
 
 
                                     LineModelView current = adapter.lineModelViews.get(attachPos);
-//                                    current.docsList.add(data.getData());
+                                    String name = String.valueOf(attachPos+1+"."+(current.docsList.size()+1));
+
+                                    AttachmentModelView attachmentModelView = new AttachmentModelView(-1,name,data.getData().toString());
+
+                                    current.docsList.add(attachmentModelView);
                                     adapter.notifyDataSetChanged();
                                 }
                                 adapter.updateDocs();
@@ -453,7 +457,7 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
 
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putBoolean(String.valueOf(Utlity.CAMERA_REQUEST_ID),adapter.isGranted).apply();
-//                    adapter.viewHolder.openFiles();
+                    adapter.viewHolder.openFiles();
                 }
             }
         }

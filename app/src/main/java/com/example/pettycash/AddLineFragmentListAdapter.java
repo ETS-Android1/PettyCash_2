@@ -481,7 +481,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
         }
 
-        private void openFiles() {
+        public void openFiles() {
 
             final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
             AlertDialog.Builder builder = new AlertDialog.Builder(context);

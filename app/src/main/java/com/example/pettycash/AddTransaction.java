@@ -145,7 +145,8 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
-
+        vat = findViewById(R.id.new_transaction_vat_switch);
+        vat.setOnCheckedChangeListener(this);
         prepareLegal();
         prepareBusiness();
         prepareDepartment();
@@ -356,9 +357,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
 
             case R.id.new_transaction_confirm_btn:
                 insertTransToDB();
-                Intent toAddLines = new Intent(this, AddLine.class);
-                toAddLines.putExtra(Utlity.transId, transID);
-                startActivity(toAddLines);
+
 
                 break;
 
@@ -378,8 +377,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
                     project = projectText.getText().toString();
                     department = depatmentText.getText().toString();
 
-                    vat = findViewById(R.id.new_transaction_vat_switch);
-                    vat.setOnCheckedChangeListener(this);
+
                     EditText descriptionEditText = findViewById(R.id.new_transaction_decription_edit_text);
                     description = descriptionEditText.getEditableText().toString();
 
@@ -387,7 +385,9 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
         new Utlity.TaskRunner().executeAsync(new Utlity.AddTransCallable(this.getApplication(),newTrans),(data)->{
             Log.v("tSizeF",String.valueOf(data));
             transID = data;
-
+            Intent toAddLines = new Intent(this, AddLine.class);
+            toAddLines.putExtra(Utlity.transId, transID);
+            startActivity(toAddLines);
 
         });
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE}, Utlity.CAMERA_REQUEST_ID);
