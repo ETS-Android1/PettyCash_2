@@ -34,4 +34,9 @@ public interface LinesDAO {
 
     @Delete
     void delete(LineModelViewDB user);
+
+
+    @Query("DELETE FROM transactionmodelview")
+    void delelteAll();
+
 }

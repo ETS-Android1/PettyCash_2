@@ -2,6 +2,7 @@ package com.example.pettycash;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,10 +12,12 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteQuery;
 import androidx.sqlite.db.SupportSQLiteStatement;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteTransactionListener;
@@ -25,6 +28,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.PermissionRequest;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -57,7 +61,8 @@ import static com.example.pettycash.databse.AppDatabase.databaseWriteExecutor;
 import static com.example.pettycash.databse.AppDatabase.instance;
 import static java.time.chrono.IsoChronology.INSTANCE;
 
-public class AddTransaction extends AppCompatActivity implements View.OnClickListener, Callable, CompoundButton.OnCheckedChangeListener {
+public class AddTransaction extends AppCompatActivity implements View.OnClickListener, Callable, CompoundButton.OnCheckedChangeListener
+        , ActivityCompat.OnRequestPermissionsResultCallback {
     TextView legalText, businessText, projectText, depatmentText ,dateText;
     ImageButton cancelBtn,confirmBtn;
     FragmentManager fragmentManager;
@@ -81,6 +86,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
     public AppDatabase db ;
     ViewModelTrans transViewModelProvider;
     private boolean isVatChecked;
+    private Integer transID;
 
 
     @Override
@@ -350,7 +356,9 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
 
             case R.id.new_transaction_confirm_btn:
                 insertTransToDB();
-
+                Intent toAddLines = new Intent(this, AddLine.class);
+                toAddLines.putExtra(Utlity.transId, transID);
+                startActivity(toAddLines);
 
                 break;
 
@@ -378,10 +386,11 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
                     TransactionModelView newTrans = new TransactionModelView(legalEntity,businessUnit,project,department,isVatChecked,dateTime,description);
         new Utlity.TaskRunner().executeAsync(new Utlity.AddTransCallable(this.getApplication(),newTrans),(data)->{
             Log.v("tSizeF",String.valueOf(data));
-            Intent toAddLines = new Intent(this, AddLine.class);
-            toAddLines.putExtra(Utlity.transId,data);
-            startActivity(toAddLines);
+            transID = data;
+
+
         });
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE}, Utlity.CAMERA_REQUEST_ID);
 
 
 //        databaseWriteExecutor.execute(new Runnable() {
@@ -446,5 +455,24 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         isVatChecked=isChecked;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.v("pre0",permissions[0]+" = "+grantResults[0]);
+        Log.v("pre1",permissions[1]+" = "+grantResults[1]);
+
+        if ( grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.v("pre0",permissions[0]+" = "+grantResults[0]);
+                if ( grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    Log.v("pre1",permissions[1]+" = "+grantResults[1]);
+
+
+                    if (requestCode == Utlity.CAMERA_REQUEST_ID) {
+
+                    }
+                }
+            }
     }
 }

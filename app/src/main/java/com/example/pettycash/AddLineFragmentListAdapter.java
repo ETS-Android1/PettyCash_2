@@ -9,13 +9,18 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.TransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +49,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pettycash.Utality.Utlity;
 import com.example.pettycash.databse.AttachmentModelView;
 import com.squareup.picasso.Picasso;
 
@@ -83,6 +89,8 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
     ActivityResultLauncher<Intent> someActivityResultLauncher;
      String currentPhotoPath;
     private boolean isBilled;
+     boolean isGranted;
+
 
 
     public AddLineFragmentListAdapter(Context context, AddLine activity, List<LineModelView> lines) {
@@ -217,7 +225,8 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener , ActivityCompat.OnRequestPermissionsResultCallback {
 
           RecyclerView attachs_recyclerView;
         int ItemView;
@@ -229,13 +238,15 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
         ImageView attachmentBtn;
         AttachmentAdapter attachmentAdapter;
         List<Uri> docs ;
+        private SharedPreferences sharedPref;
 
         public ViewHolder(@NonNull View itemView) {
 
 
 
             super(itemView);
-
+            sharedPref = PreferenceManager.getDefaultSharedPreferences(addLine);
+            isGranted = sharedPref.getBoolean(String.valueOf(Utlity.CAMERA_REQUEST_ID),false);
 
             docs = new ArrayList<>();
 
@@ -328,7 +339,20 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    lineModelViews.get(getAdapterPosition()).vatInvoiceNumber = Integer.valueOf(s.toString());
+                    if (!s.toString().isEmpty()) {
+                        lineModelViews.get(getAdapterPosition()).vatInvoiceNumber = Long.valueOf(s.toString());
+                    }
+                }
+            });
+
+            vatEditText.setTransformationMethod(new TransformationMethod() {
+                @Override
+                public CharSequence getTransformation(CharSequence source, View view) {
+                    return source;
+                }
+
+                @Override
+                public void onFocusChanged(View view, CharSequence sourceText, boolean focused, int direction, Rect previouslyFocusedRect) {
 
                 }
             });
@@ -411,8 +435,8 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
                     break;
 
                 case R.id.line_recycle_attatchment_choose_layout:
-                    openFiles();
-break;
+                    ActivityCompat.requestPermissions(addLine, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, Utlity.CAMERA_REQUEST_ID);
+                    break;
 
                 case R.id.line_recycle_cbs_code_choose_layout:
                     selectFragment = new SelectFragment(R.string.cbs_code,R.drawable.outline_category_24,R.id.line_recycle_cbs_code_choose_text,cbsCodeText.getText().toString(),activity, getAdapterPosition());
@@ -488,7 +512,6 @@ break;
 //                                        photoFile);
 //                            }
 //                        }
-                        ActivityCompat.requestPermissions(addLine,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
 //                        ActivityCompat.requestPermissions(addLine,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
 //                        addLine.someActivityResultLauncher.launch(takePictureIntent);
 //                        Log.v("imgData", Boolean.valueOf(currentPhotoPath.isEmpty()));
@@ -635,5 +658,27 @@ break;
             lineModelViews.get(getAdapterPosition()).billedToCustomer =isBilled;
 
         }
+
+        @Override
+        public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+            Log.v("pre0",permissions[0]+" = "+grantResults[0]);
+            Log.v("pre1",permissions[1]+" = "+grantResults[1]);
+
+            if ( grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.v("pre0",permissions[0]+" = "+grantResults[0]);
+                if ( grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    Log.v("pre1",permissions[1]+" = "+grantResults[1]);
+
+
+                    if (requestCode == Utlity.CAMERA_REQUEST_ID) {
+                        isGranted=true;
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putBoolean(String.valueOf(Utlity.CAMERA_REQUEST_ID),isGranted).apply();
+                        openFiles();
+                    }
+                }
+            }
+        }
+        }
     }
-}
+

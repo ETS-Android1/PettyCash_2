@@ -535,6 +535,9 @@
             style="@style/normal_red"
             android:hint="@string/invoice_number"
             android:padding="10dp"
+            android:inputType="numberPassword"
+            android:maxLength="15"
+
             >
 
 

@@ -22,6 +22,7 @@ public class Utlity {
     public static String databaseName = "first";
     public static int databaseVersion = 1;
     public static String transId = "tran";
+    public static int CAMERA_REQUEST_ID = 333;
 
     public static class TaskRunner {
         private final Executor executor = Executors.newSingleThreadExecutor(); // change according to your requirements
@@ -71,39 +72,62 @@ public class Utlity {
     }
 
     public static class AddLinesCallable implements Callable<Integer> {
+        private  AppDatabase db;
         LinesRepository linesRepository;
         List<LineModelViewDB> list= new ArrayList<>();
-
+        List<List<AttachmentModelView>> attachList = new ArrayList<>();
         public AddLinesCallable(Application application) {
         }
 
-        public AddLinesCallable(Application application, List<LineModelViewDB> list) {
+        public AddLinesCallable(Application application, List<LineModelViewDB> list , List<List<AttachmentModelView>> attachList) {
             linesRepository = new LinesRepository(application);
+            db = AppDatabase.getInstance(application);
             this.list.clear();
             this.list.addAll(list);
+            this.attachList.clear();
+            this.attachList.addAll(attachList);
         }
         @Override
         public Integer call() {
             // Some long running task
-            Log.v("lineSizeS",String.valueOf(linesRepository.mLinesDAO.getAll().size()));
             Log.v("lineSizePara",String.valueOf(list.size()));
+            Log.v("attachSizePara",String.valueOf(attachList.size()));
+
 
             Integer size = list.size();
             int i =0;
+            int currId;
             while (i <= size-1){
                 linesRepository.addLine(list.get(i));
                 Log.v("item "+i+":", String.valueOf(linesRepository.mLinesDAO.getAll().get(linesRepository.mLinesDAO.getAll().size()-1).transactionId));
+                currId =linesRepository.mLinesDAO.getAll().get(linesRepository.mLinesDAO.getAll().size()-1).id;
+                List<AttachmentModelView> currenAttachList =attachList.get(i);
+                int j =0;
+//                Log.v("curDocS", String.valueOf(current.docsList.size()));
+                while (j <= currenAttachList.size()-1){
+
+                    AttachmentModelView attachVM = currenAttachList.get(j);
+                    attachVM.lineId=currId;
+//                    Log.v("curDocItem"+j+"", attachVM.name);
+
+                    db.attachmentDao().insertAttachment(attachVM);
+
+
+                    j++;
+                }
+
                 i++;
             }
 
             Integer dbSize =linesRepository.mLinesDAO.getAll().size();
-
+//            db.attachmentDao().delelteAll();
+//            db.linesDao().delelteAll();
+//            db.transDao().delelteAll();
             return dbSize;
         }
     }
 
     public static class AddAttachmentCallable implements Callable<Integer> {
-        LinesRepository linesRepository;
         List<AttachmentModelView> list= new ArrayList<>();
         AppDatabase db ;
 
@@ -118,18 +142,18 @@ public class Utlity {
         @Override
         public Integer call() {
             // Some long running task
-            Log.v("attachSizeS",String.valueOf(linesRepository.mLinesDAO.getAll().size()));
+            Log.v("attachSizeS",String.valueOf(db.attachmentDao().getAll().size()));
             Log.v("attachSizePara",String.valueOf(list.size()));
 
             Integer size = list.size();
             int i =0;
             while (i <= size-1){
                 db.attachmentDao().insertAttachment(list.get(i));
-                Log.v("attachitem "+i+":", String.valueOf(linesRepository.mLinesDAO.getAll().get(linesRepository.mLinesDAO.getAll().size()-1).transactionId));
+                Log.v("attachitem "+i+":", String.valueOf(db.attachmentDao().getAll().get(db.attachmentDao().getAll().size()-1).lineId));
                 i++;
             }
 
-            Integer dbSize =linesRepository.mLinesDAO.getAll().size();
+            Integer dbSize =db.attachmentDao().getAll().size();
 
             return dbSize;
         }

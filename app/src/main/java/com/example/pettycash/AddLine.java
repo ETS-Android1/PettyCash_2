@@ -4,7 +4,10 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,11 +17,14 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -34,7 +40,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddLine extends AppCompatActivity implements View.OnClickListener {
+public class AddLine extends AppCompatActivity implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     public LineModelView current;
     public AttachmentAdapter.ViewHolder currentItemView;
@@ -111,8 +117,8 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener {
 //                                    cancelBtn.setImageBitmap(imageBitmap);
 //                                    galleryAddPic(getContentResolver(),(Bitmap) result.getData().getExtras().get("data"),"1.1","des");
                                     LineModelView current = adapter.lineModelViews.get(attachPos);
-                                    String name = String.valueOf(attachPos+current.docsList.size());
-                                    AttachmentModelView attachmentModelView = new AttachmentModelView(0,name,photoURI.toString());
+                                    String name = String.valueOf(attachPos+1+"."+current.docsList.size());
+                                    AttachmentModelView attachmentModelView = new AttachmentModelView(-1,name,photoURI.toString());
                                     current.docsList.add(attachmentModelView);
 
 //                                    adapter.notifyDataSetChanged();
@@ -390,26 +396,66 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener {
 
         int i = 0;
         List<LineModelViewDB> lineModelViewDBList = new ArrayList<>();
-
+        List<List<AttachmentModelView>> attachList = new ArrayList<>();
         while (i <= adapter.lineModelViews.size()-1){
             LineModelView current = adapter.lineModelViews.get(i);
             LineModelViewDB lineModelViewDB = new LineModelViewDB(currentTransID,current.category,current.unit,current.item,current.quantity,current.price,current.amount,current.supplierName,current.invoiceNumber,current.vatInvoiceNumber,current.billedToCustomer,current.invoiceDate,current.cbsCode,current.expenditureType);
+            Log.v("libeIdBefore", String.valueOf(lineModelViewDB.id));
             lineModelViewDBList.add(lineModelViewDB);
+
+
+
+                attachList.add(current.docsList);
+
+
 
             i++;
         }
-        Log.v("beforeLineList",String.valueOf(lineModelViewDBList.size()));
 
-        new Utlity.TaskRunner().executeAsync(new Utlity.AddLinesCallable(this.getApplication(),lineModelViewDBList),(data) ->{
+
+        Log.v("beforeLineList",String.valueOf(lineModelViewDBList.size()));
+        Log.v("beforeAttachList",String.valueOf(attachList.size()));
+
+
+
+        new Utlity.TaskRunner().executeAsync(new Utlity.AddLinesCallable(this.getApplication(),lineModelViewDBList ,attachList),(data) ->{
+
             Log.v("lineSizeF",String.valueOf(data));
 
         });
-
+//        new Utlity.TaskRunner().executeAsync(new Utlity.AddAttachmentCallable(this.getApplication(),attachList),(data) ->{
+//            Log.v("AttachSizeF",String.valueOf(data));
+//
+//        });
 
 
 
 
     }
-    
-    
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.v("only","addLine");
+
+        Log.v("pre0",permissions[0]+" = "+grantResults[0]);
+        Log.v("pre1",permissions[1]+" = "+grantResults[1]);
+
+        if ( grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Log.v("pre0",permissions[0]+" = "+grantResults[0]);
+            if ( grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                Log.v("pre1",permissions[1]+" = "+grantResults[1]);
+
+
+                if (requestCode == Utlity.CAMERA_REQUEST_ID) {
+                    adapter.isGranted=true;
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean(String.valueOf(Utlity.CAMERA_REQUEST_ID),adapter.isGranted).apply();
+//                    adapter.viewHolder.openFiles();
+                }
+            }
+        }
+    }
 }

@@ -12,6 +12,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:allowClearUserData="true"
+        android:fullBackupContent="false"
+
 
     android:theme="@style/Theme.PettyCash">
 

@@ -17,4 +17,9 @@ public interface AttachmentDAO {
     @Insert
     void insertAttachment(AttachmentModelView trans);
 
+
+    @Query("DELETE FROM transactionmodelview")
+    void delelteAll();
+
+
 }
