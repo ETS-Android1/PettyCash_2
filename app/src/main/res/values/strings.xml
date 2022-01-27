@@ -60,8 +60,8 @@
     <string name="supplier_number">Supplier Name</string>
     <string name="supplier_name">Supplier Name</string>
     <string name="vat_number">VAT Number</string>
-    <string name="select_billed">Billed to Customer</string>
-    <string name="attatchment">attachment</string>
+    <string name="billed_to_customer">Billed to Customer</string>
+    <string name="attachment">attachment</string>
     <string name="ser">SAR</string>
     <string name="submit">Submit</string>
     <string name="sar">(SAR)</string>
@@ -69,6 +69,9 @@
     <string name="expenditure_type">Expenditure Type</string>
     <string name="cbs_code">CBS Code</string>
     <string name="preview">Preview</string>
+    <string name="status">Status</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="incomplete">Incomplete</string>
 
 
 </resources>

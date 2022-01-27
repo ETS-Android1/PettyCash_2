@@ -25,14 +25,17 @@ public class TransactionModelView {
       @ColumnInfo(name = "description")
     public  String description;
     @ColumnInfo(name = "status")
-    public  boolean status;
+    public  String status;
+
+
+    @ColumnInfo(name = "total_amount")
+    public double total_amount;
 
 
 
 
 
-
-    public TransactionModelView(String legalEntity, String businessUnit, String project, String department,boolean isVat , long date , String description) {
+    public TransactionModelView(String legalEntity, String businessUnit, String project, String department,boolean isVat , long date , String description,String status) {
         this.legalEntry = legalEntity;
         this.businessUnit = businessUnit;
         this.project = project;
@@ -40,9 +43,18 @@ public class TransactionModelView {
         this.isVat = isVat;
         this.date = date;
         this.description = description;
-        status = false;
+        this.status  = "incomplete";
     }
 
     public TransactionModelView() {
+    }
+
+
+    public double getTotal_amount() {
+        return total_amount;
+    }
+
+    public void setTotal_amount(double total_amount) {
+        this.total_amount = total_amount;
     }
 }

@@ -9,7 +9,7 @@
         android:id="@+id/attachment_recycle_image"
         android:background="@drawable/attatchment_shape"
         android:src="@drawable/outline_add_circle_black_36"
-        android:hint="@string/attatchment"
+        android:hint="@string/attachment"
         android:padding="5dp"
         android:layout_centerHorizontal="true"
         android:fitsSystemWindows="true"

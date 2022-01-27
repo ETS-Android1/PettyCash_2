@@ -668,7 +668,7 @@
             android:layout_height="wrap_content"
             style="@style/normal_dark"
             android:id="@+id/line_recycle_billed_text"
-            android:text="@string/select_billed"
+            android:text="@string/billed_to_customer"
              android:gravity="center_vertical"
             ></TextView>
 
@@ -696,7 +696,7 @@
             android:layout_height="wrap_content"
             style="@style/normal_dark"
             android:id="@+id/line_recycle_attatchment_text"
-            android:text="@string/attatchment"
+            android:text="@string/attachment"
              android:gravity="center_vertical"
             ></TextView>
         <Space
@@ -720,7 +720,7 @@
                 android:id="@+id/line_recycle_attatchment_choose_layout"
                 android:background="@drawable/attatchment_shape"
                 android:src="@drawable/outline_add_circle_black_36"
-                android:hint="@string/attatchment"
+                android:hint="@string/attachment"
                 android:padding="10dp"
                 ></ImageView>
 

@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:text="@string/preview"
+        style="@style/title_dark"
+        android:id="@+id/trans_review_line_title"
+        ></TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/trans_review_line_layout"
+        android:orientation="vertical"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/edit_text_shape_for_line"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_category"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:text="@string/category"
+                ></TextView>
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_category_value"
+                style="@style/normal_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textAlignment="textEnd"
+                ></TextView>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_item"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:text="@string/item"
+                ></TextView>
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_item_value"
+                style="@style/normal_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textAlignment="textEnd"
+                ></TextView>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_quantity"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:text="@string/quantity"
+                ></TextView>
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_quantity_value"
+                style="@style/normal_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textAlignment="textEnd"
+                ></TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_unit"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:text="@string/unit"
+                ></TextView>
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_unit_value"
+                style="@style/normal_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textAlignment="textEnd"
+                ></TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_price"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:text="@string/price"
+                ></TextView>
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_price_value"
+                style="@style/normal_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textAlignment="textEnd"
+                ></TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_amount"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:text="@string/amount"
+                ></TextView>
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_amount_value"
+                style="@style/normal_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textAlignment="textEnd"
+                ></TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_invoice_date"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:text="@string/invoice_date"
+                ></TextView>
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_invoice_date_value"
+                style="@style/normal_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textAlignment="textEnd"
+                ></TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_invoice_number"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:text="@string/invoice_number"
+                ></TextView>
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_invoice_number_value"
+                style="@style/normal_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textAlignment="textEnd"
+                ></TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_supplier_name"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:text="@string/supplier_name"
+                ></TextView>
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_supplier_name_value"
+                style="@style/normal_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textAlignment="textEnd"
+                ></TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_vat_number"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:text="@string/vat_number"
+                ></TextView>
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_vat_number_value"
+                style="@style/normal_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textAlignment="textEnd"
+                ></TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_billed"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:text="@string/billed_to_customer"
+                ></TextView>
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_billed_value"
+                style="@style/normal_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textAlignment="textEnd"
+                ></TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_cbs_code"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:text="@string/cbs_code"
+                ></TextView>
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_cbs_code_value"
+                style="@style/normal_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textAlignment="textEnd"
+                ></TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_expenditure_type"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:text="@string/expenditure_type"
+                ></TextView>
+
+
+
+            <TextView
+                android:id="@+id/trans_review_line_expenditure_type_value"
+                style="@style/normal_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textAlignment="textEnd"
+                ></TextView>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+    
+
+</LinearLayout>

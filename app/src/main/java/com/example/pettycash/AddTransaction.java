@@ -352,7 +352,6 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
             case R.id.new_transaction_cancel_btn:
                 Intent toHome = new Intent(this, HomeContainer.class);
                 startActivity(toHome);
-                finish();
                 break;
 
             case R.id.new_transaction_confirm_btn:
@@ -381,7 +380,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
                     EditText descriptionEditText = findViewById(R.id.new_transaction_decription_edit_text);
                     description = descriptionEditText.getEditableText().toString();
 
-                    TransactionModelView newTrans = new TransactionModelView(legalEntity,businessUnit,project,department,isVatChecked,dateTime,description);
+                    TransactionModelView newTrans = new TransactionModelView(legalEntity,businessUnit,project,department,isVatChecked,dateTime,description,getString(R.string.incomplete));
         new Utlity.TaskRunner().executeAsync(new Utlity.AddTransCallable(this.getApplication(),newTrans),(data)->{
             Log.v("tSizeF",String.valueOf(data));
             transID = data;

@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {LineModelViewDB.class,TransactionModelView.class,AttachmentModelView.class}, version = 5 , exportSchema = false)
+@Database(entities = {LineModelViewDB.class,TransactionModelView.class,AttachmentModelView.class}, version = 6 , exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static Object LOCK = new Object();
 

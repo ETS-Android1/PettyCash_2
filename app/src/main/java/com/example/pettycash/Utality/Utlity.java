@@ -70,6 +70,24 @@ public class Utlity {
             return id;
         }
     }
+    public static class GetTransCallable implements Callable<TransactionModelView> {
+        TransRepository repository;
+        TransactionModelView trans;
+        int transID = -1;
+        public GetTransCallable(Application application , int transID) {
+            repository = new TransRepository(application);
+            this.transID = transID;
+        }
+
+
+        @Override
+        public TransactionModelView call() {
+            // Some long running task
+            TransactionModelView transactionModelView =repository.mtransDao.getSingle(transID);
+
+            return transactionModelView;
+        }
+    }
 
     public static class AddLinesCallable implements Callable<Integer> {
         private  AppDatabase db;
@@ -93,12 +111,16 @@ public class Utlity {
             Log.v("lineSizePara",String.valueOf(list.size()));
             Log.v("attachSizePara",String.valueOf(attachList.size()));
 
-
+            double totalAmount =0;
+            int transIdfromLine =-1;
             Integer size = list.size();
             int i =0;
             int currId;
             while (i <= size-1){
                 linesRepository.addLine(list.get(i));
+                totalAmount += list.get(i).amount;
+                transIdfromLine = list.get(i).transactionId;
+
                 Log.v("item "+i+":", String.valueOf(linesRepository.mLinesDAO.getAll().get(linesRepository.mLinesDAO.getAll().size()-1).transactionId));
                 currId =linesRepository.mLinesDAO.getAll().get(linesRepository.mLinesDAO.getAll().size()-1).id;
                 List<AttachmentModelView> currenAttachList =attachList.get(i);
@@ -118,7 +140,8 @@ public class Utlity {
 
                 i++;
             }
-
+        Log.v("total_amount",totalAmount+"");
+            db.transDao().updateTotalAmount(transIdfromLine,totalAmount);
             Integer dbSize =linesRepository.mLinesDAO.getAll().size();
 //            db.attachmentDao().delelteAll();
 //            db.linesDao().delelteAll();

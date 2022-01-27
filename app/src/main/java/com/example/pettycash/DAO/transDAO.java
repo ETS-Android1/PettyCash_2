@@ -24,4 +24,10 @@ public interface transDAO {
 
     @Query("DELETE FROM transactionmodelview")
     void delelteAll();
+
+    @Query("SELECT * FROM TransactionModelView WHERE :transID == id")
+    TransactionModelView getSingle(int transID);
+
+    @Query("UPDATE  TransactionModelView SET total_amount = :totalAmount WHERE :transId == id")
+    void updateTotalAmount(int transId, double totalAmount);
 }

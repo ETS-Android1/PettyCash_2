@@ -425,6 +425,10 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
         new Utlity.TaskRunner().executeAsync(new Utlity.AddLinesCallable(this.getApplication(),lineModelViewDBList ,attachList),(data) ->{
 
             Log.v("lineSizeF",String.valueOf(data));
+            Intent toReview = new Intent(this, TransactionReview.class);
+            toReview.putExtra(Utlity.transId, currentTransID);
+
+            startActivity(toReview);
 
         });
 //        new Utlity.TaskRunner().executeAsync(new Utlity.AddAttachmentCallable(this.getApplication(),attachList),(data) ->{

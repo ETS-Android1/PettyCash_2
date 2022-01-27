@@ -27,61 +27,314 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:id="@+id/trans_review_trans_layout"
             android:orientation="vertical"
-            android:paddingVertical="20dp"
+            android:paddingVertical="10dp"
             android:paddingHorizontal="10dp"
             android:background="@drawable/edit_text_shape_for_line"
             >
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+               android:layout_height="wrap_content"
+                android:weightSum="2"
                 android:orientation="horizontal"
-                android:paddingVertical="5dp"
-                android:paddingHorizontal="15dp"
-                android:background="@drawable/edit_text_shape"
+                android:paddingVertical="10dp"
+android:paddingHorizontal="5dp"
                 >
 
 
 
 
                     <TextView
-                        android:paddingLeft="10dp"
-
-                        android:layout_width="wrap_content"
+                        android:id="@+id/trans_review_status"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         style="@style/normal_dark"
-                        android:text="@string/legal_entity"
-                        android:layout_gravity="center_vertical"
+                        android:text="@string/status"
                         ></TextView>
 
 
 
                     <TextView
-                        android:id="@+id/new_transaction_legal_select_title"
-                        style="@style/normal_red"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:paddingRight="10dp"
-                        android:textColor="@color/red"></TextView>
+                        android:id="@+id/trans_review_status_value"
+                        style="@style/normal_dark"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="test"
+                        android:textAlignment="textEnd"
+                        ></TextView>
 
 
-            </RelativeLayout>
+            </LinearLayout>
 
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
                 android:orientation="horizontal"
-                android:paddingVertical="5dp"
-                android:paddingHorizontal="15dp"
-                android:background="@drawable/edit_text_shape"
-                ></RelativeLayout>
+                android:paddingVertical="10dp"
+android:paddingHorizontal="5dp"
+ >
+
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_date"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/normal_dark"
+                    android:text="@string/date"
+                    ></TextView>
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_date_value"
+                    style="@style/normal_dark"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="test"
+                    android:textAlignment="textEnd"
+                    ></TextView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+android:paddingHorizontal="5dp"
+ >
+
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_legal_entity"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/normal_dark"
+                    android:text="@string/legal_entity"
+                    ></TextView>
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_legal_entity_value"
+                    style="@style/normal_dark"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="test"
+                    android:textAlignment="textEnd"
+                    ></TextView>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="5dp"
+                >
+
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_business_unit"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/normal_dark"
+                    android:text="@string/business_unit"
+                    ></TextView>
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_business_unit_value"
+                    style="@style/normal_dark"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="test"
+                    android:textAlignment="textEnd"
+                    ></TextView>
+
+
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+android:paddingHorizontal="5dp"
+ >
+
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_project"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/normal_dark"
+                    android:text="@string/project"
+                    ></TextView>
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_project_value"
+                    style="@style/normal_dark"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="test"
+                    android:textAlignment="textEnd"
+                    ></TextView>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="5dp"
+                >
+
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_department"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/normal_dark"
+                    android:text="@string/department"
+                    ></TextView>
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_department_value"
+                    style="@style/normal_dark"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="test"
+                    android:textAlignment="textEnd"
+                    ></TextView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+android:paddingHorizontal="5dp"
+ >
+
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_vat"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/normal_dark"
+                    android:text="@string/vat"
+                    ></TextView>
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_vat_value"
+                    style="@style/normal_dark"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="test"
+                    android:textAlignment="textEnd"
+                    ></TextView>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+android:paddingHorizontal="5dp"
+ >
+
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_total_amount"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/normal_dark"
+                    android:text="@string/total_amount"
+                    ></TextView>
+
+
+
+                <TextView
+                    android:id="@+id/trans_review_total_amount_value"
+                    style="@style/normal_dark"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="test"
+                    android:textAlignment="textEnd"
+                    ></TextView>
+
+
+            </LinearLayout>
+
+
+
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/trans_review_add_lines_layout"
+
+            ></androidx.recyclerview.widget.RecyclerView>
 
 
     </LinearLayout>
