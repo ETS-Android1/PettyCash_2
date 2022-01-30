@@ -8,6 +8,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.pettycash.databse.LineModelViewDB;
+import com.example.pettycash.databse.TransactionModelView;
 
 import java.util.List;
 
@@ -38,5 +39,9 @@ public interface LinesDAO {
 
     @Query("DELETE FROM transactionmodelview")
     void delelteAll();
+
+    @Query("SELECT * FROM LineModelViewDB WHERE :transID == transactionId")
+    List<LineModelViewDB> ListofLines(int transID);
+
 
 }

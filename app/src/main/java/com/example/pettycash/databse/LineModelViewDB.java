@@ -1,6 +1,7 @@
 package com.example.pettycash.databse;
 
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -61,6 +62,8 @@ public class LineModelViewDB {
         this.invoiceNumber = invoiceNumber;
         this.vatInvoiceNumber = vatInvoiceNumber;
         this.billedToCustomer = billedToCustomer;
+        Log.v("date of line on DB",invoiceDate+"");
+
         this.invoiceDate = invoiceDate;
         this.cbsCode = cbsCode;
         this.expenditureType = expenditureType;

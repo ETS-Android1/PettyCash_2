@@ -1,21 +1,32 @@
 package com.example.pettycash;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.pettycash.Utality.Utlity;
+import com.example.pettycash.databse.LineModelViewDB;
 import com.example.pettycash.databse.TransactionModelView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 public class TransactionReview extends AppCompatActivity {
     TextView legalValueText, businessValueText, projectValueText, depatmentValueText ,dateValueText,statusValueText,vatValueText,amountValueText;
+    RecyclerView linesLayout;
+    TransReviewAdapter adapter;
+    int currentTransId = -1;
+    private List<LineModelViewDB> linesList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +38,6 @@ public class TransactionReview extends AppCompatActivity {
         depatmentValueText = findViewById(R.id.trans_review_department_value);
         dateValueText = findViewById(R.id.trans_review_date_value);
         statusValueText = findViewById(R.id.trans_review_status_value);
-        int currentTransId = -1;
         Log.v("transIdFromADDLine", String.valueOf(getIntent().getIntExtra(Utlity.transId,-1)));
         currentTransId = getIntent().getIntExtra(Utlity.transId,-1);
 
@@ -56,8 +66,31 @@ public class TransactionReview extends AppCompatActivity {
 
             amountValueText.setText(transDB.total_amount+"(SAR)");
 
-        });
 
+
+
+
+        });
+        linesLayout = findViewById(R.id.trans_review_add_lines_layout);
+//        linesLayout.setNestedScrollingEnabled(false);
+
+        LinearLayoutManager  customLiner = new LinearLayoutManager(this){
+//            @Override
+//            public boolean canScrollVertically() {
+//                return false;
+//            }
+        };
+        linesLayout.setLayoutManager(customLiner);
+        linesList = new ArrayList<>();
+        adapter = new TransReviewAdapter(this,linesList);
+        linesLayout.setAdapter(adapter);
+
+        new Utlity.TaskRunner().executeAsync(new Utlity.GetLineCallable(this.getApplication(),currentTransId), (data) ->{
+            adapter.lineModelViews.addAll(data);
+            Log.v("lineListDBSize", String.valueOf(data.size()));
+            adapter.notifyDataSetChanged();
+
+        } );
 
 
 

@@ -72,6 +72,7 @@
     <string name="status">Status</string>
     <string name="total_amount">Total Amount</string>
     <string name="incomplete">Incomplete</string>
+    <string name="err_choose">YOU MUST CHOOSE AN ITEM</string>
 
 
 </resources>

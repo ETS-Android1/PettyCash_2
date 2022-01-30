@@ -172,6 +172,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
         SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.ENGLISH);
 
         holder.dateChooseText.setText(dateFormat.format(current.invoiceDate));
+
         double amount = current.price*current.quantity;
         holder.amountChooseText.setText(String.valueOf(amount) +" SAR");
 

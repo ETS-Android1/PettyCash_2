@@ -134,8 +134,9 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
                     }
 
                     Log.v("cat:", editText.getText().toString());
-                    addLine.adapter.viewHolder.upadteText(orginalTextViewID,editText.getText().toString(),addLineNum);
-
+                    if (!editText.getText().toString().isEmpty()) {
+                        addLine.adapter.viewHolder.upadteText(orginalTextViewID, editText.getText().toString(), addLineNum);
+                    }
 
 
                     keyboard = addLine.getCurrentFocus();

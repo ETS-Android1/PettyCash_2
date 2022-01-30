@@ -150,6 +150,33 @@ public class Utlity {
         }
     }
 
+    public static class GetLineCallable implements Callable<List<LineModelViewDB>> {
+        AppDatabase db;
+        TransactionModelView trans;
+        int transID = -1;
+        List<LineModelViewDB> linesList;
+        public GetLineCallable(Application application , int transID) {
+            db = AppDatabase.getInstance(application);
+            this.transID = transID;
+            linesList = new ArrayList<>();
+        }
+
+
+        @Override
+        public List<LineModelViewDB> call() {
+            // Some long running task
+            Log.v("getListTrans ID",transID+"");
+            List<LineModelViewDB> listDB =db.linesDao().ListofLines(transID);
+            Log.v("getListSize",listDB.size()+"");
+
+            if (listDB.size() > 0 ){
+                linesList.addAll(listDB);
+            }
+
+            return linesList;
+        }
+    }
+
     public static class AddAttachmentCallable implements Callable<Integer> {
         List<AttachmentModelView> list= new ArrayList<>();
         AppDatabase db ;

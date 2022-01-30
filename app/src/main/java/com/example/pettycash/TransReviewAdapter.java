@@ -40,6 +40,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pettycash.Utality.Utlity;
 import com.example.pettycash.databse.AttachmentModelView;
+import com.example.pettycash.databse.LineModelViewDB;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -59,7 +60,6 @@ public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.
     int icon;
     UserPreferences userPreferences;
     String sharedPrefId;
-    AddLine addLine;
 
     ViewHolder viewHolder;
 
@@ -67,7 +67,7 @@ public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.
 
 
     AddLine activity;
-    List<LineModelView> lineModelViews = new ArrayList<>();
+    List<LineModelViewDB> lineModelViews = new ArrayList<>();
 
     private DatePickerDialog.OnDateSetListener date;
     private Calendar myCalendar;
@@ -77,7 +77,7 @@ public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.
     boolean isGranted;
 
 
-    public TransReviewAdapter(Context context, AddLine activity, List<LineModelView> lines) {
+    public TransReviewAdapter(Context context, List<LineModelViewDB> lines) {
         this.context = context;
         this.activity = activity;
         lineModelViews.addAll(lines);
@@ -92,14 +92,14 @@ public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.
 //        this.sharedPrefId = sharedPrefId;
 
 
-        addLine = (AddLine) context;
+
 
     }
 
     public void updateDocs() {
         viewHolder.attachmentAdapter.notifyDataSetChanged();
-        Log.v("docsL", String.valueOf(lineModelViews.get(addLine.attachPos).docsList.size()));
-        addLine.camere = false;
+//        Log.v("docsL", String.valueOf(lineModelViews.get(addLine.attachPos).docsList.size()));
+//        addLine.camere = false;
     }
 
     @NonNull
@@ -114,45 +114,46 @@ public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
 
-        LineModelView current = lineModelViews.get(position);
-        List<AttachmentModelView> docs = current.docsList;
-        holder.attachmentAdapter.linePos = position + 1;
-        holder.attachmentAdapter.docList.clear();
-        holder.attachmentAdapter.docList.addAll(docs);
-        holder.attachmentAdapter.notifyDataSetChanged();
+        LineModelViewDB current = lineModelViews.get(position);
+//        List<AttachmentModelView> docs = current.docsList;
+//        holder.attachmentAdapter.linePos = position + 1;
+//        holder.attachmentAdapter.docList.clear();
+//        holder.attachmentAdapter.docList.addAll(docs);
+//        holder.attachmentAdapter.notifyDataSetChanged();
 
         int pos = position + 1;
-        Log.v("current : " + current.position, "adapter: " + position);
-        Log.v("current", "pos: " + position + " cat : " + current.category + " item : " + current.item + " unit : " + current.unit + " price : " + current.price + " quantity : " + current.quantity + " pClicked: " + Boolean.toString(current.priceClicked) + " qClicked " + current.quantityClicked);
+//        Log.v("current : " + current.position, "adapter: " + position);
+//        Log.v("current", "pos: " + position + " cat : " + current.category + " item : " + current.item + " unit : " + current.unit + " price : " + current.price + " quantity : " + current.quantity + " pClicked: " + Boolean.toString(current.priceClicked) + " qClicked " + current.quantityClicked);
 
 //
-//        if (current.category != null)
-//            holder.categoryChooseText.setText(current.category);
-//
-//        if (current.unit != null)
-//            holder.unitChooseText.setText(current.unit);
-//
-//        if (current.item != null)
-//            holder.itemChooseText.setText(current.item);
-//
-//        if (current.cbsCode != null)
-//            holder.cbsCodeText.setText(current.cbsCode);
-//
-//        if (current.expenditureType != null)
-//            holder.expenditureTypeText.setText(current.expenditureType);
-//
+        holder.title.setText("Add Line "+pos);
+        if (current.category != null)
+            holder.categoryValueText.setText(current.category);
+
+        if (current.unit != null)
+            holder.unitValueText.setText(current.unit);
+
+        if (current.item != null)
+            holder.itemValueText.setText(current.item);
+
+        if (current.cbsCode != null)
+            holder.cbsCodeValueText.setText(current.cbsCode);
+
+        if (current.expenditureType != null)
+            holder.expenditureTypeValueText.setText(current.expenditureType);
+
 //        if (current.price != 0 && current.priceClicked)
-//            holder.priceChooseText.setText(String.valueOf(current.price));
+            holder.priceValueText.setText(String.valueOf(current.price)+" (SAR)");
 //
 //        if (current.quantity > 1 && current.quantityClicked)
-//            holder.quantityChooseText.setText(String.valueOf(current.quantity));
+            holder.quantityValueText.setText(String.valueOf(current.quantity));
 //
-//        String myFormat = "yyyy-MM-dd";
-//        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.ENGLISH);
-//
-//        holder.dateChooseText.setText(dateFormat.format(current.invoiceDate));
+        String myFormat = "yyyy-MM-dd";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+            Log.v("date of line after",current.invoiceDate+"");
+        holder.dateValueText.setText(dateFormat.format(current.invoiceDate));
 //        double amount = current.price * current.quantity;
-//        holder.amountChooseText.setText(String.valueOf(amount) + " SAR");
+        holder.amountValueText.setText(current.amount+" (SAR)");
 //
 //        holder.billed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            @Override
@@ -189,7 +190,7 @@ public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.
 
     @Override
     public int getItemCount() {
-        Log.v("adptS", String.valueOf(lineModelViews.size()));
+        Log.v("transReviceadptsize", String.valueOf(lineModelViews.size()));
         return lineModelViews.size();
     }
 
@@ -209,8 +210,8 @@ public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.
 
 
             super(itemView);
-            sharedPref = PreferenceManager.getDefaultSharedPreferences(addLine);
-
+//            sharedPref = PreferenceManager.getDefaultSharedPreferences(addLine);
+            title = itemView.findViewById(R.id.trans_review_line_title);
             categoryValueText = itemView.findViewById(R.id.trans_review_line_category_value);
             itemValueText = itemView.findViewById(R.id.trans_review_line_item_value);
             quantityValueText = itemView.findViewById(R.id.trans_review_line_quantity_value);
@@ -224,6 +225,7 @@ public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.
             billedValueText = itemView.findViewById(R.id.trans_review_line_billed_value);
             cbsCodeValueText = itemView.findViewById(R.id.trans_review_line_cbs_code_value);
             expenditureTypeValueText = itemView.findViewById(R.id.trans_review_line_expenditure_type_value);
+            dateValueText = itemView.findViewById(R.id.trans_review_line_invoice_date_value);
 
 
 //            categoryValueText = itemView.findViewById(R.id.trans_review_line_category_value);

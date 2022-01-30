@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.example.pettycash.Utality.Utlity;
 import com.example.pettycash.databse.AttachmentModelView;
 import com.example.pettycash.databse.LineModelViewDB;
@@ -39,6 +41,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.basgeekball.awesomevalidation.ValidationStyle.COLORATION;
 
 public class AddLine extends AppCompatActivity implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -100,6 +104,7 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
         lines_recyclerView.setLayoutManager(new LinearLayoutManager(this));
         lines_recyclerView.setAdapter(adapter);
 
+        enableValidate();
 
         someActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -152,6 +157,13 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
 
     }
 
+    private void enableValidate() {
+        AwesomeValidation mAwesomeValidation = new AwesomeValidation(COLORATION);
+        mAwesomeValidation.setColor(Color.RED);
+        AwesomeValidation.disableAutoFocusOnFirstFailure();
+
+        mAwesomeValidation.addValidation(this, R.id.line_recycle_category_choose_text, "[a-zA-Z\\s]+", R.string.err_choose);
+    }
 
 
     private void galleryAddPic(ContentResolver cr,
@@ -403,6 +415,7 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
         List<List<AttachmentModelView>> attachList = new ArrayList<>();
         while (i <= adapter.lineModelViews.size()-1){
             LineModelView current = adapter.lineModelViews.get(i);
+            Log.v("date of line before",current.invoiceDate+"");
             LineModelViewDB lineModelViewDB = new LineModelViewDB(currentTransID,current.category,current.unit,current.item,current.quantity,current.price,current.amount,current.supplierName,current.invoiceNumber,current.vatInvoiceNumber,current.billedToCustomer,current.invoiceDate,current.cbsCode,current.expenditureType);
             Log.v("libeIdBefore", String.valueOf(lineModelViewDB.id));
             lineModelViewDBList.add(lineModelViewDB);
