@@ -44,9 +44,14 @@ android:background="@color/white"
         android:layout_height="0dp"
         android:layout_weight="4"
         android:orientation="vertical"
-        android:padding="20dp"
         >
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:id="@+id/type_fragment_edit_text_layout"
+    >
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,27 +61,32 @@ android:background="@color/white"
         android:paddingHorizontal="10dp"
         android:background="@drawable/edit_text_shape_for_line"
         android:textSize="17dp"
+        android:inputType="numberPassword"
 
         ></EditText>
+</LinearLayout>
 
-        <Space
+
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            ></Space>
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            >
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/type_fragment_btn"
         android:text="@string/submit"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="5dp"
+        android:padding="20dp"
         android:background="@drawable/login_btn_background"
         android:textColor="@color/white"
 
 
         ></androidx.appcompat.widget.AppCompatButton>
-
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

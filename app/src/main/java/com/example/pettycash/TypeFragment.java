@@ -1,17 +1,30 @@
 package com.example.pettycash;
 
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.text.method.TransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+
+import static com.basgeekball.awesomevalidation.ValidationStyle.COLORATION;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,10 +51,13 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
     AddLine addLine;
     View view;
     int addLineNum =-1;
+    LinearLayout editTextFullLayout;
+    String value;
 
 
     int orginalTextViewID;
     private View cancelBtn;
+    private AwesomeValidation mAwesomeValidation;
 
     public TypeFragment() {
         // Required empty public constructor
@@ -95,6 +111,10 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_type, container, false);
 
+        mAwesomeValidation = new AwesomeValidation(COLORATION);
+        mAwesomeValidation.setColor(Color.YELLOW);
+
+        editTextFullLayout = view.findViewById(R.id.type_fragment_edit_text_layout);
         title = view.findViewById(R.id.type_fragment_title);
         if (hint != null )
             title.setText("Enter "+hint);
@@ -111,9 +131,13 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
             editText.setOnClickListener(this);
 
+        if (orginalTextViewID == R.id.line_recycle_quantity_choose_text) {
 
+        }else {
+            editText.setInputType(InputType.TYPE_CLASS_PHONE);
+        }
 
-
+        mAwesomeValidation.addValidation(getActivity(), R.id.type_fragment_edit_text, "[0-9]+", R.string.value_greater_then_zere_err);
 
         return view;
     }
@@ -124,44 +148,48 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
         if (addLine != null) {
             switch (v.getId()) {
                 case R.id.type_fragment_btn:
-                    if (orginalTextViewID == R.id.line_recycle_price_choose_text) {
+//                    if (orginalTextViewID == R.id.line_recycle_price_choose_text) {
                         Log.v("price", "clicked");
                         addLine.adapter.lineModelViews.get(addLineNum).priceClicked = true;
-                        if (!editText.getText().toString().isEmpty()) {
+                        if (!value.isEmpty()) {
                             Log.v("priceUpdate",Integer.valueOf(editText.getText().toString())+"");
-                            if (Integer.valueOf(editText.getText().toString()) < 0) {
-                                addLine.adapter.viewHolder.upadteText(orginalTextViewID, "0", addLineNum);
-
+                            if (Integer.valueOf(editText.getText().toString()) <= 0) {
+                            editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.red_light));
+                                Toast.makeText(getActivity(),getActivity().getText(R.string.value_greater_then_zere_err),Toast.LENGTH_SHORT).show();
+                            }else    if (Integer.valueOf(editText.getText().toString()) <= 0) {
+                                editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.red_light));
+                                Toast.makeText(getActivity(),getActivity().getText(R.string.value_greater_then_zere_err),Toast.LENGTH_SHORT).show();
                             } else {
-                                addLine.adapter.viewHolder.upadteText(orginalTextViewID, editText.getText().toString(), addLineNum);
+                                addLine.adapter.viewHolder.upadteText(orginalTextViewID, value, addLineNum);
+                                keyboard = addLine.getCurrentFocus();
+                                if (keyboard == null) {
+                                    keyboard = new View(addLine);
+                                }
+                                imm = (InputMethodManager) addLine.getSystemService(addLine.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
+                                addLine.hideFragment();
                             }
+
                         }
-                    }
-                    if (orginalTextViewID == R.id.line_recycle_quantity_choose_text){
-                        Log.v("quantity","clicked");
-                        addLine.adapter.lineModelViews.get(addLineNum).quantityClicked =true;
-                        if (!editText.getText().toString().isEmpty()) {
-                            if (Integer.valueOf(editText.getText().toString()) <= 0){
-                                addLine.adapter.viewHolder.upadteText(orginalTextViewID, "1", addLineNum);
+//                    }
+//                    if (orginalTextViewID == R.id.line_recycle_quantity_choose_text){
+//                        Log.v("quantity","clicked");
+//                        addLine.adapter.lineModelViews.get(addLineNum).quantityClicked =true;
+//                        if (!editText.getText().toString().isEmpty()) {
+//                            if (Integer.valueOf(editText.getText().toString()) <= 0){
+//                                addLine.adapter.viewHolder.upadteText(orginalTextViewID, "1", addLineNum);
+//
+//                            }else {
+//                                addLine.adapter.viewHolder.upadteText(orginalTextViewID, editText.getText().toString(), addLineNum);
+//
+//                            }
+//                    }
+//
+//                    }
 
-                            }else {
-                                addLine.adapter.viewHolder.upadteText(orginalTextViewID, editText.getText().toString(), addLineNum);
-
-                            }
-                    }
-
-                    }
 
 
-                    keyboard = addLine.getCurrentFocus();
-                        if (keyboard == null) {
-                            keyboard = new View(addLine);
-                        }
-                       imm = (InputMethodManager) addLine.getSystemService(addLine.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
-                    addLine.hideFragment();
                     break;
                 case R.id.type_fragment_cancel:
 
@@ -177,7 +205,71 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
                     addLine.hideFragment();
 
                 case R.id.type_fragment_edit_text:
+                    mAwesomeValidation.validate();
                     clicked = true;
+
+                    if (orginalTextViewID == R.id.line_recycle_quantity_choose_text) {
+                        editText.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+
+                        editText.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable s) {
+                                if (!s.toString().isEmpty()) {
+                                    value = s.toString();
+                                }
+                            }
+                        });
+
+                        editText.setTransformationMethod(new TransformationMethod() {
+                            @Override
+                            public CharSequence getTransformation(CharSequence source, View view) {
+                                return source;
+                            }
+
+                            @Override
+                            public void onFocusChanged(View view, CharSequence sourceText, boolean focused, int direction, Rect previouslyFocusedRect) {
+
+                            }
+                        });
+                    }else {
+                        editText.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable s) {
+                                if (!s.toString().isEmpty()) {
+                                    value = s.toString();
+                                    if (value.matches("[0-9]+(.)") ){
+                                        editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+
+                                    }else {
+                                        editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.red_light));
+                                        Toast.makeText(getActivity(),getActivity().getText(R.string.value_greater_then_zere_and_num_err),Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+                            }
+                        });
+                    }
+
             }
         }
 

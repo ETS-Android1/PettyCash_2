@@ -53,15 +53,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/outline_add_circle_24"
 
             >
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/add_transaction_btn"
-                android:src="@drawable/outline_add_circle_black_48"
-                android:background="@color/gray_light"
-                ></androidx.appcompat.widget.AppCompatImageButton>
+
 
         </RelativeLayout>
 

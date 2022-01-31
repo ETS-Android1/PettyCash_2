@@ -5,14 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".AddTransaction">
     <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="19"
+        android:weightSum="21"
         android:background="@color/gray_light"
         >
 
@@ -24,7 +24,7 @@
             android:background="@color/red_dark"
             android:paddingHorizontal="30dp"
             >
-            <androidx.appcompat.widget.AppCompatImageButton
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -32,7 +32,7 @@
                 android:src="@drawable/outline_arrow_circle_left_white_48"
                 android:background="?android:attr/selectableItemBackground"
                 android:id="@+id/new_transaction_cancel_btn"
-                ></androidx.appcompat.widget.AppCompatImageButton>
+                ></androidx.appcompat.widget.AppCompatImageView>
 
         </LinearLayout>
 
@@ -50,8 +50,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/create_transaction"
-                style="@style/normal_dark"
-                android:textAlignment="center"
+                style="@style/title_dark"
+               android:gravity="center"
+
                         ></TextView>
 
             <RelativeLayout
@@ -106,7 +107,7 @@
                        android:gravity="center_vertical"
                         ></TextView>
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/new_transaction_date_image"
 
                         android:layout_width="30dp"
@@ -114,7 +115,7 @@
 
                         android:layout_alignParentRight="true"
                         android:src="@drawable/outline_calendar_month_black_36" android:layout_centerInParent="true"
-                        ></ImageButton>
+                        ></ImageView>
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -172,7 +173,7 @@
                         android:paddingRight="10dp"
                         android:textColor="@color/red"></TextView>
 
-                    <ImageButton
+                    <ImageView
 
                         android:id="@+id/new_transaction_legal_select_btn"
                         android:layout_width="30dp"
@@ -181,7 +182,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerInParent="true"
                         android:background="@drawable/circle_btn_gray"
-                        android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageButton>
+                        android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageView>
 
                 </RelativeLayout>
 
@@ -240,7 +241,7 @@
                        android:gravity="center_vertical"
                         ></TextView>
 
-                    <ImageButton
+                    <ImageView
 
                         android:id="@+id/new_transaction_business_select_btn"
                         android:layout_width="30dp"
@@ -249,7 +250,7 @@
                         android:layout_alignParentRight="true"
                         android:background="@drawable/circle_btn_gray"
                         android:src="@drawable/outline_arrow_forward_ios_white_18" android:layout_centerInParent="true"
-                        ></ImageButton>
+                        ></ImageView>
                 </RelativeLayout>
 
             </RelativeLayout> 
@@ -306,7 +307,7 @@
                        android:gravity="center_vertical"
                         ></TextView>
 
-                    <ImageButton
+                    <ImageView
 
                         android:id="@+id/new_transaction_project_select_btn"
                         android:layout_width="30dp"
@@ -315,7 +316,7 @@
                         android:layout_alignParentRight="true"
                         android:background="@drawable/circle_btn_gray"
                         android:src="@drawable/outline_arrow_forward_ios_white_18" android:layout_centerInParent="true"
-                        ></ImageButton>
+                        ></ImageView>
 
                 </RelativeLayout>
             </RelativeLayout> 
@@ -374,7 +375,7 @@
                        android:gravity="center_vertical"
                         ></TextView>
 
-                    <ImageButton
+                    <ImageView
 
                         android:id="@+id/new_transaction_department_select_btn"
                         android:layout_width="30dp"
@@ -383,7 +384,7 @@
                         android:layout_alignParentRight="true"
                         android:background="@drawable/circle_btn_gray"
                         android:src="@drawable/outline_arrow_forward_ios_white_18" android:layout_centerInParent="true"
-                        ></ImageButton>
+                        ></ImageView>
 
                 </RelativeLayout>
             </RelativeLayout> 
@@ -444,7 +445,7 @@
                         android:text="5112155"
                         ></TextView>
 
-                    <ImageButton
+                    <ImageView
 
                         android:id="@+id/new_transaction_petty_cash_id_select_btn"
                         android:layout_width="30dp"
@@ -453,7 +454,7 @@
                         android:layout_alignParentRight="true"
                         android:background="@drawable/circle_btn_gray"
                         android:src="@drawable/outline_arrow_forward_ios_white_18" android:layout_centerInParent="true"
-                        ></ImageButton>
+                        ></ImageView>
 
                 </RelativeLayout>
             </RelativeLayout> 
@@ -573,13 +574,14 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:paddingHorizontal="20dp"
                 >
 
-                <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                <ImageView
+                    android:layout_margin="5dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
 
                     android:src="@drawable/outline_check_white_24"
                     android:background="@drawable/circle_btn_red_light"
@@ -587,7 +589,7 @@
                     android:layout_alignParentRight="true"
                     android:textAlignment="center"
 
-                    >                </ImageButton>
+                    >                </ImageView>
             </RelativeLayout>
 
 
@@ -599,14 +601,14 @@
 
 
 
-<fragment
+
+    <fragment
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:layout_alignParentBottom="true"
         android:id="@+id/add_transaction_fragment"
         class="com.example.pettycash.SelectFragment"
         ></fragment>
-
 
 
 </RelativeLayout>

@@ -397,8 +397,9 @@
                 >
 
                 <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_margin="5dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
 
                     android:src="@drawable/outline_check_white_24"
                     android:background="@drawable/circle_btn_red"

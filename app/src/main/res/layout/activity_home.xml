@@ -44,9 +44,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/home_user_welcome"
                         android:text="good morning"
-                        android:textSize="20sp"
                         android:padding="5dp"
-                        android:textColor="@color/white"
+                        style="@style/normal"
                         >
 
                     </TextView>
@@ -56,9 +55,10 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/home_user_name"
                         android:text="your name (id)"
-                        android:textSize="20sp"
                         android:padding="5dp"
-                        android:textColor="@color/white"
+
+                        style="@style/normal"
+
                         >
 
                     </TextView>
@@ -69,7 +69,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/home_user_img"
-                    android:src="@drawable/ic_launcher_foreground"
+                    android:src="@drawable/outline_account_circle_white_36"
                     ></ImageView>
         </LinearLayout>
 
@@ -120,10 +120,9 @@
                         android:id="@+id/home_statistics_title"
                         android:text="@string/statistics"
                         android:padding="5dp"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
                         android:textColor="@color/black"
                         android:layout_weight="1"
+                        style="@style/title_dark"
                         >
 
                     </TextView>
@@ -153,11 +152,10 @@
                         android:layout_height="0dp"
                         android:id="@+id/home_statistics_basic_info"
                         android:text="@string/basic_info"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
                         android:textColor="@color/black"
                         android:padding="5dp"
                         android:layout_weight="1"
+                        style="@style/title_dark"
                         ></TextView>
 
                     <TextView
@@ -165,10 +163,9 @@
                         android:layout_height="0dp"
                         android:id="@+id/home_statistics_profile"
                         android:text="@string/profile"
-                        android:textSize="18sp"
-                        android:textColor="@color/black"
                         android:padding="5dp"
                         android:layout_weight="1"
+                        style="@style/normal_dark"
                         ></TextView>
 
                     <LinearLayout
@@ -181,8 +178,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="20sp"
-                            android:textColor="@color/black"
+                            style="@style/normal_dark"
                             android:text="65 %"
                             ></TextView>
 
@@ -190,7 +186,7 @@
                             android:orientation="horizontal"
                             android:id="@+id/home_statistics_basic_info_bar"
                             android:layout_width="match_parent"
-                            android:layout_height="10dp"
+                            android:layout_height="20dp"
                             android:background="@drawable/line_bar"
                             android:paddingVertical="5dp"
                             ></LinearLayout>
@@ -211,17 +207,17 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:text="@string/modified_on"
-                            android:textColor="@color/gray_dark"
-                            android:textSize="15sp"
+                            style="@style/normal_dark"
                             ></TextView>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:id="@+id/home_statistics_basic_info_date"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
+
                             android:text="May 14 2020"
+                            style="@style/normal_dark"
+
                             ></TextView>
                     </LinearLayout>
 
@@ -249,9 +245,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/transactions"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    style="@style/title_dark"
                     ></TextView>
 
                 <LinearLayout
@@ -261,7 +255,7 @@
                     android:weightSum="3"
                     android:orientation="horizontal"
                     android:id="@+id/home_transactions_data_layout"
-                    android:padding="10dp"
+                    android:padding="18dp"
                     >
 
                     <LinearLayout

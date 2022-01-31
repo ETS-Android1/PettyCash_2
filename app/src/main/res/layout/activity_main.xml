@@ -41,9 +41,7 @@
         android:layout_below="@id/login_logo"
         android:layout_centerHorizontal="true"
         android:text="@string/welcome_first"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
+       style="@style/title_light"
         android:paddingTop="30dp"
         ></TextView>
 
@@ -55,9 +53,7 @@
         android:layout_centerHorizontal="true"
 
         android:text="@string/welcome_second"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
+      style="@style/title_light"
         ></TextView>
 </RelativeLayout>
 

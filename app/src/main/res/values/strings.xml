@@ -73,6 +73,8 @@
     <string name="total_amount">Total Amount</string>
     <string name="incomplete">Incomplete</string>
     <string name="err_choose">YOU MUST CHOOSE AN ITEM</string>
+    <string name="value_greater_then_zere_err">value shoulde be greater than zero</string>
+    <string name="value_greater_then_zere_and_num_err" >value should be numbers only and greater the zero </string>
 
 
 </resources>
