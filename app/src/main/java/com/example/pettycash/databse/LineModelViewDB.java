@@ -55,7 +55,11 @@ public class LineModelViewDB {
         this.category = category;
         this.unit = unit;
         this.item = item;
-        this.quantity = quantity;
+        if (quantity<= 0){
+            this.quantity =1;
+        }else {
+            this.quantity = quantity;
+        }
         this.price = price;
         this.amount = amount;
         this.supplierName = supplierName;

@@ -13,6 +13,7 @@
     <color name="red">#980117</color>
     <color name="red_light">#DD0324</color>
     <color name="red_dark">#53000C</color>
+    <color name="red_err">#FF3350</color>
 
 
 </resources>

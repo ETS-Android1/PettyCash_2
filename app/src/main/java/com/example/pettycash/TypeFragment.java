@@ -124,18 +124,33 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
         if (addLine != null) {
             switch (v.getId()) {
                 case R.id.type_fragment_btn:
-                    if (orginalTextViewID == R.id.line_recycle_price_choose_text){
-                        Log.v("price","clicked");
-                        addLine.adapter.lineModelViews.get(addLineNum).priceClicked =true;
+                    if (orginalTextViewID == R.id.line_recycle_price_choose_text) {
+                        Log.v("price", "clicked");
+                        addLine.adapter.lineModelViews.get(addLineNum).priceClicked = true;
+                        if (!editText.getText().toString().isEmpty()) {
+                            Log.v("priceUpdate",Integer.valueOf(editText.getText().toString())+"");
+                            if (Integer.valueOf(editText.getText().toString()) < 0) {
+                                addLine.adapter.viewHolder.upadteText(orginalTextViewID, "0", addLineNum);
+
+                            } else {
+                                addLine.adapter.viewHolder.upadteText(orginalTextViewID, editText.getText().toString(), addLineNum);
+
+                            }
+                        }
                     }
                     if (orginalTextViewID == R.id.line_recycle_quantity_choose_text){
                         Log.v("quantity","clicked");
                         addLine.adapter.lineModelViews.get(addLineNum).quantityClicked =true;
+                        if (!editText.getText().toString().isEmpty()) {
+                            if (Integer.valueOf(editText.getText().toString()) <= 0){
+                                addLine.adapter.viewHolder.upadteText(orginalTextViewID, "1", addLineNum);
+
+                            }else {
+                                addLine.adapter.viewHolder.upadteText(orginalTextViewID, editText.getText().toString(), addLineNum);
+
+                            }
                     }
 
-                    Log.v("cat:", editText.getText().toString());
-                    if (!editText.getText().toString().isEmpty()) {
-                        addLine.adapter.viewHolder.upadteText(orginalTextViewID, editText.getText().toString(), addLineNum);
                     }
 
 

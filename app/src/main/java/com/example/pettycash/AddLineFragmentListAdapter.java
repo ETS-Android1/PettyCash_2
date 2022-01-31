@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
@@ -165,7 +166,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
         if (current.price != 0 && current.priceClicked)
             holder.priceChooseText.setText(String.valueOf(current.price));
 
-        if (current.quantity >1 && current.quantityClicked)
+        if (current.quantity >=1 && current.quantityClicked)
             holder.quantityChooseText.setText(String.valueOf(current.quantity));
 
         String myFormat="yyyy-MM-dd";
@@ -229,13 +230,17 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener , ActivityCompat.OnRequestPermissionsResultCallback {
 
-          RecyclerView attachs_recyclerView;
-        int ItemView;
-        ImageButton imageView;
-        RelativeLayout categorylayout,itemlayout,quantitylayout,unitlayout,datelayout,cbsCodeLayout,expenditureTypeLayout,priceEditText,amountEditText;
-        TextView categoryChooseText,itemChooseText,quantityChooseText,unitChooseText,priceChooseText,amountChooseText,dateChooseText,cbsCodeText,expenditureTypeText,title;
-        EditText invoiceEditText,supplierEditText,vatEditText;
-        Switch billed;
+            private final View categoryfullLayout;
+        private final View unitFullLayout;
+        private  RelativeLayout priceFullLayout , itemFullLayout , quantityFullLayout , cbsCodeFullLayout,expenditureTypeFullLayout ;
+        LinearLayout vatFullLayout,supplierFullLayout,invoiceNumberFullLayout;
+            RecyclerView attachs_recyclerView;
+            int ItemView;
+            ImageButton imageView;
+            RelativeLayout categorylayout,itemlayout,quantitylayout,unitlayout,datelayout,cbsCodeLayout,expenditureTypeLayout,priceEditText,amountEditText;
+            TextView categoryChooseText,itemChooseText,quantityChooseText,unitChooseText,priceChooseText,amountChooseText,dateChooseText,cbsCodeText,expenditureTypeText,title;
+            EditText invoiceEditText,supplierEditText,vatEditText;
+            Switch billed;
         ImageView attachmentBtn;
         AttachmentAdapter attachmentAdapter;
         List<Uri> docs ;
@@ -260,6 +265,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
             attachs_recyclerView.setAdapter(attachmentAdapter);
 
             viewHolder = this;
+
             billed = itemView.findViewById(R.id.line_recycle_switch);
             title = itemView.findViewById(R.id.line_recycle_title_text);
 
@@ -367,6 +373,170 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
             unitChooseText = itemView.findViewById(R.id.line_recycle_unit_choose_text);
             priceChooseText = itemView.findViewById(R.id.line_recycle_price_choose_text);
 
+
+
+            categoryfullLayout = itemView.findViewById(R.id.line_recycle_category_layout);
+            unitFullLayout= itemView.findViewById(R.id.line_recycle_unit_layout);
+            itemFullLayout= itemView.findViewById(R.id.line_recycle_item_layout);
+            quantityFullLayout= itemView.findViewById(R.id.line_recycle_quantity_layout);
+            priceEditText = itemView.findViewById(R.id.line_recycle_price_layout);
+            amountEditText = itemView.findViewById(R.id.line_recycle_amount_layout);
+            cbsCodeFullLayout= itemView.findViewById(R.id.line_recycle_cbs_code_layout);
+            expenditureTypeFullLayout= itemView.findViewById(R.id.line_recycle_expenditure_type_layout);
+            priceFullLayout = itemView.findViewById(R.id.line_recycle_price_layout);
+            vatFullLayout = itemView.findViewById(R.id.line_recycle_vat_number_layout);
+            supplierFullLayout = itemView.findViewById(R.id.line_recycle_supplier_name_layout);
+            invoiceNumberFullLayout = itemView.findViewById(R.id.line_recycle_invoice_number_layout);
+            
+            
+            
+
+
+
+
+        }
+        public boolean checkValidate(LineModelView previous) {
+            boolean state = true;
+            if (previous.category == null ){
+                categoryfullLayout.setBackgroundColor(context.getResources().getColor(R.color.red_err));
+
+                state = false;
+                categoryChooseText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        categoryfullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+
+                    }
+                });
+            }else {
+                categoryfullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+            }
+            if (previous.item == null ){
+                itemFullLayout.setBackgroundColor(context.getResources().getColor(R.color.red_err));
+                state = false;
+                itemChooseText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        itemFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+
+                    }
+                });
+            }else {
+                itemFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+            }
+            if (previous.unit == null ){
+                unitFullLayout.setBackgroundColor(context.getResources().getColor(R.color.red_err));
+                state = false;
+                 unitChooseText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        unitFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+                    }
+                    });
+
+            }else {
+                unitFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+            }
+            if (previous.cbsCode == null ){
+                cbsCodeFullLayout.setBackgroundColor(context.getResources().getColor(R.color.red_err));
+                state = false;
+                cbsCodeText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        cbsCodeFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+                    }
+                });
+
+            }else {
+                cbsCodeFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+            }
+            if (previous.expenditureType == null ){
+                expenditureTypeFullLayout.setBackgroundColor(context.getResources().getColor(R.color.red_err));
+                state = false;
+                expenditureTypeText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        expenditureTypeFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+                    }
+                });
+            }else {
+                expenditureTypeFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+            }
+            
+            if (previous.price <=0){
+                categoryfullLayout.setBackgroundColor(context.getResources().getColor(R.color.red_err));
+                priceChooseText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        expenditureTypeFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+
+                    }
+                });
+            }else {
+                expenditureTypeFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+
+            }
+            return state;
         }
 
         @Override
@@ -634,6 +804,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
                     break;
 
                 case R.id.line_recycle_quantity_choose_text:
+                    Log.v("quan ",text);
                     lineModelViews.get(pos).quantity = Integer.valueOf(text);
                     lineModelViews.get(pos).amount =    lineModelViews.get(pos).quantity*   lineModelViews.get(pos).price;
                     break;

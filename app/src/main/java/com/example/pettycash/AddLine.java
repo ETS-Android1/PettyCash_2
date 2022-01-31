@@ -30,11 +30,13 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.example.pettycash.Utality.Utlity;
 import com.example.pettycash.databse.AttachmentModelView;
 import com.example.pettycash.databse.LineModelViewDB;
+import com.google.common.collect.Range;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -50,6 +52,7 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
     public AttachmentAdapter.ViewHolder currentItemView;
     RecyclerView lines_recyclerView;
     AddLineFragmentListAdapter adapter;
+    RelativeLayout categoryLayout;
 
     ImageButton cancelBtn,addLineBtn , continueBtn,saveAndCloseBtn;
 
@@ -155,14 +158,15 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
 
 
 
+
     }
 
     private void enableValidate() {
-        AwesomeValidation mAwesomeValidation = new AwesomeValidation(COLORATION);
-        mAwesomeValidation.setColor(Color.RED);
-        AwesomeValidation.disableAutoFocusOnFirstFailure();
-
-        mAwesomeValidation.addValidation(this, R.id.line_recycle_category_choose_text, "[a-zA-Z\\s]+", R.string.err_choose);
+//        AwesomeValidation mAwesomeValidation = new AwesomeValidation(COLORATION);
+//        mAwesomeValidation.setColor(Color.RED);
+//        AwesomeValidation.disableAutoFocusOnFirstFailure();
+//
+//        mAwesomeValidation.addValidation(this, R.id.line_recycle_category_choose_text, Range.closed(0.01f, 2.72f), R.string.err_choose);
     }
 
 
@@ -383,21 +387,25 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
 
             case R.id.add_line_add_more_btn:
                 LineModelView previous =adapter.lineModelViews.get(adapter.lineModelViews.size()-1);
-                LineModelView newLine = new LineModelView(previous.position+1,previous.category,previous.unit,previous.item);
-                Log.v("new Line","pos: "+newLine.position +" cat : "+newLine.category +" item : "+newLine.item +" unit : "+newLine.unit +" price : "+newLine.price +" quantity : "+newLine.quantity);
-                adapter.lineModelViews.add(newLine);
-                int i=0 ;
-                while (i<adapter.lineModelViews.size()){
-                    Log.v("item "+i,String.valueOf(adapter.lineModelViews.get(i).position));
-                    i++;
-                }
+
+                if (adapter.viewHolder.checkValidate(previous)) {
+
+                    LineModelView newLine = new LineModelView(previous.position + 1, previous.category, previous.unit, previous.item);
+                    Log.v("new Line", "pos: " + newLine.position + " cat : " + newLine.category + " item : " + newLine.item + " unit : " + newLine.unit + " price : " + newLine.price + " quantity : " + newLine.quantity);
+                    adapter.lineModelViews.add(newLine);
+                    int i = 0;
+                    while (i < adapter.lineModelViews.size()) {
+                        Log.v("item " + i, String.valueOf(adapter.lineModelViews.get(i).position));
+                        i++;
+                    }
 //                Collections.sort(lineList, (o1, o2) -> String.valueOf(o1.position).compareTo(String.valueOf(o2.position)));
 //                i=0;
 //                while (i<lineList.size()){
 //                    Log.v("item "+i,String.valueOf(lineList.get(i).position));
 //                    i++;
 //                }
-                adapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
+                }
                 break;
 
             case R.id.add_line_continue:
@@ -407,6 +415,8 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
             case R.id.add_line_save_and_close_btn:
         }
     }
+
+
 
     void insetrAllLinesToDB(){
 
