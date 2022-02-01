@@ -2,6 +2,8 @@ package com.example.pettycash;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -33,6 +35,7 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -64,7 +67,8 @@ import static java.time.chrono.IsoChronology.INSTANCE;
 public class AddTransaction extends AppCompatActivity implements View.OnClickListener, Callable, CompoundButton.OnCheckedChangeListener
         , ActivityCompat.OnRequestPermissionsResultCallback {
     TextView legalText, businessText, projectText, depatmentText ,dateText;
-    ImageButton cancelBtn,confirmBtn;
+    ImageView confirmBtn;
+    AppCompatImageView cancelBtn;
     FragmentManager fragmentManager;
     private static View fragment;
     SharedPreferences sharedPref;

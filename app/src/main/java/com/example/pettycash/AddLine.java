@@ -409,7 +409,9 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
                 break;
 
             case R.id.add_line_continue:
-                insetrAllLinesToDB();
+                if (adapter.viewHolder.checkValidateForAll()) {
+                    insetrAllLinesToDB();
+                }
                 break;
 
             case R.id.add_line_save_and_close_btn:

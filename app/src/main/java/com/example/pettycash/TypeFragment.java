@@ -116,13 +116,56 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
         editTextFullLayout = view.findViewById(R.id.type_fragment_edit_text_layout);
         title = view.findViewById(R.id.type_fragment_title);
+
+        editText = view.findViewById(R.id.type_fragment_edit_text);
         if (hint != null )
             title.setText("Enter "+hint);
-//        }
-        editText = view.findViewById(R.id.type_fragment_edit_text);
+
         if (hint != null)
             editText.setHint("Enter the " + hint.toLowerCase());
+  editText.setTransformationMethod(new TransformationMethod() {
+                        @Override
+                        public CharSequence getTransformation(CharSequence source, View view) {
+                            return source;
+                        }
 
+                        @Override
+                        public void onFocusChanged(View view, CharSequence sourceText, boolean focused, int direction, Rect previouslyFocusedRect) {
+
+                        }
+                    });
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                value = s.toString();
+                Log.v("ontextChange",value);
+                Log.v("ontextChange",s.toString());
+
+
+                    if (value.matches("[0-9]+")) {
+                        editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+
+                    } else {
+                        editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.red_light));
+                        Toast.makeText(getActivity(), getActivity().getText(R.string.value_greater_then_zere_and_num_err), Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                }
+
+
+        });
         submitBtn = view.findViewById(R.id.type_fragment_btn);
         cancelBtn = view.findViewById(R.id.type_fragment_cancel);
 //        if (submitBtn != null)
@@ -131,9 +174,13 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
             editText.setOnClickListener(this);
 
-        if (orginalTextViewID == R.id.line_recycle_quantity_choose_text) {
 
-        }else {
+        if (orginalTextViewID == R.id.line_recycle_quantity_choose_text) {
+            Log.v("origID","quantity");
+        }else         if (orginalTextViewID == R.id.line_recycle_price_choose_text) {
+
+            Log.v("origID","price");
+
             editText.setInputType(InputType.TYPE_CLASS_PHONE);
         }
 
@@ -148,29 +195,34 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
         if (addLine != null) {
             switch (v.getId()) {
                 case R.id.type_fragment_btn:
+//                    mAwesomeValidation.validate();
+
 //                    if (orginalTextViewID == R.id.line_recycle_price_choose_text) {
                         Log.v("price", "clicked");
                         addLine.adapter.lineModelViews.get(addLineNum).priceClicked = true;
-                        if (!value.isEmpty()) {
-                            Log.v("priceUpdate",Integer.valueOf(editText.getText().toString())+"");
-                            if (Integer.valueOf(editText.getText().toString()) <= 0) {
-                            editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.red_light));
-                                Toast.makeText(getActivity(),getActivity().getText(R.string.value_greater_then_zere_err),Toast.LENGTH_SHORT).show();
-                            }else    if (Integer.valueOf(editText.getText().toString()) <= 0) {
-                                editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.red_light));
-                                Toast.makeText(getActivity(),getActivity().getText(R.string.value_greater_then_zere_err),Toast.LENGTH_SHORT).show();
-                            } else {
-                                addLine.adapter.viewHolder.upadteText(orginalTextViewID, value, addLineNum);
-                                keyboard = addLine.getCurrentFocus();
-                                if (keyboard == null) {
-                                    keyboard = new View(addLine);
+                        addLine.adapter.lineModelViews.get(addLineNum).quantityClicked = true;
+                        if (value != null) {
+                            if (!value.isEmpty()) {
+                                Log.v("priceUpdate", Integer.valueOf(editText.getText().toString()) + "");
+                                if (Integer.valueOf(editText.getText().toString()) <= 0) {
+                                    editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.red_light));
+                                    Toast.makeText(getActivity(), getActivity().getText(R.string.value_greater_then_zere_err), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    addLine.adapter.viewHolder.upadteText(orginalTextViewID, value, addLineNum);
+                                    keyboard = addLine.getCurrentFocus();
+                                    if (keyboard == null) {
+                                        keyboard = new View(addLine);
+                                    }
+                                    imm = (InputMethodManager) addLine.getSystemService(addLine.INPUT_METHOD_SERVICE);
+                                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+                                    addLine.hideFragment();
                                 }
-                                imm = (InputMethodManager) addLine.getSystemService(addLine.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-                                addLine.hideFragment();
                             }
-
+                        }else {
+                            editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.red_light));
+                            Toast.makeText(getActivity(), getActivity().getText(R.string.empty_err), Toast.LENGTH_SHORT).show();
                         }
 //                    }
 //                    if (orginalTextViewID == R.id.line_recycle_quantity_choose_text){
@@ -205,70 +257,78 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
                     addLine.hideFragment();
 
                 case R.id.type_fragment_edit_text:
-                    mAwesomeValidation.validate();
                     clicked = true;
 
-                    if (orginalTextViewID == R.id.line_recycle_quantity_choose_text) {
-                        editText.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+//                        editText.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+//
+//                        editText.addTextChangedListener(new TextWatcher() {
+//                            @Override
+//                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                            }
+//
+//                            @Override
+//                            public void afterTextChanged(Editable s) {
+//                                value = s.toString();
+//                                Log.v("ontextChange",value);
+//                                Log.v("ontextChange",s.toString());
+//                                if (orginalTextViewID == R.id.line_recycle_quantity_choose_text) {
+//                                    editText.setTransformationMethod(new TransformationMethod() {
+//                                        @Override
+//                                        public CharSequence getTransformation(CharSequence source, View view) {
+//                                            return source;
+//                                        }
+//
+//                                        @Override
+//                                        public void onFocusChanged(View view, CharSequence sourceText, boolean focused, int direction, Rect previouslyFocusedRect) {
+//
+//                                        }
+//                                    });
+//                                } else {
+//
+//
+//                                        if (value.matches("[0-9]")) {
+//                                            editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+//
+//                                        } else {
+//                                            editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.red_light));
+//                                            Toast.makeText(getActivity(), getActivity().getText(R.string.value_greater_then_zere_and_num_err), Toast.LENGTH_SHORT).show();
+//
+//                                        }
+//
+//
+//                                    }
+//                                }
+//
+//                        });
 
-                        editText.addTextChangedListener(new TextWatcher() {
-                            @Override
-                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                    }else {
+//                        editText.addTextChangedListener(new TextWatcher() {
+//                            @Override
+//                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                            }
+//
+//                            @Override
+//                            public void afterTextChanged(Editable s) {
+//                                value = s.toString();
+//
+//                                }
+//                            }
+//                        });
+//                    }
 
-                            }
-
-                            @Override
-                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                            }
-
-                            @Override
-                            public void afterTextChanged(Editable s) {
-                                if (!s.toString().isEmpty()) {
-                                    value = s.toString();
-                                }
-                            }
-                        });
-
-                        editText.setTransformationMethod(new TransformationMethod() {
-                            @Override
-                            public CharSequence getTransformation(CharSequence source, View view) {
-                                return source;
-                            }
-
-                            @Override
-                            public void onFocusChanged(View view, CharSequence sourceText, boolean focused, int direction, Rect previouslyFocusedRect) {
-
-                            }
-                        });
-                    }else {
-                        editText.addTextChangedListener(new TextWatcher() {
-                            @Override
-                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                            }
-
-                            @Override
-                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                            }
-
-                            @Override
-                            public void afterTextChanged(Editable s) {
-                                if (!s.toString().isEmpty()) {
-                                    value = s.toString();
-                                    if (value.matches("[0-9]+(.)") ){
-                                        editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
-
-                                    }else {
-                                        editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.red_light));
-                                        Toast.makeText(getActivity(),getActivity().getText(R.string.value_greater_then_zere_and_num_err),Toast.LENGTH_SHORT).show();
-
-                                    }
-                                }
-                            }
-                        });
-                    }
 
             }
         }

@@ -42,7 +42,7 @@
         android:layout_centerHorizontal="true"
         android:text="@string/welcome_first"
        style="@style/title_light"
-        android:paddingTop="30dp"
+        android:paddingTop="10dp"
         ></TextView>
 
     <TextView

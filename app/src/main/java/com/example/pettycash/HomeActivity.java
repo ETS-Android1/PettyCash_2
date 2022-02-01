@@ -201,7 +201,7 @@ public class HomeActivity extends Fragment {
         // add data
 //        seekBarX.setProgress(45);
 //        seekBarY.setProgress(180);
-        setData(45, 180);
+        setData(9, 180);
 
         // draw points over time
        lineChart.animateX(1500);
@@ -222,7 +222,7 @@ public class HomeActivity extends Fragment {
         for (int i = 0; i < count; i++) {
 
             float val = (float) (Math.random() * range) - 30;
-            values.add(new Entry(i, val, getResources().getDrawable(R.drawable.ic_launcher_foreground)));
+            values.add(new Entry(i, val, getResources().getDrawable(R.drawable.fade_red)));
         }
 
         LineDataSet set1;

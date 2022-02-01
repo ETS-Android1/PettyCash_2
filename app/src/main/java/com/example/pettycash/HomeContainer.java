@@ -12,11 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 public class HomeContainer extends AppCompatActivity implements View.OnClickListener {
     Fragment mainView , settingView ;
     ImageButton settings,home;
-    AppCompatImageButton addTrnsaction;
+    RelativeLayout addTrnsaction;
     FragmentManager fragmentManager;
 
 
