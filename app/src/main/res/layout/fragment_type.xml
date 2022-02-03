@@ -23,7 +23,9 @@ android:background="@color/white"
             android:text="title"
             android:id="@+id/type_fragment_title"
             android:gravity="center_vertical"
-            style="@style/title_light"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
 
             />
 

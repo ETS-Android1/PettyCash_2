@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -405,13 +407,29 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
 //                    i++;
 //                }
                     adapter.notifyDataSetChanged();
+                    lines_recyclerView.smoothScrollToPosition(adapter.lineModelViews.size()-1);
+                }else{
+
+                    final CharSequence[] options = { "Okey" };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle(getResources().getString(R.string.all_red_feild_required));
+                    builder.setItems(options, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+
+
+                    });
+                    builder.show();
                 }
                 break;
 
             case R.id.add_line_continue:
-                if (adapter.viewHolder.checkValidateForAll()) {
+//                if (adapter.viewHolder.checkValidateForAll()) {
                     insetrAllLinesToDB();
-                }
+//                }
                 break;
 
             case R.id.add_line_save_and_close_btn:

@@ -26,6 +26,14 @@ public class LineModelView {
     String cbsCode;
     String expenditureType;
     boolean priceClicked,quantityClicked;
+    public boolean isVatValid =true;
+    public boolean isItemValid =true;
+    public boolean isCategoryValid =true;
+    public boolean isPriceValid =true;
+    public boolean isUnitValid =true;
+    public boolean isCbsCodeValid =true;
+    public boolean isExpenditureTypeValid =true;
+
 
 
     public LineModelView(int position) {

@@ -134,8 +134,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-
-
+//        Log.v("holderPos",holder.pos+"");
         LineModelView current = lineModelViews.get(position);
         List<AttachmentModelView> docs= current.docsList;
         holder.attachmentAdapter.linePos = position+1;
@@ -143,12 +142,17 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
         holder.attachmentAdapter.docList.addAll(docs);
         holder.attachmentAdapter.notifyDataSetChanged();
 
+        Log.v("adpPos",position + "vatFromLine: "+current.vatInvoiceNumber);
+
+
         int pos = position+1;
-        Log.v("current : "+current.position,"adapter: " +position);
-        Log.v("current","pos: "+position +" cat : "+current.category +" item : "+current.item +" unit : "+current.unit +" price : "+current.price +" quantity : "+current.quantity+" pClicked: "+Boolean.toString(current.priceClicked)+" qClicked "+current.quantityClicked);
+//        Log.v("current : "+current.position,"adapter: " +position+" , holder: "+holder.pos);
+//        Log.v("current","pos: "+position +" cat : "+current.category +" item : "+current.item +" unit : "+current.unit +" price : "+current.price +" quantity : "+current.quantity+" pClicked: "+Boolean.toString(current.priceClicked)+" qClicked "+current.quantityClicked+" vat");
 
 
-
+        if (!current.isPriceValid){
+            holder.priceFullLayout.setBackgroundColor(context.getResources().getColor(R.color.red_err));
+        }
 
         if (current.category != null)
             holder.categoryChooseText.setText(current.category);
@@ -171,6 +175,18 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
         if (current.quantity >=1 && current.quantityClicked)
             holder.quantityChooseText.setText(String.valueOf(current.quantity));
 
+        if (current.vatInvoiceNumber>0)
+            holder.vatEditText.setText(String.valueOf(current.vatInvoiceNumber));
+
+        if (current.invoiceNumber != null)
+            holder.invoiceEditText.setText(String.valueOf(current.invoiceNumber));
+
+        if (current.supplierName != null)
+            holder.supplierEditText.setText(String.valueOf(current.supplierName));
+
+        if (current.amount >0){
+            holder.amountChooseText.setText(String.valueOf(current.amount));
+        }
         String myFormat="yyyy-MM-dd";
         SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.ENGLISH);
 
@@ -178,6 +194,8 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
         double amount = current.price*current.quantity;
         holder.amountChooseText.setText(String.valueOf(amount) +" SAR");
+
+        Log.v("adpPos",position + "vatFromLineEditTXT: "+holder.vatEditText.getText().toString());
 
         holder.billed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -231,7 +249,6 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener , ActivityCompat.OnRequestPermissionsResultCallback {
-
             private final View categoryfullLayout;
         private final View unitFullLayout;
         private  RelativeLayout priceFullLayout , itemFullLayout , quantityFullLayout , cbsCodeFullLayout,expenditureTypeFullLayout ;
@@ -248,6 +265,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
         List<Uri> docs ;
         private SharedPreferences sharedPref;
         boolean vatValueBool=false;
+        int pos;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -255,6 +273,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
 
             super(itemView);
+            pos = lineModelViews.size();
             sharedPref = PreferenceManager.getDefaultSharedPreferences(addLine);
             isGranted = sharedPref.getBoolean(String.valueOf(Utlity.CAMERA_REQUEST_ID),false);
 
@@ -340,23 +359,23 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
             vatFullLayout = itemView.findViewById(R.id.line_recycle_vat_number_layout);
 
-            vatEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (!hasFocus){
-                        if (vatValueBool){
-
-                        }else {
-
-//                            vatEditText.requestFocus();
-//                            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-//                            imm.showSoftInput(vatEditText, InputMethodManager.SHOW_IMPLICIT);
-                            vatFullLayout.setBackgroundColor(addLine.getResources().getColor(R.color.red_err));
-                            Toast.makeText(addLine, addLine.getText(R.string.value_15_digits_err), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            });
+//            vatEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//                @Override
+//                public void onFocusChange(View v, boolean hasFocus) {
+//                    if (!hasFocus){
+//                        if (vatValueBool){
+//
+//                        }else {
+//
+////                            vatEditText.requestFocus();
+////                            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+////                            imm.showSoftInput(vatEditText, InputMethodManager.SHOW_IMPLICIT);
+//                            vatFullLayout.setBackgroundColor(addLine.getResources().getColor(R.color.red_err));
+//                            Toast.makeText(addLine, addLine.getText(R.string.value_15_digits_err), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                }
+//            });
             vatEditText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -590,7 +609,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
         @Override
         public void onClick(View v) {
-
+            Log.v("currnetPos",getAdapterPosition()+"");
             SelectFragment selectFragment;
             TypeFragment typeFragment;
 
@@ -867,6 +886,8 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
                 default:
             }
             notifyDataSetChanged();
+
+
 //            Log.v("cat:",text);
 //            TextView textView = itemView.findViewById(viewId);
 //            textView.setText(text);
@@ -904,7 +925,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
         public boolean checkValidateForAll() {
             int i =0;
             while (i < lineModelViews.size()){
-                if (checkValidate(lineModelViews.get(i))){
+                if (checkValidatePerItem(lineModelViews.get(i))){
 
                 }else {
                     return false;
@@ -913,6 +934,55 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
             }
             return true;
         }
+
+        private boolean checkValidatePerItem(LineModelView previous) {
+                boolean state = true;
+                if ( String.valueOf(previous.vatInvoiceNumber).length()< 15 ) {
+                    previous.isVatValid=false;
+                    state = false;
+
+                }else {
+                    vatFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+                }
+                if (previous.category == null ){
+                    previous.isCategoryValid=false;
+
+                }else {
+                    categoryfullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+                }
+                if (previous.item == null ){
+                  previous.isItemValid=false;
+                }else {
+                    itemFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+                }
+                if (previous.unit == null ){
+                   previous.isUnitValid=false;
+                }else {
+                    unitFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+                }
+                if (previous.cbsCode == null ){
+               previous.isCbsCodeValid = false;
+
+                }else {
+                    cbsCodeFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+                }
+                if (previous.expenditureType == null ){
+               previous.isExpenditureTypeValid = false;
+                }else {
+                    expenditureTypeFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+                }
+
+                if (previous.price <=0){
+                   previous.isPriceValid = false;
+                }else {
+                    priceFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+
+                }
+
+
+                return state;
+            }
+        }
     }
-    }
+
 
