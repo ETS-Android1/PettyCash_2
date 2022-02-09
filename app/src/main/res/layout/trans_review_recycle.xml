@@ -498,6 +498,23 @@
 
 
 
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/trans_review_line_attachment_layout"
+
+
+            >
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/line_recycle_attachment_recycle"
+                ></androidx.recyclerview.widget.RecyclerView>
+        </ScrollView>
+
 
 
 

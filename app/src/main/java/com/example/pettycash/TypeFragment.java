@@ -203,8 +203,8 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
                         addLine.adapter.lineModelViews.get(addLineNum).quantityClicked = true;
                         if (value != null) {
                             if (!value.isEmpty()) {
-                                Log.v("priceUpdate", Integer.valueOf(editText.getText().toString()) + "");
-                                if (Integer.valueOf(editText.getText().toString()) <= 0) {
+                                Log.v("priceUpdate", Integer.valueOf(value) + "");
+                                if (Integer.valueOf(value) <= 0) {
                                     editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.red_light));
                                     Toast.makeText(getActivity(), getActivity().getText(R.string.value_greater_then_zere_err), Toast.LENGTH_SHORT).show();
                                 } else {

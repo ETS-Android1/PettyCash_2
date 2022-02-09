@@ -209,6 +209,25 @@ public class Utlity {
         }
     }
 
+    public static class GetAttachCallable implements Callable<List<List<AttachmentModelView>>>{
+        AppDatabase db ;
+        public GetAttachCallable(Application application) {
+            db=AppDatabase.getInstance(application);
+        }
+
+        @Override
+        public List<List<AttachmentModelView>> call() {
+            int size= 0;
+            List<AttachmentModelView> current = new ArrayList<>();
+            List<List<AttachmentModelView>> all = new ArrayList<>();
+            int i =0;
+            while (i<size){
+
+            }
+
+            return null;
+        }
+    }
 }
 
 

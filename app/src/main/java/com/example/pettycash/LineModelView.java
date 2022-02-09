@@ -14,7 +14,7 @@ public class LineModelView {
     public int quantity =1;
     public String invoiceNumber;
     public String supplierName;
-    public long vatInvoiceNumber;
+    public String vatInvoiceNumber;
     public long invoiceDate;
     public boolean billedToCustomer;
     public List<AttachmentModelView> docsList;
@@ -50,6 +50,12 @@ public class LineModelView {
         this.category = category;
         this.unit = unit;
         this.item = item;
+        docsList = new ArrayList<>();
+
+    }
+
+    public LineModelView(int transactionId, String category, String unit, String item, int quantity, double price, double amount, String supplierName, String invoiceNumber, long vatInvoiceNumber, boolean billedToCustomer, long invoiceDate, String cbsCode, String expenditureType) {
+
         docsList = new ArrayList<>();
 
     }

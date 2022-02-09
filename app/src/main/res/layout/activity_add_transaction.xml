@@ -6,6 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:focusable="false"
+    android:focusableInTouchMode="true"
     tools:context=".AddTransaction">
     <LinearLayout
 
@@ -20,19 +22,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:weightSum="6"
             android:background="@color/red_dark"
             android:paddingHorizontal="30dp"
-            >
+            android:weightSum="6">
+
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/new_transaction_cancel_btn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                android:src="@drawable/outline_arrow_circle_left_white_48"
                 android:background="?android:attr/selectableItemBackground"
-                android:id="@+id/new_transaction_cancel_btn"
-                ></androidx.appcompat.widget.AppCompatImageView>
+                android:padding="5dp"
+                android:src="@drawable/outline_arrow_circle_left_white_48"></androidx.appcompat.widget.AppCompatImageView>
 
         </LinearLayout>
 
@@ -46,14 +47,14 @@
 
 
             <TextView
+                style="@style/title_dark"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/create_transaction"
-                style="@style/title_dark"
-               android:gravity="center"
 
-                        ></TextView>
+                ></TextView>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -545,27 +546,25 @@
 
                 </LinearLayout>
 
-<Space
-    android:layout_width="match_parent"
-    android:layout_height="20dp"
-    ></Space>
+<!--<Space-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="20dp"-->
+<!--    ></Space>-->
                 <RelativeLayout
+                    android:id="@+id/new_transaction_decription_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/description_layout"
-                    android:id="@+id/new_transaction_decription_layout"
-                        android:padding="10dp"
-                    >
+                    android:padding="10dp">
 
 
                     <EditText
+                        android:id="@+id/new_transaction_decription_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/new_transaction_decription_edit_text"
-                        android:hint="@string/type_here"
-                        android:padding="10dp"
                         android:background="@drawable/edit_text_shape_for_line"
-                        ></EditText>
+                        android:hint="@string/type_here"
+                        android:padding="10dp"></EditText>
 
 
                 </RelativeLayout>

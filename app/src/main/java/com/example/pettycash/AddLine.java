@@ -40,6 +40,7 @@ import com.example.pettycash.databse.AttachmentModelView;
 import com.example.pettycash.databse.LineModelViewDB;
 import com.google.common.collect.Range;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -137,6 +138,7 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
 //
 //                                    current.docsList.add((Uri) result.getData().getExtras().get("data"));
                                     adapter.notifyDataSetChanged();
+
                                 }else {
 
 
@@ -172,54 +174,14 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
     }
 
 
-    private void galleryAddPic(ContentResolver cr,
-                               Bitmap source,
-                               String title,
-                               String description) {
+    private void galleryAddPic() {
 
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE, title);
-        values.put(MediaStore.Images.Media.DISPLAY_NAME, title);
-        values.put(MediaStore.Images.Media.DESCRIPTION, description);
-        values.put(MediaStore.Images.Media.MIME_TYPE, "image/png");
-        // Add the date meta data to ensure the image is added at the front of the gallery
-        values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis());
-        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File("null");
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
 
-        Uri url = null;
-        String stringUrl = null;    /* value to be returned */
-
-        try {
-            url = cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-
-            if (source != null) {
-                OutputStream outputStream = cr.openOutputStream(url);
-//
-                try {
-                    Log.v("NullO", outputStream.toString());
-
-                    source.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                    outputStream.flush();
-                } catch (Exception e) {
-
-                }
-                try {
-                    outputStream.close();
-                } catch (Exception e) {
-
-                }
-            }
-        }catch (IOException e){
-        }
-        Log.v("NullB",source.toString());
-
-
-
-
-//        Log.v("imgPath",file.getAbsolutePath());
-//        Log.v("imgPath",file.getPath());
-//        setPic(file.getAbsolutePath());
-//        insertImage(getContentResolver(),bitmap,"1.1","jj");
 
     }
     private void setPic(String path) {
@@ -381,6 +343,7 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()){
 
             case R.id.add_line_cancel_btn:
@@ -389,6 +352,13 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
 
             case R.id.add_line_add_more_btn:
                 LineModelView previous =adapter.lineModelViews.get(adapter.lineModelViews.size()-1);
+                Log.v("prev :", "pos: " + previous.position + " cat : " + previous.category + " item : " + previous.item + " unit : " + previous.unit + " price : " + previous.price + " quantity : " + previous.quantity + " amount : "+previous.amount + " vat : " + previous.vatInvoiceNumber);
+
+                for (int i =0; i<adapter.lineModelViews.size();i++){
+                    LineModelView newLine = adapter.lineModelViews.get(i);
+                            Log.v("new Line "+i+" :", "pos: " + newLine.position + " cat : " + newLine.category + " item : " + newLine.item + " unit : " + newLine.unit + " price : " + newLine.price + " quantity : " + newLine.quantity + " amount : "+newLine.amount + " vat : " + newLine.vatInvoiceNumber);
+
+                }
 
                 if (adapter.viewHolder.checkValidate(previous)) {
 

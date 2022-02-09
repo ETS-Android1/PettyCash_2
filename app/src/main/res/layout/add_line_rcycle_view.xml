@@ -6,13 +6,14 @@
     android:orientation="vertical"
     android:background="@color/white"
     tools:context=".AddLine"
+    android:focusable="false"
+    android:focusableInTouchMode="true"
 
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_height="wrap_content"
         android:id="@+id/line_recycle_title_layout"
         android:orientation="horizontal"
         android:background="@color/gray_light"
@@ -21,13 +22,21 @@
         >
 
                 <TextView     android:layout_centerVertical="true"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
             style="@style/title_dark"
             android:id="@+id/line_recycle_title_text"
             android:text="@string/add_line"
          android:gravity="center_vertical"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/adpPos"
+            android:layout_toRightOf="@id/line_recycle_title_text"
+            android:paddingLeft="20dp"
+            android:textSize="18sp"
             ></TextView>
     </RelativeLayout>
 
@@ -41,13 +50,13 @@
 
         >
 
-                <TextView     android:layout_centerVertical="true"
+        <TextView
+            android:id="@+id/line_recycle_category_text"
+            style="@style/normal_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/normal_dark"
-            android:id="@+id/line_recycle_category_text"
-            android:text="@string/category"
-            ></TextView>
+            android:layout_centerVertical="true"
+            android:text="@string/category"></TextView>
 
         <RelativeLayout
             android:layout_width="160dp"
@@ -542,6 +551,17 @@
 
 
         </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/line_recycle_vat_number_error"
+            android:text="vat number must be 15 digits"
+            android:textColor="@color/red_dark"
+            android:textSize="15sp"
+            android:visibility="gone"
+
+            ></TextView>
 
 
     </LinearLayout>

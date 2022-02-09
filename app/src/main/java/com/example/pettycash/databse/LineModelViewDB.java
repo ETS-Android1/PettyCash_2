@@ -7,6 +7,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.pettycash.LineModelView;
+
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,7 +38,7 @@ public class LineModelViewDB {
     @ColumnInfo(name = "invoice_Number")
     public  String invoiceNumber;
     @ColumnInfo(name = "vat_Invoice_Number")
-    public   long vatInvoiceNumber;
+    public   String vatInvoiceNumber;
     @ColumnInfo(name = "billedToCustomer")
     public   boolean billedToCustomer;
     @ColumnInfo(name = "invoice_Date")
@@ -50,7 +52,8 @@ public class LineModelViewDB {
 
 
 
-    public LineModelViewDB(int transactionId, String category, String unit, String item, int quantity, double price, double amount, String supplierName, String invoiceNumber, long vatInvoiceNumber, boolean billedToCustomer, long invoiceDate, String cbsCode, String expenditureType) {
+    public LineModelViewDB(int transactionId, String category, String unit, String item, int quantity, double price, double amount, String supplierName, String invoiceNumber, String vatInvoiceNumber, boolean billedToCustomer, long invoiceDate, String cbsCode, String expenditureType) {
+//        super(transactionId,category,unit,item,quantity,price,amount,supplierName,invoiceNumber,vatInvoiceNumber,billedToCustomer,invoiceDate,cbsCode,expenditureType);
         this.transactionId = transactionId;
         this.category = category;
         this.unit = unit;
