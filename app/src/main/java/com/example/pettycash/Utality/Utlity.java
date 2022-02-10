@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import com.example.pettycash.LineModelView;
 import com.example.pettycash.databse.AppDatabase;
 import com.example.pettycash.databse.AttachmentModelView;
 import com.example.pettycash.databse.LineModelViewDB;
@@ -123,12 +124,14 @@ public class Utlity {
 
                 Log.v("item "+i+":", String.valueOf(linesRepository.mLinesDAO.getAll().get(linesRepository.mLinesDAO.getAll().size()-1).transactionId));
                 currId =linesRepository.mLinesDAO.getAll().get(linesRepository.mLinesDAO.getAll().size()-1).id;
+                int currtransId = linesRepository.mLinesDAO.getAll().get(linesRepository.mLinesDAO.getAll().size() - 1).transactionId;
                 List<AttachmentModelView> currenAttachList =attachList.get(i);
                 int j =0;
 //                Log.v("curDocS", String.valueOf(current.docsList.size()));
                 while (j <= currenAttachList.size()-1){
 
                     AttachmentModelView attachVM = currenAttachList.get(j);
+                    attachVM.transId = currtransId;
                     attachVM.lineId=currId;
 //                    Log.v("curDocItem"+j+"", attachVM.name);
 
@@ -150,11 +153,11 @@ public class Utlity {
         }
     }
 
-    public static class GetLineCallable implements Callable<List<LineModelViewDB>> {
+    public static class GetLineCallable implements Callable<List<LineModelView>> {
         AppDatabase db;
         TransactionModelView trans;
         int transID = -1;
-        List<LineModelViewDB> linesList;
+        List<LineModelView> linesList;
         public GetLineCallable(Application application , int transID) {
             db = AppDatabase.getInstance(application);
             this.transID = transID;
@@ -163,18 +166,30 @@ public class Utlity {
 
 
         @Override
-        public List<LineModelViewDB> call() {
+        public List<LineModelView> call() {
             // Some long running task
             Log.v("getListTrans ID",transID+"");
             List<LineModelViewDB> listDB =db.linesDao().ListofLines(transID);
             Log.v("getListSize",listDB.size()+"");
 
             if (listDB.size() > 0 ){
-                linesList.addAll(listDB);
+                for (int i = 0 ; i<listDB.size();i++) {
+                    LineModelViewDB currentDB = listDB.get(i);
+                    LineModelView lineModelView = Utlity.dbToJavaLMV(currentDB);
+                    lineModelView.docsList.addAll(db.attachmentDao().getAllbyTransId(transID));
+                    linesList.add(lineModelView);
+                }
+
             }
 
             return linesList;
         }
+    }
+
+    private static LineModelView dbToJavaLMV(LineModelViewDB currentDB) {
+        LineModelView lineModelView = new LineModelView(currentDB.transactionId,currentDB.category,currentDB.unit,currentDB.item,currentDB.quantity,currentDB.price,currentDB.amount,currentDB.supplierName,currentDB.invoiceNumber,currentDB.invoiceDate,currentDB.billedToCustomer,currentDB.invoiceDate,currentDB.cbsCode,currentDB.expenditureType);
+        return lineModelView;
+
     }
 
     public static class AddAttachmentCallable implements Callable<Integer> {

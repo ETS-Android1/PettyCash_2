@@ -67,7 +67,7 @@ public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.
 
 
     AddLine activity;
-    List<LineModelViewDB> lineModelViews = new ArrayList<>();
+    List<LineModelView> lineModelViews = new ArrayList<>();
     List<List<AttachmentModelView>> attachments = new ArrayList<>();
 
     private DatePickerDialog.OnDateSetListener date;

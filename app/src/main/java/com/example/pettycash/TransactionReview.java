@@ -86,15 +86,9 @@ public class TransactionReview extends AppCompatActivity {
         linesLayout.setAdapter(adapter);
 
         new Utlity.TaskRunner().executeAsync(new Utlity.GetLineCallable(this.getApplication(),currentTransId), (data) ->{
-            List<LineModelViewDB> lines = new ArrayList<>();
-            LineModelViewDB newLine = null;
-            int i = 0;
-            while (i <data.size()){
-                newLine = data.get(i);
-                Log.v("cateFormDB"+i,newLine.category);
-                lines.add(newLine);
-                i++;
-            }
+            List<LineModelView> lines = new ArrayList<>();
+            adapter.lineModelViews.clear();
+            adapter.lineModelViews.addAll(data);
 //            adapter.lineModelViews.addAll(data);
             Log.v("lineListDBSize", String.valueOf(data.size()));
             adapter.notifyDataSetChanged();

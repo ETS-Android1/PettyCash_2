@@ -9,13 +9,16 @@ public class AttachmentModelView {
     public int id;
     @ColumnInfo(name = "lineId")
     public int lineId;
+  @ColumnInfo(name = "transId")
+    public int transId;
     @ColumnInfo(name = "name")
     public String name;
     @ColumnInfo(name = "path")
     public  String path;
 
 
-    public AttachmentModelView(int lineId, String name, String path) {
+    public AttachmentModelView(int transId ,int lineId, String name, String path) {
+        this.transId = transId;
         this.lineId = lineId;
         this.name = name;
         this.path = path;
