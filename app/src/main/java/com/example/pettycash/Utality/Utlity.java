@@ -176,6 +176,7 @@ public class Utlity {
                 for (int i = 0 ; i<listDB.size();i++) {
                     LineModelViewDB currentDB = listDB.get(i);
                     LineModelView lineModelView = Utlity.dbToJavaLMV(currentDB);
+
                     lineModelView.docsList.addAll(db.attachmentDao().getAllbyTransId(transID));
                     linesList.add(lineModelView);
                 }
@@ -187,7 +188,8 @@ public class Utlity {
     }
 
     private static LineModelView dbToJavaLMV(LineModelViewDB currentDB) {
-        LineModelView lineModelView = new LineModelView(currentDB.transactionId,currentDB.category,currentDB.unit,currentDB.item,currentDB.quantity,currentDB.price,currentDB.amount,currentDB.supplierName,currentDB.invoiceNumber,currentDB.invoiceDate,currentDB.billedToCustomer,currentDB.invoiceDate,currentDB.cbsCode,currentDB.expenditureType);
+        LineModelView lineModelView = new LineModelView(currentDB.transactionId,currentDB.category,currentDB.unit,currentDB.item,currentDB.quantity,currentDB.price,currentDB.amount,currentDB.supplierName,currentDB.invoiceNumber,currentDB.vatInvoiceNumber,currentDB.billedToCustomer,currentDB.invoiceDate,currentDB.cbsCode,currentDB.expenditureType);
+
         return lineModelView;
 
     }

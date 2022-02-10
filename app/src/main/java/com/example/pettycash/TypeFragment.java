@@ -152,12 +152,14 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
                 Log.v("ontextChange",s.toString());
 
 
-                    if (value.matches("[0-9]+")) {
+                    if (value.matches("^[0-9]+(\\.[0-9]+)*$") || value.matches("^[0-9]+(\\.)*$")) {
                         editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+                        submitBtn.setClickable(true);
 
                     } else {
                         editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.red_light));
                         Toast.makeText(getActivity(), getActivity().getText(R.string.value_greater_then_zere_and_num_err), Toast.LENGTH_SHORT).show();
+                        submitBtn.setClickable(false);
 
                     }
 
@@ -203,8 +205,8 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
                         addLine.adapter.lineModelViews.get(addLineNum).quantityClicked = true;
                         if (value != null) {
                             if (!value.isEmpty()) {
-                                Log.v("priceUpdate", Integer.valueOf(value) + "");
-                                if (Integer.valueOf(value) <= 0) {
+                                Log.v("priceUpdate", Double.valueOf(value) + "");
+                                if (Double.valueOf(value) <= 0 && !value.matches("^[0-9]+(\\.[0-9]+)*$")) {
                                     editTextFullLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.red_light));
                                     Toast.makeText(getActivity(), getActivity().getText(R.string.value_greater_then_zere_err), Toast.LENGTH_SHORT).show();
                                 } else {

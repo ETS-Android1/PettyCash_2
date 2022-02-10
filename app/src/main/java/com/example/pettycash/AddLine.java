@@ -129,7 +129,7 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
 //                                    galleryAddPic(getContentResolver(),(Bitmap) result.getData().getExtras().get("data"),"1.1","des");
                                     LineModelView current = adapter.lineModelViews.get(attachPos);
                                     String name = String.valueOf(attachPos+1+"."+(current.docsList.size()+1));
-                                    AttachmentModelView attachmentModelView = new AttachmentModelView(-1,name,photoURI.toString());
+                                    AttachmentModelView attachmentModelView = new AttachmentModelView(-1,-1,name,photoURI.toString());
                                     current.docsList.add(attachmentModelView);
 
 //                                    adapter.notifyDataSetChanged();
@@ -148,7 +148,7 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
                                     LineModelView current = adapter.lineModelViews.get(attachPos);
                                     String name = String.valueOf(attachPos+1+"."+(current.docsList.size()+1));
 
-                                    AttachmentModelView attachmentModelView = new AttachmentModelView(-1,name,data.getData().toString());
+                                    AttachmentModelView attachmentModelView = new AttachmentModelView(-1,-1,name,data.getData().toString());
 
                                     current.docsList.add(attachmentModelView);
                                     adapter.notifyDataSetChanged();

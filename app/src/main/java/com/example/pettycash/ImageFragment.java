@@ -91,8 +91,15 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.image_fragment_cancel_btn:
                 Log.v("imageGA",getActivity().toString());
-                        AddLine addLine = (AddLine) getActivity();
-                        addLine.imageFragment.setVisibility(View.GONE);
+                if (getActivity() instanceof AddLine) {
+                    AddLine addLine = (AddLine) getActivity();
+                    addLine.imageFragment.setVisibility(View.GONE);
+
+                }else {
+                    TransactionReview  transactionReview = (TransactionReview) getActivity();
+                    transactionReview.imageFragment.setVisibility(View.GONE);
+
+                }
 
 
 

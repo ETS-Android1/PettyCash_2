@@ -1,11 +1,16 @@
 package com.example.pettycash;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.MediaRouteButton;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,11 +26,14 @@ import java.util.List;
 import java.util.Locale;
 
 public class TransactionReview extends AppCompatActivity {
+    public FragmentManager fragmentManager;
+    public View imageFragment;
     TextView legalValueText, businessValueText, projectValueText, depatmentValueText ,dateValueText,statusValueText,vatValueText,amountValueText;
     RecyclerView linesLayout;
     TransReviewAdapter adapter;
     int currentTransId = -1;
-    private List<LineModelViewDB> linesList;
+    ImageButton save_btn;
+    private List<LineModelView> linesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +90,20 @@ public class TransactionReview extends AppCompatActivity {
         };
         linesLayout.setLayoutManager(customLiner);
         linesList = new ArrayList<>();
-        adapter = new TransReviewAdapter(this,linesList);
+        adapter = new TransReviewAdapter(this,linesList,this);
         linesLayout.setAdapter(adapter);
 
         new Utlity.TaskRunner().executeAsync(new Utlity.GetLineCallable(this.getApplication(),currentTransId), (data) ->{
             List<LineModelView> lines = new ArrayList<>();
             adapter.lineModelViews.clear();
             adapter.lineModelViews.addAll(data);
+            for (LineModelView current:
+                 adapter.lineModelViews) {
+
+                Log.v("new Line "+current.position+" :", "pos: " + current.position + " cat : " + current.category + " item : " + current.item + " unit : " + current.unit + " price : " + current.price + " quantity : " + current.quantity + " amount : "+current.amount + " vat : " + current.vatInvoiceNumber);
+
+
+            }
 //            adapter.lineModelViews.addAll(data);
             Log.v("lineListDBSize", String.valueOf(data.size()));
             adapter.notifyDataSetChanged();
@@ -98,7 +113,23 @@ public class TransactionReview extends AppCompatActivity {
 //
 //        });
         } );
+        imageFragment = findViewById(R.id.trans_review_Image_fragment);
 
+        fragmentManager =getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(new SelectFragment(),"empty")
+                .commit();
+        imageFragment.setVisibility(View.GONE);
 
+        save_btn = findViewById(R.id.trans_review_save_and_close_btn);
+        save_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent toHome = new Intent(TransactionReview.this,HomeContainer.class);
+                startActivity(toHome);
+                finish();
+            }
+        });
     }
 }

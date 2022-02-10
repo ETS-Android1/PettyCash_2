@@ -24,6 +24,7 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
     Context context;
     List<AttachmentModelView> docList;
     AddLine addLine;
+    TransactionReview transactionReview;
     int linePos = -1;
 
 
@@ -42,6 +43,13 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
 
     }
 
+    public AttachmentAdapter(Context context,TransactionReview transactionReview) {
+        this.context = context;
+        docList = new ArrayList<>();
+        this.transactionReview = transactionReview;
+
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -52,13 +60,12 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            if (linePos != -1) {
-                Log.v("doc", "doc" + position + " :" + docList.get(position));
+                Log.v("doc", "doc" + position + " :" + docList.get(position).path);
                 int pos = position + 1;
                 holder.title.setText(linePos + "." + pos);
 
                 Picasso.get().load(docList.get(position).path).into(holder.image);
-            }
+
     }
 
 
@@ -96,11 +103,17 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
         public void onClick(View v) {
 
             ImageFragment imageFragment = new ImageFragment(Uri.parse(docList.get(getAdapterPosition()).path));
-            addLine.fragmentManager.beginTransaction()
-                    .replace(R.id.add_line_Image_fragment,imageFragment,"image")
-                    .commit();
-            addLine.imageFragment.setVisibility(View.VISIBLE);
-
+            if (addLine != null) {
+                addLine.fragmentManager.beginTransaction()
+                        .replace(R.id.add_line_Image_fragment, imageFragment, "image")
+                        .commit();
+                addLine.imageFragment.setVisibility(View.VISIBLE);
+            }else {
+                transactionReview.fragmentManager.beginTransaction()
+                        .replace(R.id.trans_review_Image_fragment, imageFragment, "image")
+                        .commit();
+                transactionReview.imageFragment.setVisibility(View.VISIBLE);
+            }
 
         }
 

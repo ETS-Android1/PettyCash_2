@@ -1,11 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TransactionReview">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="8"
+        android:orientation="horizontal"
+        android:background="@color/gray_light"
+
+        >
+      <Space
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="6"
+          ></Space>
+
+        <LinearLayout
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:paddingVertical="10dp"
+
+
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+
+                <ImageButton
+                    android:id="@+id/trans_review_save_and_close_btn"
+                    android:layout_width="45dp"
+
+                    android:layout_height="45dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/circle_btn_red_light"
+                    android:src="@drawable/outline_check_white_24"
+
+
+                    ></ImageButton>
+
+
+            </RelativeLayout>
+
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/normal_dark"
+                android:layout_alignParentBottom="true"
+                android:paddingTop="5dp"
+                android:text="@string/save_and_close"
+                android:gravity="center"
+                ></TextView>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+>
     <LinearLayout
         android:id="@+id/trans_review_mainLayout"
         android:layout_width="match_parent"
@@ -340,3 +414,16 @@ android:paddingHorizontal="5dp"
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/trans_review_Image_fragment"
+        class="com.example.pettycash.ImageFragment"
+
+
+        />
+
+
+</RelativeLayout>

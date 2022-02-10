@@ -149,7 +149,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
         holder.adpPos.setText(position+"");
 
         LineModelView current = lineModelViews.get(position);
-        Log.v("new Line "+current.position+" :", "pos: " + current.position + " cat : " + current.category + " item : " + current.item + " unit : " + current.unit + " price : " + current.price + " quantity : " + current.quantity + " amount : "+current.amount + " vat : " + current.vatInvoiceNumber);
+        Log.v("new Line "+current.position+" :", "pos: " + current.position + " cat : " + current.category + " item : " + current.item + " unit : " + current.unit + " price : " + current.price + " quantity : " + current.quantity + " amount : "+current.amount + " vat : " + current.vatInvoiceNumber + " invoice : "+current.invoiceNumber);
 
         Log.v("attachSize",current.docsList.size()+"");
         List<AttachmentModelView> docs= current.docsList;
@@ -275,7 +275,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
 
 //
-
+        holder.billed.setChecked(current.billedToCustomer);
 
 
         holder.title.setText(addLine.getResources().getString(R.string.add_line)+ " "+pos);
@@ -406,28 +406,8 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 //            amountEditText.setOnClickListener(this);
             datelayout.setOnClickListener(this);
             billed.setOnCheckedChangeListener(this);
-            invoiceEditText.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                }
 
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    String value = s.toString();
-
-                    int pos = getAdapterPosition();
-                    if (pos<0){
-                        pos = 0;
-                    }
-            lineModelViews.get(pos).invoiceNumber = value;
-                }
-            });
             supplierEditText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -444,11 +424,71 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
                     String value = s.toString();
 
                     int pos = getAdapterPosition();
-                    if (pos<0){
+                    if (pos < 0) {
                         pos = 0;
                     }
-                    lineModelViews.get(pos).supplierName = value;
+                    if (value != null) {
+                        if (!value.isEmpty()) {
+                            Log.v("vayAfterChange", value.length() + "");
+                            Log.v("vayAfterChange", value + "");
+                            if (value.length() >3) {
+//                                vatValueBool=true;
+                                supplierFullLayout.setBackgroundColor(addLine.getResources().getColor(R.color.white));
 
+
+                            } else {
+//                                vatValueBool=false;
+//                                supplierFullLayout.setBackgroundColor(addLine.getResources().getColor(R.color.red_err));
+
+
+                            }
+
+                            lineModelViews.get(pos).supplierName = value;
+                        }
+                    }
+                }
+            });
+
+            invoiceEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    String value = s.toString();
+
+                    int pos = getAdapterPosition();
+                    if (pos < 0) {
+                        pos = 0;
+                    }
+                    if (value != null) {
+                        if (!value.isEmpty()) {
+                            Log.v("vayAfterChange", value.length() + "");
+                            Log.v("vayAfterChange", value + "");
+                            if (value.length() >3) {
+//                                vatValueBool=true;
+                                invoiceNumberFullLayout.setBackgroundColor(addLine.getResources().getColor(R.color.white));
+
+
+                            } else {
+//                                vatValueBool=false;
+//                                invoiceNumberFullLayout.setBackgroundColor(addLine.getResources().getColor(R.color.red_err));
+
+
+                            }
+                            lineModelViews.get(pos).invoiceNumber = value;
+
+
+                        }
+
+                    }
                 }
             });
 
@@ -502,8 +542,8 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
                             } else {
                                 vatValueBool=false;
-                                vatFullLayout.setBackgroundColor(addLine.getResources().getColor(R.color.red_err));
-                                vatErrorMassage.setVisibility(View.VISIBLE);
+//                                vatFullLayout.setBackgroundColor(addLine.getResources().getColor(R.color.red_err));
+//                                vatErrorMassage.setVisibility(View.VISIBLE);
 
 
                             }
@@ -1141,6 +1181,25 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
                 }else {
                     vatFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
                 }
+            if ( String.valueOf(previous.invoiceNumber).length()< 3 ) {
+//                previous.isVatValid=false;
+                invoiceNumberFullLayout.setBackgroundColor(context.getResources().getColor(R.color.red_err));
+
+                state = false;
+
+            }else {
+                invoiceNumberFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+            }
+                if ( String.valueOf(previous.supplierName).length()< 3 ) {
+//                previous.isVatValid=false;
+                supplierFullLayout.setBackgroundColor(context.getResources().getColor(R.color.red_err));
+
+                state = false;
+
+            }else {
+                supplierFullLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+            }
+
                 if (previous.category == null ){
                     previous.isCategoryValid=false;
 

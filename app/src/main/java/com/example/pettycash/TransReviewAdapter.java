@@ -54,6 +54,7 @@ import java.util.Locale;
 
 public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.ViewHolder> {
 
+    public   TransactionReview transactionReview;
     //    private final int selectorTitle;
     Context context;
     List<String> stringList;
@@ -78,12 +79,13 @@ public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.
     boolean isGranted;
 
 
-    public TransReviewAdapter(Context context, List<LineModelViewDB> lines) {
+    public TransReviewAdapter(Context context, List<LineModelView> lines,TransactionReview transactionReview) {
         this.context = context;
         this.activity = activity;
         lineModelViews.addAll(lines);
         Log.v("adpList", String.valueOf(lineModelViews.size()));
         myCalendar = Calendar.getInstance();
+        this.transactionReview = transactionReview;
 
 
 //        this.stringList = stringList;
@@ -115,12 +117,14 @@ public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
 
-        LineModelViewDB current = lineModelViews.get(position);
-//        List<AttachmentModelView> docs = current.docsList;
-//        holder.attachmentAdapter.linePos = position + 1;
-//        holder.attachmentAdapter.docList.clear();
-//        holder.attachmentAdapter.docList.addAll(docs);
-//        holder.attachmentAdapter.notifyDataSetChanged();
+        LineModelView current = lineModelViews.get(position);
+        Log.v("new Line TR"+current.position+" :", "pos: " + current.position + " cat : " + current.category + " item : " + current.item + " unit : " + current.unit + " price : " + current.price + " quantity : " + current.quantity + " amount : "+current.amount + " vat : " + current.vatInvoiceNumber +" docsSize : "+ current.docsList.size());
+
+        List<AttachmentModelView> docs = current.docsList;
+        holder.attachmentAdapter.linePos = position + 1;
+        holder.attachmentAdapter.docList.clear();
+        holder.attachmentAdapter.docList.addAll(docs);
+        holder.attachmentAdapter.notifyDataSetChanged();
 
         int pos = position + 1;
 //        Log.v("current : " + current.position, "adapter: " + position);
@@ -186,6 +190,20 @@ public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.
 //            }
 //        };
 
+        if (current.vatInvoiceNumber != null)
+            holder.vatValueText.setText("");
+        holder.vatValueText.setText(current.vatInvoiceNumber);
+
+        if (current.invoiceNumber != null)
+            holder.invoiceNumberValueText.setText("");
+        holder.invoiceNumberValueText.setText(current.invoiceNumber);
+
+        if (current.supplierName != null)
+            holder.supplierValueText.setText("");
+        holder.supplierValueText.setText(current.supplierName);
+
+        holder.billedValueText.setText(current.billedToCustomer+"");
+
 
     }
 
@@ -227,6 +245,18 @@ public class TransReviewAdapter extends RecyclerView.Adapter<TransReviewAdapter.
             cbsCodeValueText = itemView.findViewById(R.id.trans_review_line_cbs_code_value);
             expenditureTypeValueText = itemView.findViewById(R.id.trans_review_line_expenditure_type_value);
             dateValueText = itemView.findViewById(R.id.trans_review_line_invoice_date_value);
+
+
+            attachmentAdapter = new AttachmentAdapter(context,transactionReview);
+
+
+
+
+
+            attachs_recyclerView = itemView.findViewById(R.id.trans_review_attachment_recycle);
+            LinearLayoutManager linearLayout = new LinearLayoutManager(context,RecyclerView.HORIZONTAL,false);
+            attachs_recyclerView.setLayoutManager(linearLayout);
+            attachs_recyclerView.setAdapter(attachmentAdapter);
 
 
 //            categoryValueText = itemView.findViewById(R.id.trans_review_line_category_value);
