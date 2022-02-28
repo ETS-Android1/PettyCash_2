@@ -111,12 +111,20 @@ public class Utlity {
             // Some long running task
             Log.v("lineSizePara",String.valueOf(list.size()));
             Log.v("attachSizePara",String.valueOf(attachList.size()));
-
             double totalAmount =0;
             int transIdfromLine =-1;
             Integer size = list.size();
             int i =0;
             int currId;
+            int currtransId =0;
+
+            if (linesRepository.mLinesDAO.getAll().size() >0) {
+                currtransId = linesRepository.mLinesDAO.getAll().get(linesRepository.mLinesDAO.getAll().size() - 1).transactionId;
+                db.linesDao().delelteAllByTransId(currtransId);
+                db.attachmentDao().delelteAllByTransId(currtransId);
+
+            }
+
             while (i <= size-1){
                 linesRepository.addLine(list.get(i));
                 totalAmount += list.get(i).amount;
@@ -124,15 +132,15 @@ public class Utlity {
 
                 Log.v("item "+i+":", String.valueOf(linesRepository.mLinesDAO.getAll().get(linesRepository.mLinesDAO.getAll().size()-1).transactionId));
                 currId =linesRepository.mLinesDAO.getAll().get(linesRepository.mLinesDAO.getAll().size()-1).id;
-                int currtransId = linesRepository.mLinesDAO.getAll().get(linesRepository.mLinesDAO.getAll().size() - 1).transactionId;
                 List<AttachmentModelView> currenAttachList =attachList.get(i);
                 int j =0;
 //                Log.v("curDocS", String.valueOf(current.docsList.size()));
                 while (j <= currenAttachList.size()-1){
-
+                    Log.v("insertAttach","yes");
                     AttachmentModelView attachVM = currenAttachList.get(j);
                     attachVM.transId = currtransId;
                     attachVM.lineId=currId;
+                    Log.v("attatchPhoto",attachVM.path);
 //                    Log.v("curDocItem"+j+"", attachVM.name);
 
                     db.attachmentDao().insertAttachment(attachVM);
@@ -176,8 +184,9 @@ public class Utlity {
                 for (int i = 0 ; i<listDB.size();i++) {
                     LineModelViewDB currentDB = listDB.get(i);
                     LineModelView lineModelView = Utlity.dbToJavaLMV(currentDB);
-
-                    lineModelView.docsList.addAll(db.attachmentDao().getAllbyTransId(transID));
+                    List<AttachmentModelView> docsList = db.attachmentDao().getAllbyLineId(currentDB.id);
+                    lineModelView.docsList.clear();
+                    lineModelView.docsList.addAll(docsList);
                     linesList.add(lineModelView);
                 }
 

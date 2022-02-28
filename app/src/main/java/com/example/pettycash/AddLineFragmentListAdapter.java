@@ -138,7 +138,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        clareAll(holder);
+        clareAll(holder);
 
 //        Log.v("holderPos",holder.pos+"");
         Log.v("holderPosAdp",position+"");
@@ -146,10 +146,9 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
 
 
-        holder.adpPos.setText(position+"");
 
         LineModelView current = lineModelViews.get(position);
-        Log.v("new Line "+current.position+" :", "pos: " + current.position + " cat : " + current.category + " item : " + current.item + " unit : " + current.unit + " price : " + current.price + " quantity : " + current.quantity + " amount : "+current.amount + " vat : " + current.vatInvoiceNumber + " invoice : "+current.invoiceNumber);
+        Log.v("new Line on bind "+current.position+" :", "pos: " + current.position + " cat : " + current.category + " item : " + current.item + " unit : " + current.unit + " price : " + current.price + " quantity : " + current.quantity + " amount : "+current.amount + " vat : " + current.vatInvoiceNumber + " invoice : "+current.invoiceNumber);
 
         Log.v("attachSize",current.docsList.size()+"");
         List<AttachmentModelView> docs= current.docsList;
@@ -248,16 +247,23 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
         holder.quantityChooseText.setText(String.valueOf(current.quantity));
 
+        holder.vatEditText.setText("");
+        Log.v("vat edit before",holder.vatEditText.getText().toString());
+        Log.v("vat before",current.vatInvoiceNumber);
         if (current.vatInvoiceNumber != null)
-            holder.vatEditText.setText("");
             holder.vatEditText.setText(current.vatInvoiceNumber);
+        Log.v("vat after",current.vatInvoiceNumber);
+        Log.v("vat edit after",holder.vatEditText.getText().toString());
+
+
+
+        holder.invoiceEditText.setText("");
 
         if (current.invoiceNumber != null)
-            holder.invoiceEditText.setText("");
             holder.invoiceEditText.setText(current.invoiceNumber);
 
+                holder.supplierEditText.setText("");
         if (current.supplierName != null)
-            holder.supplierEditText.setText("");
             holder.supplierEditText.setText(current.supplierName);
 
         if (current.amount >0){
@@ -314,8 +320,10 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
         holder.vatEditText.setText("");
         holder.supplierEditText.setText("");
         holder.invoiceEditText.setText("");
-        holder.priceChooseText.setText("0");
-        holder.quantityChooseText.setText("1");
+        holder.expenditureTypeText.setText(context.getResources().getText(R.string.choose));
+        holder.categoryChooseText.setText(context.getResources().getText(R.string.choose));
+//        holder.priceChooseText.setText("0");
+//        holder.quantityChooseText.setText("1");
 
     }
 
@@ -339,7 +347,6 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
             RelativeLayout categorylayout,itemlayout,quantitylayout,unitlayout,datelayout,cbsCodeLayout,expenditureTypeLayout,priceEditText,amountEditText;
             TextView categoryChooseText,itemChooseText,quantityChooseText,unitChooseText,priceChooseText,amountChooseText,dateChooseText,cbsCodeText,expenditureTypeText,title,vatErrorMassage;
             EditText invoiceEditText,supplierEditText,vatEditText;
-            TextView adpPos;
             Switch billed;
         ImageView attachmentBtn;
         AttachmentAdapter attachmentAdapter;
@@ -353,7 +360,6 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
 
             super(itemView);
-            adpPos = itemView.findViewById(R.id.adpPos);
 
 //            pos = lineModelViews.size();
             sharedPref = PreferenceManager.getDefaultSharedPreferences(addLine);
@@ -444,8 +450,16 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
                             }
 
                             lineModelViews.get(pos).supplierName = value;
+                        }else if (lineModelViews.get(0).supplierName != null && ! lineModelViews.get(0).supplierName.isEmpty()){
+
+                        }else {
+                            lineModelViews.get(pos).supplierName = "";
+
                         }
                     }
+                    Log.v("inoicesup value",value + "LV pos: "+lineModelViews.get(pos).position+"  LV value : "+lineModelViews.get(pos).supplierName);
+//                    notifyDataSetChanged();
+
                 }
             });
 
@@ -486,9 +500,17 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
                             lineModelViews.get(pos).invoiceNumber = value;
 
 
+                        }else if (lineModelViews.get(0).invoiceNumber != null && ! lineModelViews.get(0).invoiceNumber.isEmpty()){
+
+                        }else {
+                            lineModelViews.get(pos).invoiceNumber = "";
+
                         }
 
                     }
+                    Log.v("inoiceNum value",value + "LV pos: "+lineModelViews.get(pos).position+"  LV value : "+lineModelViews.get(pos).invoiceNumber);
+
+//                    notifyDataSetChanged();
                 }
             });
 
@@ -529,19 +551,20 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
                     if (pos<0){
                         pos = 0;
                     }
+                    LineModelView lineModelView = lineModelViews.get(pos);
                     String value = s.toString();
                     if (value != null) {
                         if (!value.isEmpty()) {
-                            Log.v("vayAfterChange",value.length()+"");
-                            Log.v("vayAfterChange",value+"");
+                            Log.v("vayAfterChange", value.length() + "");
+                            Log.v("vayAfterChange", value + "");
                             if (value.length() == 15) {
-                                vatValueBool=true;
+                                vatValueBool = true;
                                 vatFullLayout.setBackgroundColor(addLine.getResources().getColor(R.color.white));
                                 vatErrorMassage.setVisibility(View.GONE);
 
 
                             } else {
-                                vatValueBool=false;
+                                vatValueBool = false;
 //                                vatFullLayout.setBackgroundColor(addLine.getResources().getColor(R.color.red_err));
 //                                vatErrorMassage.setVisibility(View.VISIBLE);
 
@@ -553,14 +576,20 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
 //                            notifyDataSetChanged();
 
-                        }else {
 
+                        } else if (lineModelViews.get(pos).vatInvoiceNumber != null && !lineModelViews.get(pos).vatInvoiceNumber.isEmpty()) {
+
+
+                        } else {
+                            lineModelViews.get(pos).vatInvoiceNumber = "";
                         }
                     }else {
                         lineModelViews.get(pos).vatInvoiceNumber = "";
 
                     }
+                    Log.v("inoicevat value",value + "LV pos: "+lineModelViews.get(pos).position+"  LV value : "+lineModelViews.get(pos).vatInvoiceNumber);
 
+//                    notifyDataSetChanged();
 
                 }
             });
@@ -623,6 +652,7 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
         }
         public boolean checkValidate(LineModelView previous) {
+            Log.v("onValidate",String.valueOf(previous.amount)+"");
 
             View vatLayout = addLine.lines_recyclerView.findViewHolderForAdapterPosition(previous.position).itemView.findViewById(vatFullLayout.getId());
             View catLayout = addLine.lines_recyclerView.findViewHolderForAdapterPosition(previous.position).itemView.findViewById(categoryfullLayout.getId());
@@ -991,9 +1021,12 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
                                             "com.example.android.fileprovider",
                                             imageFile);
                                     addLine.photoURI = photoURI;
+                                    Log.v("photoPath",photoURI.toString());
                                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                                }else {
+                                    Log.v("photoPath","null");
                                 }
-                                } catch (IOException e) {
+                            } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         }
@@ -1161,15 +1194,20 @@ public class AddLineFragmentListAdapter extends RecyclerView.Adapter<AddLineFrag
 
         public boolean checkValidateForAll() {
             int i =0;
-            while (i < lineModelViews.size()){
-                if (checkValidatePerItem(lineModelViews.get(i))){
+            Boolean state = false;
+            LineModelView newLine =null;
+            Log.v("validate list Size",lineModelViews.size()+"");
+            while (i <= lineModelViews.size()-1){
+                    newLine = lineModelViews.get((i));
+                    Log.v("new Line Validate", "pos: " + newLine.position + " cat : " + newLine.category + " item : " + newLine.item + " unit : " + newLine.unit + " price : " + newLine.price + " quantity : " + newLine.quantity);
 
-                }else {
-                    return false;
-                }
+
+                 state = checkValidate(lineModelViews.get(i));
+
                 i++;
+
             }
-            return true;
+            return state;
         }
 
         private boolean checkValidatePerItem(LineModelView previous) {

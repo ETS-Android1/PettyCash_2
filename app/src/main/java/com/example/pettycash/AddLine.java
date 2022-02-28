@@ -103,11 +103,13 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
         typeFragment.setVisibility(View.GONE);
         imageFragment.setVisibility(View.GONE);
 
-        lineList.add(new LineModelView(0));
-        adapter = new AddLineFragmentListAdapter(this,this,lineList);
+        LineModelView lineModelView = new LineModelView(0,"1","1","1",1,5,5,"1","1","123456987541235",true,1515341564,"1","1");
+        lineList.add(lineModelView);
 
         lines_recyclerView = findViewById(R.id.add_line_list_view);
         lines_recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new AddLineFragmentListAdapter(this,this,lineList);
+
         lines_recyclerView.setAdapter(adapter);
 
         enableValidate();
@@ -126,7 +128,12 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
                                 if (camere) {
 //                                    Bitmap imageBitmap = (Bitmap) result.getData().getExtras().get("data");
 //                                    cancelBtn.setImageBitmap(imageBitmap);
-//                                    galleryAddPic(getContentResolver(),(Bitmap) result.getData().getExtras().get("data"),"1.1","des");
+                                    Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                                    File f = new File(photoURI.toString());
+                                    Uri contentUri = Uri.fromFile(f);
+                                    mediaScanIntent.setData(contentUri);
+                                    sendBroadcast(mediaScanIntent);
+
                                     LineModelView current = adapter.lineModelViews.get(attachPos);
                                     String name = String.valueOf(attachPos+1+"."+(current.docsList.size()+1));
                                     AttachmentModelView attachmentModelView = new AttachmentModelView(-1,-1,name,photoURI.toString());
@@ -330,9 +337,11 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
     }
 
 
-    public void hideFragment() {
+    public void hideFragment(int pos) {
         selectFragment.setVisibility(View.GONE);
         typeFragment.setVisibility(View.GONE);
+        lines_recyclerView.smoothScrollToPosition(pos);
+
 
 
     }
@@ -354,11 +363,11 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
                 LineModelView previous =adapter.lineModelViews.get(adapter.lineModelViews.size()-1);
                 Log.v("prev :", "pos: " + previous.position + " cat : " + previous.category + " item : " + previous.item + " unit : " + previous.unit + " price : " + previous.price + " quantity : " + previous.quantity + " amount : "+previous.amount + " vat : " + previous.vatInvoiceNumber);
 
-                for (int i =0; i<adapter.lineModelViews.size();i++){
-                    LineModelView newLine = adapter.lineModelViews.get(i);
-                            Log.v("new Line "+i+" :", "pos: " + newLine.position + " cat : " + newLine.category + " item : " + newLine.item + " unit : " + newLine.unit + " price : " + newLine.price + " quantity : " + newLine.quantity + " amount : "+newLine.amount + " vat : " + newLine.vatInvoiceNumber);
-
-                }
+//                for (int i =0; i<adapter.lineModelViews.size();i++){
+//                    LineModelView newLine = adapter.lineModelViews.get(i);
+//                            Log.v("new Line "+i+" :", "pos: " + newLine.position + " cat : " + newLine.category + " item : " + newLine.item + " unit : " + newLine.unit + " price : " + newLine.price + " quantity : " + newLine.quantity + " amount : "+newLine.amount + " vat : " + newLine.vatInvoiceNumber);
+//
+//                }
 
                 if (adapter.viewHolder.checkValidate(previous)) {
 
@@ -397,9 +406,10 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
                 break;
 
             case R.id.add_line_continue:
-//                if (adapter.viewHolder.checkValidateForAll()) {
+                Log.v("conBTN","yes");
+                if (adapter.viewHolder.checkValidateForAll()) {
                     insetrAllLinesToDB();
-//                }
+                }
                 break;
 
             case R.id.add_line_save_and_close_btn:
@@ -413,7 +423,7 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
         int i = 0;
         List<LineModelViewDB> lineModelViewDBList = new ArrayList<>();
         List<List<AttachmentModelView>> attachList = new ArrayList<>();
-        while (i <= adapter.lineModelViews.size()-1){
+        while (i < adapter.lineModelViews.size()){
             LineModelView current = adapter.lineModelViews.get(i);
             Log.v("date of line before",current.invoiceDate+"");
             LineModelViewDB lineModelViewDB = new LineModelViewDB(currentTransID,current.category,current.unit,current.item,current.quantity,current.price,current.amount,current.supplierName,current.invoiceNumber,current.vatInvoiceNumber,current.billedToCustomer,current.invoiceDate,current.cbsCode,current.expenditureType);
@@ -478,5 +488,12 @@ public class AddLine extends AppCompatActivity implements View.OnClickListener, 
                 }
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
     }
 }

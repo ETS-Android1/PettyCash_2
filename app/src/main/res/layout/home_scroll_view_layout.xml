@@ -267,8 +267,8 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+
                         android:id="@+id/home_transactions_data_third_title_layout"
                         android:text="@string/pending"
                         android:textSize="18sp"
@@ -280,8 +280,8 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+
                         android:id="@+id/home_transactions_data_third_value_layout"
                         android:text="12"
                         android:textColor="@color/white"

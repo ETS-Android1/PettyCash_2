@@ -144,7 +144,7 @@ public class FragmentListAdapter  extends RecyclerView.Adapter<FragmentListAdapt
             }
             else {
                 AddLine addLine = (AddLine) activeActivity;
-                addLine.hideFragment();
+                addLine.hideFragment(addLineNum);
                 addLine.adapter.viewHolder.upadteText(textViewID,nameText.getText().toString(),addLineNum);
             }
 

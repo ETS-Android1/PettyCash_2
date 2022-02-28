@@ -218,7 +218,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
                                     imm = (InputMethodManager) addLine.getSystemService(addLine.INPUT_METHOD_SERVICE);
                                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-                                    addLine.hideFragment();
+                                    addLine.hideFragment(addLineNum);
                                 }
 
                             }
@@ -256,7 +256,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
                         imm = (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(keyboard.getWindowToken(), 0);
 
-                    addLine.hideFragment();
+                    addLine.hideFragment(addLineNum);
 
                 case R.id.type_fragment_edit_text:
                     clicked = true;

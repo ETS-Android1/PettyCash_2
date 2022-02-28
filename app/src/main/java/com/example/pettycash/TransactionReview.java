@@ -108,11 +108,16 @@ public class TransactionReview extends AppCompatActivity {
             Log.v("lineListDBSize", String.valueOf(data.size()));
             adapter.notifyDataSetChanged();
 
-//        while ()
-//        new Utlity.TaskRunner().executeAsync(new Utlity.GetAttachCallable(this.getApplication()),(data) ->{
-//
-//        });
         } );
+//        int i = 0 ;
+//
+//        while (i < adapter.lineModelViews.size()) {
+//            new Utlity.TaskRunner().executeAsync(new Utlity.GetAttachCallable(this.getApplication()), (attachData) -> {
+//                LineModelView current = adapter.lineModelViews.get(i);
+//                current.docsList.clear();
+//                current.docsList.addAll(attachData.get(i));
+//            });
+//        }
         imageFragment = findViewById(R.id.trans_review_Image_fragment);
 
         fragmentManager =getSupportFragmentManager();

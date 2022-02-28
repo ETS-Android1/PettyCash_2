@@ -43,5 +43,6 @@ public interface LinesDAO {
     @Query("SELECT * FROM LineModelViewDB WHERE :transID == transactionId")
     List<LineModelViewDB> ListofLines(int transID);
 
-
+ @Query("DELETE  FROM LineModelViewDB WHERE :transID == transactionId")
+    void delelteAllByTransId(int transID);
 }

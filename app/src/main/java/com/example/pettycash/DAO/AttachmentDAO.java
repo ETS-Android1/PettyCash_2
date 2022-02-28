@@ -23,7 +23,9 @@ public interface AttachmentDAO {
     @Query("DELETE FROM transactionmodelview")
     void delelteAll();
 
-    @Query("SELECT * FROM AttachmentModelView WHERE :transID == transId")
-    List<AttachmentModelView> getAllbyTransId(int transID);
+    @Query("SELECT * FROM AttachmentModelView WHERE :LineID == lineId")
+    List<AttachmentModelView> getAllbyLineId(int LineID);
 
+    @Query("DELETE  FROM AttachmentModelView WHERE :currtransId == transId")
+    void delelteAllByTransId(int currtransId);
 }
