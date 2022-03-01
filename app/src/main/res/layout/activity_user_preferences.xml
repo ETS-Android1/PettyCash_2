@@ -94,17 +94,16 @@
 
 
                     <TextView
+                        android:id="@+id/preferences_legal_select_title"
+                        style="@style/normal_red"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/preferences_legal_select_title"
-                        android:textColor="@color/red"
-                        style="@style/normal_red"
+                        android:layout_centerVertical="true"
                         android:layout_toLeftOf="@id/preferences_legal_select_btn"
+                        android:gravity="center_vertical"
                         android:paddingRight="10dp"
                         android:text="55555555"
-                        android:gravity="center_vertical"
-                        android:layout_centerVertical="true"
-                        ></TextView>
+                        android:textColor="@color/red"></TextView>
 
                     <ImageView
                         android:id="@+id/preferences_legal_select_btn"
@@ -178,10 +177,12 @@
                         android:id="@+id/preferences_business_select_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:textAlignment="center"
                         android:layout_alignParentRight="true"
-                        android:layout_centerHorizontal="true"
+                        android:layout_centerInParent="true"
                         android:background="@drawable/circle_btn_gray"
-                        android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageView>
+                        android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -238,15 +239,16 @@
                         android:paddingRight="10dp"
                         android:textColor="@color/red"></TextView>
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/preferences_project_select_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:textAlignment="center"
                         android:layout_alignParentRight="true"
                         android:layout_centerInParent="true"
-                        android:layout_centerHorizontal="true"
                         android:background="@drawable/circle_btn_gray"
-                        android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageButton>
+                        android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -305,15 +307,17 @@
                     android:layout_centerVertical="true"
                     ></TextView>
 
-                <ImageButton
+                <ImageView
+
+                    android:id="@+id/preferences_department_select_btn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/outline_arrow_forward_ios_white_18"
-                    android:background="@drawable/circle_btn_gray"
+                    android:textAlignment="center"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
-                    android:id="@+id/preferences_department_select_btn"
-                    ></ImageButton>
+                    android:background="@drawable/circle_btn_gray"
+                    android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
             </RelativeLayout>
             </RelativeLayout>
 
@@ -416,14 +420,10 @@
         </LinearLayout>
 
 
-
-
-
     <fragment
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_alignParentBottom="true"
         android:id="@+id/preferences_fragment"
         class="com.example.pettycash.SelectFragment"
-        ></fragment>
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_alignParentBottom="true"></fragment>
 </RelativeLayout>

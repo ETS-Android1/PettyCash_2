@@ -179,11 +179,11 @@
                         android:id="@+id/new_transaction_legal_select_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-
+                        android:textAlignment="center"
                         android:layout_alignParentRight="true"
                         android:layout_centerInParent="true"
                         android:background="@drawable/circle_btn_gray"
-                        android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageView>
+                        android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
 
                 </RelativeLayout>
 
@@ -247,11 +247,12 @@
                         android:id="@+id/new_transaction_business_select_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-
+                        android:textAlignment="center"
                         android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
                         android:background="@drawable/circle_btn_gray"
-                        android:src="@drawable/outline_arrow_forward_ios_white_18" android:layout_centerInParent="true"
-                        ></ImageView>
+                        android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
                 </RelativeLayout>
 
             </RelativeLayout> 
@@ -313,11 +314,12 @@
                         android:id="@+id/new_transaction_project_select_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-
+                        android:textAlignment="center"
                         android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
                         android:background="@drawable/circle_btn_gray"
-                        android:src="@drawable/outline_arrow_forward_ios_white_18" android:layout_centerInParent="true"
-                        ></ImageView>
+                        android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
 
                 </RelativeLayout>
             </RelativeLayout> 
@@ -381,11 +383,12 @@
                         android:id="@+id/new_transaction_department_select_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-
+                        android:textAlignment="center"
                         android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
                         android:background="@drawable/circle_btn_gray"
-                        android:src="@drawable/outline_arrow_forward_ios_white_18" android:layout_centerInParent="true"
-                        ></ImageView>
+                        android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
 
                 </RelativeLayout>
             </RelativeLayout> 
@@ -451,11 +454,12 @@
                         android:id="@+id/new_transaction_petty_cash_id_select_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-
+                        android:textAlignment="center"
                         android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
                         android:background="@drawable/circle_btn_gray"
-                        android:src="@drawable/outline_arrow_forward_ios_white_18" android:layout_centerInParent="true"
-                        ></ImageView>
+                        android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
 
                 </RelativeLayout>
             </RelativeLayout> 
@@ -577,7 +581,7 @@
                 android:paddingHorizontal="20dp"
                 >
 
-                <ImageView
+                <ImageButton
                     android:layout_margin="5dp"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -588,7 +592,7 @@
                     android:layout_alignParentRight="true"
                     android:textAlignment="center"
 
-                    >                </ImageView>
+                    >                </ImageButton>
             </RelativeLayout>
 
 

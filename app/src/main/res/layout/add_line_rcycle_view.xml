@@ -78,10 +78,12 @@
                 android:id="@+id/line_recycle_category_choose_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-
+                android:textAlignment="center"
                 android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:background="@drawable/circle_btn_gray"
-                android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageView>
+                android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
         </RelativeLayout>
 
 
@@ -129,10 +131,12 @@
                 android:id="@+id/line_recycle_item_choose_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-
+                android:textAlignment="center"
                 android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:background="@drawable/circle_btn_gray"
-                android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageView>
+                android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
         </RelativeLayout>
 
 
@@ -190,10 +194,13 @@
                 android:id="@+id/line_recycle_quantity_choose_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-
+                android:textAlignment="center"
                 android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:background="@drawable/circle_btn_gray"
                 android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
+
 
         </RelativeLayout>
 </RelativeLayout>
@@ -243,10 +250,12 @@
                     android:id="@+id/line_recycle_unit_choose_btn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-
+                    android:textAlignment="center"
                     android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
                     android:background="@drawable/circle_btn_gray"
-                    android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageView>
+                    android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
 
             </RelativeLayout>
         </RelativeLayout>
@@ -302,10 +311,12 @@
                 android:id="@+id/line_recycle_price_choose_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-
+                android:textAlignment="center"
                 android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:background="@drawable/circle_btn_gray"
-                android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageView>
+                android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
 
         </RelativeLayout>
 
@@ -334,34 +345,36 @@
             ></TextView>
 
         <RelativeLayout
+            android:id="@+id/line_recycle_amount_choose_layout"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:id="@+id/line_recycle_amount_choose_layout"
 
             >
 
 
-                    <TextView     android:layout_centerVertical="true"
+            <TextView
+                android:id="@+id/line_recycle_amount_choose_text"
+                style="@style/normal_red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/line_recycle_amount_choose_text"
-                android:textColor="@color/red"
-                style="@style/normal_red"
+                android:layout_centerVertical="true"
                 android:text="0.00"
+                android:layout_alignParentRight="true"
                 android:paddingRight="10dp"
-                        android:layout_toLeftOf="@id/line_recycle_amount_choose_btn"
-
-                        ></TextView>
+                android:textColor="@color/red"></TextView>
 
             <ImageView
                 android:id="@+id/line_recycle_amount_choose_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-
                 android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:background="@drawable/circle_btn_gray"
-                android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageView>
+                android:src="@drawable/outline_arrow_forward_ios_10"
+                android:textAlignment="center"
+                android:visibility="gone"></ImageView>
+
 
         </RelativeLayout>
 
@@ -604,10 +617,12 @@
                 android:id="@+id/line_recycle_cbs_code_choose_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-
+                android:textAlignment="center"
                 android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:background="@drawable/circle_btn_gray"
-                android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageView>
+                android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
         </RelativeLayout>
 
 
@@ -657,10 +672,12 @@
                 android:id="@+id/line_recycle_expenditure_type_choose_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-
+                android:textAlignment="center"
                 android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:background="@drawable/circle_btn_gray"
-                android:src="@drawable/outline_arrow_forward_ios_white_18"></ImageView>
+                android:src="@drawable/outline_arrow_forward_ios_10"></ImageView>
+
         </RelativeLayout>
 
 

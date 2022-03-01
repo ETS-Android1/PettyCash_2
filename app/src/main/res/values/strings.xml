@@ -74,7 +74,7 @@
     <string name="incomplete">Incomplete</string>
     <string name="err_choose">YOU MUST CHOOSE AN ITEM</string>
     <string name="value_greater_then_zere_err">value shoulde be greater than zero</string>
-    <string name="value_greater_then_zere_and_num_err" >value should be numbers only and greater the zero </string>
+    <string name="value_greater_then_zere_and_num_err">value should be numbers only and greater the zero </string>
     <string name="empty_err">please type the value</string>
     <string name="value_15_digits_err">vat number must be 15 digits</string>
     <string name="all_red_feild_required">All the red feild are required</string>

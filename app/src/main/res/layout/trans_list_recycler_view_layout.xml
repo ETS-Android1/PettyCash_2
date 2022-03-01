@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/trans_list_Item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/normal_red"
+        android:text="test"
+        android:paddingVertical="10dp"
+        ></TextView>
+
+    <RelativeLayout
+        android:id="@+id/trans_list_Item_second_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        >
+        <TextView
+            android:id="@+id/trans_list_Item_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/normal_dark"
+            android:text="test"
+
+            ></TextView>
+
+        <TextView
+        android:id="@+id/trans_list_Item_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/normal_red"
+        android:text="test"
+            android:gravity="right"
+        ></TextView>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/trans_list_Item_third_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:weightSum="3"
+        >
+        <LinearLayout
+            android:id="@+id/trans_list_Item_bu_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            style="@style/normal_dark"
+            android:text="test"
+            android:orientation="horizontal"
+
+            >
+            <RelativeLayout
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/circle_btn_red"
+                >
+            <ImageView
+                android:id="@+id/trans_list_Item_bu_img"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/outline_dashboard_customize__white_20"
+                android:layout_centerInParent="true"
+                ></ImageView>
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/trans_list_Item_bu_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/title_dark"
+                android:text="test"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="10dp"
+                ></TextView>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+        <TextView
+            android:id="@+id/trans_list_Item_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/normal_red"
+            android:text="test"
+            android:gravity="right"
+            android:layout_centerInParent="true"
+            ></TextView>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/trans_list_Item_amount_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            style="@style/normal_dark_2"
+            android:text="@string/total_amount"
+            ></TextView>
+
+        <TextView
+            android:id="@+id/trans_list_Item_amount_value"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            style="@style/normal_dark_2"
+            android:text="test"
+            android:paddingLeft="5dp"
+            ></TextView>
+    </LinearLayout>
+
+</LinearLayout>

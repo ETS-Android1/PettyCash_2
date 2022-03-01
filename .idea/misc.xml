@@ -3,17 +3,50 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable-v24/fade_red.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/add_btn.xml" value="0.186" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/circle_btn_gray.xml" value="0.1205" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/circle_btn_red.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/circle_btn_red_dark.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/circle_btn_red_light.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/circle_btn_white.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/closed_layout.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/edit_text_shape.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/edit_text_shape_for_line.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/edit_text_shape_for_line_dark.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/fade_red.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/ic_logo_background.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/layout_outline_line.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/layout_shape.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/layout_shape_red.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/line_bar.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/login_btn_background.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/outline_account_circle_24.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/outline_account_tree_24.xml" value="0.186" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/outline_add_circle_24.xml" value="0.1205" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/outline_dashboard_customize_20.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/outline_dashboard_customize_24.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/outline_dashboard_customize_48.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/outline_dashboard_customize__white_20.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/outline_search_24.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/status_background.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/trans_status_incomplete.xml" value="0.186" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/activity_add_line.xml" value="0.11875" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/activity_add_transaction.xml" value="0.12968591691995948" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/activity_home_container.xml" value="0.12968591691995948" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/activity_transaction_review.xml" value="0.1" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/activity_user_preferences.xml" value="0.1" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/add_line_rcycle_view.xml" value="0.12968591691995948" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/attachment_recycle_view.xml" value="0.12968591691995948" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/fragment_transactions_list.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/fragment_type.xml" value="0.12968591691995948" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/home_scroll_view_layout.xml" value="0.11875" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/prefrences_list_view.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/trans_list_recycler_view_layout.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/trans_list_scroll_view_layout.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/trans_review_recycle.xml" value="0.12968591691995948" />
       </map>
     </option>
