@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/edit_text_shape_for_line"
     android:padding="20dp">
 
     <TextView
@@ -84,16 +85,18 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-        <TextView
-            android:id="@+id/trans_list_Item_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/normal_red"
-            android:text="test"
-            android:gravity="right"
-            android:layout_centerInParent="true"
-            ></TextView>
+            android:layout_weight="1"
+            android:background="@drawable/trans_status_incomplete"
+            >
+
+            <TextView
+                android:id="@+id/trans_list_Item_status"
+                style="@style/normal_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="test"></TextView>
         </RelativeLayout>
 
     </LinearLayout>
@@ -103,6 +106,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingVertical="10dp"
         >
 
         <TextView
@@ -121,5 +125,14 @@
             android:paddingLeft="5dp"
             ></TextView>
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/trans_list_Item_fourth_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        
+
+    </RelativeLayout>
 
 </LinearLayout>
