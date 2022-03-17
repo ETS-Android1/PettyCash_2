@@ -33,6 +33,19 @@
 
 </LinearLayout>
 
+    <TextView
+        android:id="@+id/trnas_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        style="@style/title_dark"
+        android:text="test"
+
+        android:gravity="center"
+        android:padding="10dp"
+
+        ></TextView>
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

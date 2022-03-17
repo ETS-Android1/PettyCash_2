@@ -23,7 +23,12 @@ public class Utlity {
     public static String databaseName = "first";
     public static int databaseVersion = 1;
     public static String transId = "tran";
+    public static String INCOMPLETE = "incomplete";
+    public static String APPROVED = "tran";
+    public static String SUBMETTED = "tran";
     public static int CAMERA_REQUEST_ID = 333;
+
+
 
     public static class TaskRunner {
         private final Executor executor = Executors.newSingleThreadExecutor(); // change according to your requirements
@@ -87,6 +92,26 @@ public class Utlity {
             TransactionModelView transactionModelView =repository.mtransDao.getSingle(transID);
 
             return transactionModelView;
+        }
+    }
+
+    public static class GetTransListCallable implements Callable<List<TransactionModelView>> {
+        TransRepository repository;
+        List<TransactionModelView> trans;
+        String status;
+        public GetTransListCallable(Application application , String status) {
+            repository = new TransRepository(application);
+            this.status = status;
+        }
+
+
+        @Override
+        public List<TransactionModelView> call() {
+            // Some long running task
+             trans =repository.getAllTransByStatus(status);
+            Log.v("transByStatus",String.valueOf(trans.size()));
+
+            return trans;
         }
     }
 

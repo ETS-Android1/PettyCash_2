@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 
 public class HomeContainer extends AppCompatActivity implements View.OnClickListener {
     Fragment mainView , settingView ;
-    ImageButton settings,home;
+    ImageButton settings,home ;
     RelativeLayout addTrnsaction;
     FragmentManager fragmentManager;
 

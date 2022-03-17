@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/edit_text_shape_for_line"
-    android:padding="20dp">
+    >
 
     <TextView
         android:id="@+id/trans_list_Item_title"
@@ -13,6 +13,7 @@
         style="@style/normal_red"
         android:text="test"
         android:paddingVertical="10dp"
+        android:paddingHorizontal="10dp"
         ></TextView>
 
     <RelativeLayout
@@ -20,9 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="10dp"
+        android:paddingHorizontal="10dp"
+
         >
         <TextView
-            android:id="@+id/trans_list_Item_category"
+            android:id="@+id/trans_list_Item_project"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/normal_dark"
@@ -31,13 +34,13 @@
             ></TextView>
 
         <TextView
-        android:id="@+id/trans_list_Item_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/normal_red"
-        android:text="test"
+            android:id="@+id/trans_list_Item_date"
+            style="@style/normal_red"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="right"
-        ></TextView>
+            android:paddingRight="20dp"
+            android:text="test"></TextView>
 
     </RelativeLayout>
 
@@ -46,13 +49,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="10dp"
-        android:weightSum="3"
+        android:weightSum="4"
+        android:paddingHorizontal="10dp"
+
         >
         <LinearLayout
             android:id="@+id/trans_list_Item_bu_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="3"
             style="@style/normal_dark"
             android:text="test"
             android:orientation="horizontal"
@@ -107,6 +112,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingVertical="10dp"
+        android:paddingHorizontal="10dp"
+
         >
 
         <TextView
@@ -131,7 +138,56 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        
+
+        <LinearLayout
+            android:id="@+id/trans_list_Item_buttons_layouts"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/trans_list_btns_background"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="3"
+
+            >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/trans_list_Item_first_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_shape_for_line"
+                android:paddingHorizontal="50dp"></androidx.appcompat.widget.AppCompatButton>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/trans_list_Item_second_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_shape_for_line"
+
+                ></androidx.appcompat.widget.AppCompatButton>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/trans_list_Item_third_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_shape_for_line"
+
+                ></androidx.appcompat.widget.AppCompatButton>
+        </LinearLayout>
+
+
+
+
 
     </RelativeLayout>
 

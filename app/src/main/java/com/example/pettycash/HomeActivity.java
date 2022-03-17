@@ -32,7 +32,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import com.example.pettycash.Utality.Utlity;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -67,11 +69,17 @@ import java.util.List;
 
 
 
-public class HomeActivity extends Fragment {
+public class HomeActivity extends Fragment implements View.OnClickListener {
     private PieChart pieChart;
     private LineChart lineChart;
     private LinearLayout viewBar;
+    private LinearLayout opens , closeds , pending_approval;
     private Typeface tf;
+
+    private TransactionsListFragment pendingFragment;
+    private TransactionsListFragment opensFragment;
+    private TransactionsListFragment closedFragmants;
+    FragmentManager fragmentManager;
 
     private int  redColor = Color.rgb(255,0,0);
     private int  redDarkColor = Color.parseColor("#980117");
@@ -93,8 +101,22 @@ public class HomeActivity extends Fragment {
         pieChart = view.findViewById(R.id.chart11);
         lineChart = view.findViewById(R.id.home_transactions_data_layout_chart);
         viewBar = view.findViewById(R.id.home_statistics_basic_info_bar);
+        opens = view.findViewById(R.id.home_transactions_data_open_layout);
+        closeds = view.findViewById(R.id.home_transactions_data_closed_layout);
+        pending_approval = view.findViewById(R.id.home_transactions_data_pending_approval_layout);
+
+        opens.setOnClickListener((View.OnClickListener) this);
+        closeds.setOnClickListener((View.OnClickListener) this);
+        pending_approval.setOnClickListener((View.OnClickListener) this);
 
 
+
+        fragmentManager =  getActivity().getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(new TransactionsListFragment(),"empty")
+                .commit();
+
+        pendingFragment = new TransactionsListFragment(getActivity(), getActivity().getApplication(), Utlity.INCOMPLETE);
 
 
 
@@ -107,6 +129,18 @@ public class HomeActivity extends Fragment {
 
         return view;
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.home_transactions_data_pending_approval_layout:
+                fragmentManager.beginTransaction()
+                    .replace(R.id.home_container_main_view, pendingFragment, "incomplete")
+                    .commit();
+
+
+        }
     }
 
     private void prepareTransactionChart() {
@@ -468,6 +502,8 @@ set1.setLineWidth(20.5f);
         s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 14, s.length(), 0);
         return s;
     }
+
+
 
 
     public class LineBar extends View {

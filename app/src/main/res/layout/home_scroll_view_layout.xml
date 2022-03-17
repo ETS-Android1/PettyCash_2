@@ -173,7 +173,7 @@
                     android:layout_weight="1"
                     android:padding="5dp"
                     android:orientation="vertical"
-                    android:id="@+id/home_transactions_data_first_layout"
+                    android:id="@+id/home_transactions_data_open_layout"
                     android:background="@drawable/open_layout"
                     >
 
@@ -181,7 +181,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="18dp"
                         android:layout_weight="1"
-                        android:id="@+id/home_transactions_data_first_title_layout"
+                        android:id="@+id/home_transactions_data_open_title_layout"
                         android:text="@string/open"
                         android:textSize="20sp"
                         android:textColor="@color/white"
@@ -197,7 +197,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="18dp"
                         android:layout_weight="1"
-                        android:id="@+id/home_transactions_data_first_value_layout"
+                        android:id="@+id/home_transactions_data_open_value_layout"
                         android:text="12"
                         android:textColor="@color/white"
                         android:padding="5dp"
@@ -216,7 +216,7 @@
                     android:layout_weight="1"
                     android:padding="5dp"
                     android:orientation="vertical"
-                    android:id="@+id/home_transactions_data_second_layout"
+                    android:id="@+id/home_transactions_data_closed_layout"
                     android:background="@drawable/closed_layout"
                     >
 
@@ -224,7 +224,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="18dp"
                         android:layout_weight="1"
-                        android:id="@+id/home_transactions_data_second_title_layout"
+                        android:id="@+id/home_transactions_data_closed_title_layout"
                         android:text="@string/closed"
                         android:textSize="20sp"
                         android:textColor="@color/white"
@@ -240,7 +240,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="18dp"
                         android:layout_weight="1"
-                        android:id="@+id/home_transactions_data_second_value_layout"
+                        android:id="@+id/home_transactions_data_closed_value_layout"
                         android:text="12"
                         android:textColor="@color/white"
                         android:padding="5dp"
@@ -261,7 +261,7 @@
                     android:weightSum="2"
                     android:padding="5dp"
                     android:orientation="vertical"
-                    android:id="@+id/home_transactions_data_third_layout"
+                    android:id="@+id/home_transactions_data_pending_approval_layout"
                     android:background="@drawable/pending_layout"
                     >
 
@@ -269,7 +269,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
-                        android:id="@+id/home_transactions_data_third_title_layout"
+                        android:id="@+id/home_transactions_data_pending_approval_title_layout"
                         android:text="@string/pending"
                         android:textSize="18sp"
                         android:textColor="@color/white"
@@ -282,7 +282,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
-                        android:id="@+id/home_transactions_data_third_value_layout"
+                        android:id="@+id/home_transactions_data_pending_approval_value_layout"
                         android:text="12"
                         android:textColor="@color/white"
                         android:padding="5dp"

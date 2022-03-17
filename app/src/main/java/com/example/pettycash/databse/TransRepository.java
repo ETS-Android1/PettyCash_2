@@ -13,6 +13,7 @@ public class TransRepository {
 
 
     private LiveData<List<TransactionModelView>> transList;
+    private List<TransactionModelView> transListByStatus;
     AppDatabase db;
 
     public TransRepository(Application application) {
@@ -33,5 +34,9 @@ public class TransRepository {
     }
     public LiveData<List<TransactionModelView>> getAllTrans(){
         return transList;
+    }
+    public List<TransactionModelView> getAllTransByStatus(String status){
+        transListByStatus = mtransDao.getAllByStatus(status);
+        return transListByStatus;
     }
 }

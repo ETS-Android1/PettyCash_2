@@ -32,4 +32,6 @@ public interface transDAO {
     @Query("UPDATE  TransactionModelView SET total_amount = :totalAmount WHERE :transId == id")
     void updateTotalAmount(int transId, double totalAmount);
 
+    @Query("SELECT * FROM TransactionModelView WHERE :status = status")
+    List<TransactionModelView> getAllByStatus(String status);
 }

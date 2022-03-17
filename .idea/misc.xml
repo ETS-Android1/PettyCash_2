@@ -32,6 +32,7 @@
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/outline_dashboard_customize__white_20.xml" value="0.186" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/outline_search_24.xml" value="0.186" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/status_background.xml" value="0.186" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/transListBtnsBackground.xml" value="0.1635" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/trans_status_approved.xml" value="0.176" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/trans_status_incomplete.xml" value="0.186" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/drawable/trans_status_under_approval.xml" value="0.176" />
@@ -43,13 +44,15 @@
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/activity_user_preferences.xml" value="0.1" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/add_line_rcycle_view.xml" value="0.12968591691995948" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/attachment_recycle_view.xml" value="0.12968591691995948" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/fragment_select.xml" value="0.2341485507246377" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/fragment_transactions_list.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/fragment_type.xml" value="0.12968591691995948" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/home_scroll_view_layout.xml" value="0.11875" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/prefrences_list_view.xml" value="0.26666666666666666" />
-        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/trans_list_recycler_view_layout.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/trans_list_recycler_view_layout.xml" value="0.33" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/trans_list_scroll_view_layout.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/trans_review_recycle.xml" value="0.12968591691995948" />
+        <entry key="..\:/Users/n.alyahya/AndroidStudioProjects/PettyCash_2/app/src/main/res/layout/transactionsListFragment.xml" value="0.2341485507246377" />
       </map>
     </option>
   </component>
