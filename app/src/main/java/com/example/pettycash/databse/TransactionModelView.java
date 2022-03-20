@@ -49,6 +49,19 @@ public class TransactionModelView {
     public TransactionModelView() {
     }
 
+    public TransactionModelView(int currentTransID, String legalEntity, String businessUnit, String project, String department, boolean isVatChecked, long dateTime, String description, String status , double total_amount) {
+        id=currentTransID;
+        this.legalEntry = legalEntity;
+        this.businessUnit = businessUnit;
+        this.project = project;
+        this.department = department;
+        this.isVat = isVatChecked;
+        this.date = dateTime;
+        this.description = description;
+        this.status=status;
+        this.total_amount = total_amount;
+    }
+
 
     public double getTotal_amount() {
         return total_amount;

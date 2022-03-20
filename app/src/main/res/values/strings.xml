@@ -78,6 +78,12 @@
     <string name="empty_err">please type the value</string>
     <string name="value_15_digits_err">vat number must be 15 digits</string>
     <string name="all_red_feild_required">All the red feild are required</string>
+    <string name="incomplete_transactions_review">Incomplete Transaction History</string>
+    <string name="approved_transactions_review">Approved Transaction History</string>
+    <string name="under_approval_transactions_review">Under Approval Transaction History</string>
+    <string name="view">View</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="edit">Edit</string>
 
 
 </resources>

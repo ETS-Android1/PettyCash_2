@@ -78,7 +78,7 @@ public class HomeActivity extends Fragment implements View.OnClickListener {
 
     private TransactionsListFragment pendingFragment;
     private TransactionsListFragment opensFragment;
-    private TransactionsListFragment closedFragmants;
+    private TransactionsListFragment closedFragmant;
     FragmentManager fragmentManager;
 
     private int  redColor = Color.rgb(255,0,0);
@@ -117,7 +117,8 @@ public class HomeActivity extends Fragment implements View.OnClickListener {
                 .commit();
 
         pendingFragment = new TransactionsListFragment(getActivity(), getActivity().getApplication(), Utlity.INCOMPLETE);
-
+        closedFragmant = new TransactionsListFragment(getActivity(), getActivity().getApplication(), Utlity.APPROVED);
+        opensFragment = new TransactionsListFragment(getActivity(), getActivity().getApplication(), Utlity.UNDER_APPROVAL);
 
 
 
@@ -138,6 +139,19 @@ public class HomeActivity extends Fragment implements View.OnClickListener {
                 fragmentManager.beginTransaction()
                     .replace(R.id.home_container_main_view, pendingFragment, "incomplete")
                     .commit();
+                    break;
+                 case R.id.home_transactions_data_closed_layout:
+                fragmentManager.beginTransaction()
+                    .replace(R.id.home_container_main_view, closedFragmant, "closed")
+                    .commit();
+                    break;
+            case R.id.home_transactions_data_open_layout:
+                fragmentManager.beginTransaction()
+                    .replace(R.id.home_container_main_view, opensFragment, "open")
+                    .commit();
+                    break;
+
+
 
 
         }

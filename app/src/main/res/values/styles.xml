@@ -49,6 +49,12 @@
         <item name="android:textStyle">bold</item>
 
     </style>
+    <style name="normal_light_red">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/red_light</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
 
 
     <style name="number">

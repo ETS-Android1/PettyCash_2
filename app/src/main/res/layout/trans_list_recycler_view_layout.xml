@@ -10,7 +10,7 @@
         android:id="@+id/trans_list_Item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/normal_red"
+        style="@style/normal_light_red"
         android:text="test"
         android:paddingVertical="10dp"
         android:paddingHorizontal="10dp"
@@ -35,7 +35,7 @@
 
         <TextView
             android:id="@+id/trans_list_Item_date"
-            style="@style/normal_red"
+            style="@style/normal_light_red"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -92,10 +92,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/trans_status_incomplete"
+            android:id="@+id/trans_list_Item_status_layout"
+
             >
 
             <TextView
-                android:id="@+id/trans_list_Item_status"
+                android:id="@+id/trans_list_Item_status_value"
                 style="@style/normal_light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -156,6 +158,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/edit_text_shape_for_line"
+
+                style="@style/normal_light_red"
                 android:paddingHorizontal="50dp"></androidx.appcompat.widget.AppCompatButton>
 
             <Space
@@ -168,6 +172,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/edit_text_shape_for_line"
+                style="@style/normal_light_red"
 
                 ></androidx.appcompat.widget.AppCompatButton>
 
@@ -181,6 +186,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/edit_text_shape_for_line"
+                style="@style/normal_light_red"
 
                 ></androidx.appcompat.widget.AppCompatButton>
         </LinearLayout>

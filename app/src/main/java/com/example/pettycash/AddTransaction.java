@@ -2,57 +2,36 @@ package com.example.pettycash;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
-import androidx.sqlite.db.SupportSQLiteQuery;
-import androidx.sqlite.db.SupportSQLiteStatement;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteTransactionListener;
 import android.os.Bundle;
-import android.os.CancellationSignal;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.PermissionRequest;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.pettycash.DAO.transDAO;
 
 import com.example.pettycash.Utality.Utlity;
 import com.example.pettycash.databse.AppDatabase;
 import com.example.pettycash.databse.TransactionModelView;
 import com.example.pettycash.databse.ViewModelTrans;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.AbstractList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
 
@@ -60,9 +39,6 @@ import static com.example.pettycash.UserPreferences.business_ID;
 import static com.example.pettycash.UserPreferences.department_ID;
 import static com.example.pettycash.UserPreferences.legal_ID;
 import static com.example.pettycash.UserPreferences.project_ID;
-import static com.example.pettycash.databse.AppDatabase.databaseWriteExecutor;
-import static com.example.pettycash.databse.AppDatabase.instance;
-import static java.time.chrono.IsoChronology.INSTANCE;
 
 public class AddTransaction extends AppCompatActivity implements View.OnClickListener, Callable, CompoundButton.OnCheckedChangeListener
         , ActivityCompat.OnRequestPermissionsResultCallback {
@@ -91,6 +67,8 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
     ViewModelTrans transViewModelProvider;
     private boolean isVatChecked;
     private Integer transID;
+    private int currentTransID;
+    private TransactionModelView currentTrans;
 
 
     @Override
@@ -98,7 +76,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
 
-
+        currentTransID = getIntent().getIntExtra(Utlity.transId, -1);
 
 
         db = AppDatabase.getInstance(this);
@@ -112,7 +90,6 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
 //
 //        }).start();
 
-        dateTime = Calendar.getInstance().getTimeInMillis();
 
         transViewModelProvider = new ViewModelProvider(this).get(ViewModelTrans.class);
 
@@ -125,12 +102,12 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
         cancelBtn = findViewById(R.id.new_transaction_cancel_btn);
 
 
-
         dateLayout = findViewById(R.id.new_transaction_date_layout);
+        dateLayout.setOnClickListener(this);
 
 
 //        datePicker = findViewById(R.id.new_transaction_date);
-            dateText = findViewById(R.id.new_transaction_date_text);
+        dateText = findViewById(R.id.new_transaction_date_text);
 //        textDate.setOnClickListener(this);
         updateLabel();
 
@@ -146,35 +123,56 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
         fragmentManager = getSupportFragmentManager();
 
 
-
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
 
         vat = findViewById(R.id.new_transaction_vat_switch);
         vat.setOnCheckedChangeListener(this);
-        prepareLegal();
-        prepareBusiness();
-        prepareDepartment();
-        prepareProject();
 
 
-
-
-
-
-        date =new DatePickerDialog.OnDateSetListener() {
+        date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH,month);
-                myCalendar.set(Calendar.DAY_OF_MONTH,day);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, day);
                 dateTime = myCalendar.getTimeInMillis();
                 updateLabel();
             }
         };
-        dateLayout.setOnClickListener(this);
+        if (currentTransID>0){
+
+            new Utlity.TaskRunner().executeAsync(new Utlity.GetTransCallable(this.getApplication(),currentTransID), (data) ->{
+                TransactionModelView transDB = data;
+                currentTrans = transDB;
+                Log.v("trxID","trans ID : "+transDB.id);
+              prepareLegal(transDB.legalEntry);
+                prepareBusiness(transDB.businessUnit);
+                prepareProject(transDB.project);
+                prepareDepartment(transDB.department);
+                String myFormat="yyyy-MM-dd";
+                SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.ENGLISH);
+                dateText.setText(dateFormat.format(transDB.date));
+
+                vat.setChecked(transDB.isVat);
+                dateTime=transDB.date;
+
+
+
+
+            });
+        }
+else{
+        dateTime = Calendar.getInstance().getTimeInMillis();
+        prepareLegal(null);
+        prepareBusiness(null);
+        prepareDepartment(null);
+        prepareProject(null);
     }
 
-    private void prepareLegal() {
+    }
+
+    private void prepareLegal(String legalEntry) {
         legalText = findViewById(R.id.new_transaction_legal_select_title);
 
         legalSelectFragment = new SelectFragment(R.string.select_lagal, 0,legal_ID,legalText.getText().toString());
@@ -182,11 +180,13 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
         legalLayout = findViewById(R.id.new_transaction_legal_layout);
 
         legalLayout.setOnClickListener(this);
-
-        String legalVal = sharedPref.getString(legal_ID, "MES");
-        if (!legalVal.equals(""))
-            legalText.setText(legalVal);
-
+        if (legalEntry == null) {
+            String legalVal = sharedPref.getString(legal_ID, "MES");
+            if (!legalVal.equals(""))
+                legalText.setText(legalVal);
+        }else {
+            legalText.setText(legalEntry);
+        }
         fragmentManager.beginTransaction()
                 .add(R.id.add_transaction_fragment, legalSelectFragment, "legal")
                 .commit();
@@ -194,7 +194,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
     }
 
 
-    private void prepareBusiness() {
+    private void prepareBusiness(String businessUnit) {
         businessText = findViewById(R.id.new_transaction_business_select_title);
 
         businessSelectFragment = new SelectFragment(R.string.select_business, R.drawable.outline_dashboard_customize_black_24,business_ID, businessText.getText().toString());
@@ -202,15 +202,17 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
         businessLayout = findViewById(R.id.new_transaction_business_layout);
 
         businessLayout.setOnClickListener(this);
+        if (businessUnit == null) {
+            String businessVal = sharedPref.getString(business_ID, "MES-BU");
+            if (!businessVal.equals(""))
+                businessText.setText(businessVal);
 
-        String businessVal = sharedPref.getString(business_ID, "MES-BU");
-        if (!businessVal.equals(""))
-            businessText.setText(businessVal);
-
-
+        }else {
+            businessText.setText(businessUnit);
+        }
     }
 
-    private void prepareProject() {
+    private void prepareProject(String project) {
         projectText = findViewById(R.id.new_transaction_project_select_title);
 
 
@@ -219,15 +221,17 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
         projectLayout = findViewById(R.id.new_transaction_project_layout);
 
         projectLayout.setOnClickListener(this);
-
-        String projectVal = sharedPref.getString(project_ID, "M111");
-        if (!projectVal.equals(""))
-            projectText.setText(projectVal);
-
+        if (project == null) {
+            String projectVal = sharedPref.getString(project_ID, "M111");
+            if (!projectVal.equals(""))
+                projectText.setText(projectVal);
+        }else {
+            projectText.setText(project);
+        }
 
     }
 
-    private void prepareDepartment() {
+    private void prepareDepartment(String department) {
         depatmentText = findViewById(R.id.new_transaction_department_select_title);
 
 
@@ -235,11 +239,14 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
 
         departmentLayout.setOnClickListener(this);
 
-        String departmentVal = sharedPref.getString(department_ID, "BU1");
-        if (!departmentVal.equals(""))
-            depatmentText.setText(departmentVal);
-        departmentSelectFragment = new SelectFragment(R.string.select_department, R.drawable.outline_account_tree_24, department_ID, depatmentText.getText().toString());
-
+        if (department == null) {
+            String departmentVal = sharedPref.getString(department_ID, "BU1");
+            if (!departmentVal.equals(""))
+                depatmentText.setText(departmentVal);
+            departmentSelectFragment = new SelectFragment(R.string.select_department, R.drawable.outline_account_tree_24, department_ID, depatmentText.getText().toString());
+        }else {
+            depatmentText.setText(department);
+        }
 
     }
 
@@ -359,8 +366,14 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.new_transaction_confirm_btn:
-                insertTransToDB();
+                if (currentTransID>0){
+                    Log.v("trxId", String.valueOf(currentTransID));
+                    updateTransDB();
+                }else {
+                    Log.v("trxId", String.valueOf(currentTransID));
 
+                    insertTransToDB();
+                }
 
                 break;
 
@@ -369,6 +382,29 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
                 break;
 
         }
+    }
+
+    private void updateTransDB() {
+        String legalEntity, businessUnit, project, department, description;
+
+        legalEntity = legalText.getText().toString();
+        businessUnit = businessText.getText().toString();
+        project = projectText.getText().toString();
+        department = depatmentText.getText().toString();
+
+
+        EditText descriptionEditText = findViewById(R.id.new_transaction_decription_edit_text);
+        description = descriptionEditText.getEditableText().toString();
+
+        TransactionModelView newTrans = new TransactionModelView(currentTransID,legalEntity, businessUnit, project, department, isVatChecked, dateTime, description, currentTrans.status,currentTrans.total_amount);
+        new Utlity.TaskRunner().executeAsync(new Utlity.UpdateTransCallable(this.getApplication(), newTrans), (data) -> {
+            Log.v("tSizeF", String.valueOf(data));
+            transID = data;
+            Intent toAddLines = new Intent(this, AddLine.class);
+            toAddLines.putExtra(Utlity.transId, transID);
+            startActivity(toAddLines);
+
+        });
     }
 
     private void insertTransToDB() {

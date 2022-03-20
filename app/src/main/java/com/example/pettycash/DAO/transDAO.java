@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.pettycash.databse.TransactionModelView;
 
@@ -34,4 +35,7 @@ public interface transDAO {
 
     @Query("SELECT * FROM TransactionModelView WHERE :status = status")
     List<TransactionModelView> getAllByStatus(String status);
+
+    @Update
+    void updateTransaction(TransactionModelView trans);
 }

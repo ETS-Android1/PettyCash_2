@@ -24,8 +24,8 @@ public class Utlity {
     public static int databaseVersion = 1;
     public static String transId = "tran";
     public static String INCOMPLETE = "incomplete";
-    public static String APPROVED = "tran";
-    public static String SUBMETTED = "tran";
+    public static String APPROVED = "approved";
+    public static String UNDER_APPROVAL = "under_approval";
     public static int CAMERA_REQUEST_ID = 333;
 
 
@@ -76,6 +76,29 @@ public class Utlity {
             return id;
         }
     }
+
+    public static class UpdateTransCallable implements Callable<Integer> {
+        TransRepository repository;
+        TransactionModelView trans;
+
+
+        public UpdateTransCallable(Application application,TransactionModelView trans) {
+            repository = new TransRepository(application);
+            this.trans = trans;
+        }
+        @Override
+        public Integer call() {
+            // Some long running task
+            Log.v("idBeforeUpdate", String.valueOf(trans.id));
+            repository.mtransDao.updateTransaction(trans);
+            List<TransactionModelView> list = repository.mtransDao.getAllNotLive();
+            Integer id =list.get(list.size()-1).id;
+            Integer size = list.size();
+            return id;
+        }
+    }
+
+
     public static class GetTransCallable implements Callable<TransactionModelView> {
         TransRepository repository;
         TransactionModelView trans;
@@ -109,7 +132,8 @@ public class Utlity {
         public List<TransactionModelView> call() {
             // Some long running task
              trans =repository.getAllTransByStatus(status);
-            Log.v("transByStatus",String.valueOf(trans.size()));
+            Log.v("transByStatus",status);
+            Log.v("transByStatusSize",String.valueOf(trans.size()));
 
             return trans;
         }
